@@ -135,7 +135,7 @@ export class PremiumStoryTeller {
   }
 
   public isCurrentlyReading(): boolean {
-    return this.isReading && this.currentAudio && !this.currentAudio.paused;
+    return !!this.isReading && !!this.currentAudio && !this.currentAudio?.paused;
   }
 
   public isPausedReading(): boolean {

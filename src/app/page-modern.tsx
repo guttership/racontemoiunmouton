@@ -91,7 +91,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-6">
               <AudioIcon className="w-12 h-12" />
               <h2 className="text-2xl font-bold text-gray-900">
-                Écouter l'histoire
+                Écouter l&apos;histoire
               </h2>
             </div>
             <StoryReader story={generatedStory} />
@@ -179,7 +179,7 @@ export default function Home() {
             <div className="flex items-center gap-3 mb-6">
               <ChildIcon className="w-12 h-12" />
               <h2 className="text-2xl font-bold text-gray-900">
-                Profil de l'enfant
+                Profil de l&apos;enfant
               </h2>
             </div>
             <ChildProfileSelector
@@ -226,7 +226,7 @@ export default function Home() {
           <div className="bg-white  rounded-2xl p-6  border border-gray-100 text-center">
             <CharacterIcon className="w-16 h-16 mx-auto mb-4" />
             <h3 className="font-bold text-gray-900 mb-2">Choisir les héros</h3>
-            <p className="text-gray-600 text-sm">Sélectionnez les personnages de l'aventure</p>
+            <p className="text-gray-600 text-sm">Sélectionnez les personnages de l&apos;aventure</p>
           </div>
           
           <div className="bg-white  rounded-2xl p-6  border border-gray-100 text-center">
@@ -237,7 +237,7 @@ export default function Home() {
           
           <div className="bg-white  rounded-2xl p-6  border border-gray-100 text-center">
             <ChildIcon className="w-16 h-16 mx-auto mb-4" />
-            <h3 className="font-bold text-gray-900 mb-2">Adapter à l'âge</h3>
+            <h3 className="font-bold text-gray-900 mb-2">Adapter à l&apos;âge</h3>
             <p className="text-gray-600 text-sm">Pour une histoire parfaite</p>
           </div>
           
@@ -246,7 +246,7 @@ export default function Home() {
               <span className="text-white text-2xl">✨</span>
             </div>
             <h3 className="font-bold text-gray-900 mb-2">Magie en action</h3>
-            <p className="text-gray-600 text-sm">L'IA crée votre histoire unique</p>
+            <p className="text-gray-600 text-sm">L&apos;IA crée votre histoire unique</p>
           </div>
         </div>
       </main>

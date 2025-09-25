@@ -56,14 +56,14 @@ export const GOOGLE_FRENCH_VOICES = {
 
 // Tons de voix prédéfinis pour histoires pour enfants
 export const STORY_VOICE_STYLES = {
-  gentle: {
+  soft: {
     name: 'Doux et apaisant',
     voice: 'fr-FR-Wavenet-C',
     speed: 0.85,
     pitch: 2.0,
     volumeGainDb: -2,
     emphasis: 'low'
-  },
+  } as const,
   animated: {
     name: 'Animé et expressif',
     voice: 'fr-FR-Wavenet-D',
@@ -71,7 +71,7 @@ export const STORY_VOICE_STYLES = {
     pitch: 4.0,
     volumeGainDb: 0,
     emphasis: 'moderate'
-  },
+  } as const,
   storyteller: {
     name: 'Conteur traditionnel',
     voice: 'fr-FR-Wavenet-B',
@@ -79,7 +79,7 @@ export const STORY_VOICE_STYLES = {
     pitch: -1.0,
     volumeGainDb: 1,
     emphasis: 'strong'
-  },
+  } as const,
   motherly: {
     name: 'Maternel et chaleureux',
     voice: 'fr-FR-Wavenet-A',
@@ -87,7 +87,7 @@ export const STORY_VOICE_STYLES = {
     pitch: 1.5,
     volumeGainDb: -1,
     emphasis: 'low'
-  },
+  } as const,
   playful: {
     name: 'Ludique et enjoué',
     voice: 'fr-FR-Neural2-A',
@@ -95,8 +95,7 @@ export const STORY_VOICE_STYLES = {
     pitch: 3.0,
     volumeGainDb: 2,
     emphasis: 'moderate'
-  },
-  // Nouveaux styles pour différents tons d'histoire
+  } as const,
   funny: {
     name: 'Drôle et rigolo',
     voice: 'fr-FR-Neural2-A',
@@ -104,7 +103,7 @@ export const STORY_VOICE_STYLES = {
     pitch: 3.5,
     volumeGainDb: 1,
     emphasis: 'moderate'
-  },
+  } as const,
   mysterious: {
     name: 'Mystérieux et intriguant',
     voice: 'fr-FR-Wavenet-B',
@@ -112,7 +111,7 @@ export const STORY_VOICE_STYLES = {
     pitch: -2.0,
     volumeGainDb: -1,
     emphasis: 'strong'
-  },
+  } as const,
   adventurous: {
     name: 'Aventureux et courageux',
     voice: 'fr-FR-Wavenet-D',
@@ -120,7 +119,7 @@ export const STORY_VOICE_STYLES = {
     pitch: 1.0,
     volumeGainDb: 2,
     emphasis: 'strong'
-  },
+  } as const,
   magical: {
     name: 'Magique et merveilleux',
     voice: 'fr-FR-Wavenet-C',
@@ -128,7 +127,7 @@ export const STORY_VOICE_STYLES = {
     pitch: 2.5,
     volumeGainDb: 0,
     emphasis: 'moderate'
-  },
+  } as const,
   scary_light: {
     name: 'Un peu effrayant (léger)',
     voice: 'fr-FR-Wavenet-B',
@@ -136,7 +135,7 @@ export const STORY_VOICE_STYLES = {
     pitch: -1.5,
     volumeGainDb: -2,
     emphasis: 'strong'
-  }
+  } as const
 };
 
 export interface GoogleTTSOptions {
@@ -144,7 +143,7 @@ export interface GoogleTTSOptions {
   speed: number;
   pitch: number;
   volumeGainDb: number;
-  emphasis?: 'low' | 'moderate' | 'strong';
+  emphasis?: 'low' | 'moderate' | 'strong' | undefined;
   ssmlText?: string; // Pour des effets SSML avancés
 }
 
@@ -183,7 +182,7 @@ export class GoogleStoryTeller {
   // Analyser automatiquement le ton de l'histoire avec l'IA
   private async analyzeStoryTone(text: string): Promise<keyof typeof STORY_VOICE_STYLES> {
     try {
-      const analysisPrompt = `Analyse cette histoire pour enfants et détermine son ton principal. Réponds UNIQUEMENT par un mot parmi : gentle, animated, storyteller, motherly, playful, funny, mysterious, adventurous, magical, scary_light
+      const analysisPrompt = `Analyse cette histoire pour enfants et détermine son ton principal. Réponds UNIQUEMENT par un mot parmi : soft, animated, storyteller, motherly, playful, funny, mysterious, adventurous, magical, scary_light
 
 Histoire : "${text.substring(0, 500)}..."
 
@@ -194,7 +193,7 @@ Critères :
 - magical : magie, fées, pouvoirs, merveilleux
 - scary_light : un peu effrayant mais approprié aux enfants
 - playful : ludique, joyeux, énergique
-- gentle : doux, apaisant, pour le coucher
+- soft : doux, apaisant, pour le coucher
 - motherly : tendre, réconfortant, chaleureux
 - animated : expressif, vivant, dramatique
 - storyteller : conte classique, narratif
@@ -247,7 +246,7 @@ Ton principal :`;
     } else if (lowerText.includes('jeu') || lowerText.includes('jouer') || lowerText.includes('amusant')) {
       return 'playful';
     } else if (lowerText.includes('doux') || lowerText.includes('calme') || lowerText.includes('dormir')) {
-      return 'gentle';
+      return 'soft';
     }
     
     // Par défaut : storyteller pour un conte classique
@@ -274,7 +273,7 @@ Ton principal :`;
     let processedText = text;
 
     switch (styleKey) {
-      case 'gentle':
+      case 'soft':
         // Ton doux et apaisant
         processedText = processedText
           .replace(/(Il était une fois)/gi, '<prosody rate="slow" pitch="+2st">$1</prosody>')

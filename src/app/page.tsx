@@ -104,47 +104,41 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100 relative">
       <ModernBackground />
       
-      {/* Header */}
-      <header className="relative text-center py-8 md:py-16 px-4 z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center mb-4 md:mb-6">
-            <Image
-              src="/logo_mouton.svg"
-              alt="Logo Raconte-moi un mouton"
-              width={120}
-              height={120}
-              className="w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 object-contain"
-            />
-          </div>
-          <h1 className="text-3xl md:text-4xl lg:text-6xl font-courgette mb-4 md:mb-6 leading-tight">
+      <main itemScope itemType="https://schema.org/WebSite">
+        {/* Header */}
+        <header className="flex flex-col items-center justify-center py-8">
+          <Image src="/logo_mouton.svg" alt="Logo Raconte-moi un mouton, application d'histoires créatives pour enfants" width={80} height={80} className="mb-4" priority aria-label="Logo Raconte-moi un mouton" />
+          <h1 itemProp="name" className="text-3xl md:text-4xl font-courgette text-[#ff7519] mb-2 text-center">
             Raconte-moi un mouton
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-2xl mx-auto font-clash-grotesk">
-            Créez une histoire magique et personnalisée pour le coucher de votre enfant
+          <p itemProp="description" className="text-lg text-gray-700 text-center max-w-2xl mx-auto">
+            Créez des histoires personnalisées pour enfants selon leurs goûts et votre imagination.<br />
+            L&apos;IA s&apos;occupe du reste !<br />
+            <span className="text-sm text-gray-500">Application Next.js rapide, créative et adaptée aux familles.</span>
           </p>
-        </div>
-      </header>
+        </header>
 
-      {/* Contenu principal avec slider */}
-      <main className="relative mx-auto px-2 md:px-4 pb-10 md:pb-20 z-10">
-        <StoryCreationSlider
-          selectedCharacters={storySettings.characters}
-          characterCount={storySettings.characterCount}
-          selectedEnvironment={storySettings.environment}
-          childProfile={childProfile}
-          isGenerating={isGenerating}
-          onCharactersChange={(characters) =>
-            setStorySettings({ ...storySettings, characters })
-          }
-          onCountChange={(count) =>
-            setStorySettings({ ...storySettings, characterCount: count })
-          }
-          onEnvironmentChange={(environment) =>
-            setStorySettings({ ...storySettings, environment })
-          }
-          onChildProfileChange={setChildProfile}
-          onCreateStory={generateStory}
-        />
+        {/* Contenu principal avec slider */}
+        <main className="relative mx-auto px-2 md:px-4 pb-10 md:pb-20 z-10">
+          <StoryCreationSlider
+            selectedCharacters={storySettings.characters}
+            characterCount={storySettings.characterCount}
+            selectedEnvironment={storySettings.environment}
+            childProfile={childProfile}
+            isGenerating={isGenerating}
+            onCharactersChange={(characters) =>
+              setStorySettings({ ...storySettings, characters })
+            }
+            onCountChange={(count) =>
+              setStorySettings({ ...storySettings, characterCount: count })
+            }
+            onEnvironmentChange={(environment) =>
+              setStorySettings({ ...storySettings, environment })
+            }
+            onChildProfileChange={setChildProfile}
+            onCreateStory={generateStory}
+          />
+        </main>
       </main>
     </div>
   );

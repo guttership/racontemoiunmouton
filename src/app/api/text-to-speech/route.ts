@@ -44,10 +44,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Retourner l'audio MP3
-    return new NextResponse(audioBuffer, {
+    let audioData: ArrayBuffer;
+    if (audioBuffer instanceof Buffer) {
+      audioData = audioBuffer.buffer instanceof ArrayBuffer ? audioBuffer.buffer : Buffer.from(audioBuffer).buffer;
+    } else if (audioBuffer instanceof Uint8Array) {
+      audioData = audioBuffer.buffer instanceof ArrayBuffer ? audioBuffer.buffer : new Uint8Array(audioBuffer).buffer;
+    } else {
+      audioData = audioBuffer as ArrayBuffer;
+    }
+    return new NextResponse(audioData, {
       headers: {
         'Content-Type': 'audio/mpeg',
-        'Content-Length': audioBuffer.length.toString(),
+        'Content-Length': String(audioData.byteLength),
         'Cache-Control': 'public, max-age=31536000', // Cache 1 an côté client
         'X-Audio-Source': 'Google Cloud TTS',
       },
