@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐑 Raconte-moi un mouton
 
-## Getting Started
+Une application Next.js pour créer des histoires personnalisées pour le coucher des enfants, utilisant l'intelligence artificielle Google Gemini.
 
-First, run the development server:
+## ✨ Fonctionnalités
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **🎭 Sélection de personnages** : Choisissez parmi animaux, fées, dragons, super-héros, etc.
+- **🌍 Environnements variés** : Forêt enchantée, château magique, vaisseau spatial, etc.
+- **👶 Personnalisation enfant** : Intégrez le nom, l'âge, les centres d'intérêt et la personnalité
+- **🎤 Synthèse vocale** : Lecture automatique de l'histoire en français
+- **📱 Design responsive** : Interface optimisée mobile-first pour une utilisation sur smartphone
+- **🎨 Interface moderne** : Design élégant avec DaisyUI et Tailwind CSS
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Cloner le projet**
+   ```bash
+   git clone <url-du-repo>
+   cd racontemoiunmouton
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Installer les dépendances**
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. **Configuration de l'API Gemini**
+   - Copiez `.env.example` vers `.env.local`
+   - Ajoutez votre clé API Google Gemini :
+   ```
+   GOOGLE_AI_API_KEY=votre_cle_api_google_gemini
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Lancer en développement**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Ouvrir dans le navigateur**
+   ```
+   http://localhost:3000
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Technologies utilisées
 
-## Deploy on Vercel
+- **Next.js 15+** - Framework React avec App Router
+- **TypeScript** - Typage statique
+- **Tailwind CSS** - Framework CSS utility-first
+- **DaisyUI** - Composants Tailwind pré-stylés
+- **Google Gemini AI** - Génération d'histoires intelligentes
+- **Vercel** - Plateforme de déploiement
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📱 Utilisation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Sélectionnez les personnages** de votre histoire
+2. **Choisissez le nombre** de personnages (1-5)
+3. **Définissez l'environnement** où se déroule l'histoire
+4. **Personnalisez pour votre enfant** (optionnel) :
+   - Nom et âge
+   - Centres d'intérêt (animaux, musique, sport...)
+   - Traits de personnalité (curieux, courageux...)
+   - Choses préférées (doudou, activités...)
+5. **Générez l'histoire** et profitez !
+6. **Utilisez la synthèse vocale** pour une lecture automatique
+
+## 🎯 Optimisations
+
+- **Mobile-first** : Interface pensée pour smartphones
+- **Performance** : Chargement optimisé avec Next.js
+- **Accessibilité** : Navigation au clavier et lecteurs d'écran
+- **Responsive** : S'adapte à toutes les tailles d'écran
+
+## 🔧 Déploiement sur Vercel
+
+1. **Connectez votre repo GitHub à Vercel**
+2. **Configurez les variables d'environnement** :
+   - `GOOGLE_AI_API_KEY`
+3. **Déployez automatiquement** à chaque push
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à :
+- Signaler des bugs
+- Proposer de nouvelles fonctionnalités
+- Améliorer la documentation
+- Ajouter des personnages ou environnements
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+---
+
+Créé avec ❤️ pour des moments magiques avant le coucher !

@@ -1,0 +1,81 @@
+/**
+* @license
+*
+* Font Family: Clash Grotesk
+* Designed by: Indian Type Foundry
+* URL: https://www.fontshare.com/fonts/clash-grotesk
+* © 2025 Indian Type Foundry
+*
+* Clash Grotesk Extralight 
+* Clash Grotesk Light 
+* Clash Grotesk Regular 
+* Clash Grotesk Medium 
+* Clash Grotesk Semibold 
+* Clash Grotesk Bold 
+* Clash Grotesk Variable (Variable font)
+
+*
+*/
+@font-face {
+  font-family: 'ClashGrotesk-Extralight';
+  src: url('/font/ClashGrotesk-Extralight.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Extralight.woff') format('woff'),
+       url('/font/ClashGrotesk-Extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Light';
+  src: url('/font/ClashGrotesk-Light.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Light.woff') format('woff'),
+       url('/font/ClashGrotesk-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Regular';
+  src: url('/font/ClashGrotesk-Regular.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Regular.woff') format('woff'),
+       url('/font/ClashGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Medium';
+  src: url('/font/ClashGrotesk-Medium.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Medium.woff') format('woff'),
+       url('/font/ClashGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Semibold';
+  src: url('/font/ClashGrotesk-Semibold.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Semibold.woff') format('woff'),
+       url('/font/ClashGrotesk-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Bold';
+  src: url('/font/ClashGrotesk-Bold.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Bold.woff') format('woff'),
+       url('/font/ClashGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Variable';
+  src: url('/font/ClashGrotesk-Variable.woff2') format('woff2'),
+       url('/font/ClashGrotesk-Variable.woff') format('woff'),
+       url('/font/ClashGrotesk-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}

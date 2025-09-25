@@ -1,103 +1,151 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState } from 'react';
+import Image from 'next/image';
+import StoryCreationSlider from '@/components/StoryCreationSlider';
+import StoryReader from '@/components/StoryReader';
+import LoadingStory from '@/components/LoadingStory';
+import { Button } from '@/components/ui/button';
+import { StorySettings, ChildProfile } from '@/types/story';
+import { ModernBackground } from '@/components/illustrations/OrganicShapes';
+import { StoryIcon } from '@/components/illustrations/ModernIcons';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [storySettings, setStorySettings] = useState<StorySettings>({
+    characters: [],
+    characterCount: 1,
+    environment: '',
+  });
+  
+  const [childProfile, setChildProfile] = useState<ChildProfile>({
+    name: '',
+    age: 3,
+    interests: [],
+    personality: [],
+    favoriteThings: []
+  });
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedStory, setGeneratedStory] = useState<string>('');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const generateStory = async () => {
+    setIsGenerating(true);
+    try {
+      const response = await fetch('/api/generate-story', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...storySettings,
+          childProfile,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur lors de la génération: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setGeneratedStory(data.story);
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert('Une erreur est survenue lors de la génération');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // Vue de l'état de génération
+  if (isGenerating) {
+    return <LoadingStory />;
+  }
+
+  // Vue de l'histoire générée
+  if (generatedStory) {
+    return (
+      <div className="min-h-screen bg-gray-100 relative">
+        <ModernBackground />
+        
+        <div className="relative max-w-5xl mx-auto p-4 z-10">
+          <div className="bg-white rounded-3xl p-6 md:p-8 mb-8">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 md:gap-6">
+              <div className="flex items-center gap-3 md:gap-4">
+                <StoryIcon className="w-12 h-12 md:w-16 md:h-16" />
+                <div>
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-courgette">
+                    Votre histoire magique
+                  </h1>
+                  <p className="text-gray-600 mt-1 font-clash-grotesk text-sm md:text-base">
+                    Une création unique pour votre enfant
+                  </p>
+                </div>
+              </div>
+              
+              <Button
+                variant="outline"
+                onClick={() => setGeneratedStory('')}
+                className="bg-gray-100 text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-2xl font-clash-grotesk font-semibold text-sm md:text-base"
+              >
+                📝 Nouvelle histoire
+              </Button>
+            </div>
+          </div>
+          
+          <StoryReader story={generatedStory} />
         </div>
+      </div>
+    );
+  }
+
+  console.log('🏠 Affichage de la page principale');
+
+  // Vue principale avec le slider
+  return (
+    <div className="min-h-screen bg-gray-100 relative">
+      <ModernBackground />
+      
+      {/* Header */}
+      <header className="relative text-center py-8 md:py-16 px-4 z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center mb-4 md:mb-6">
+            <Image
+              src="/logo_mouton.svg"
+              alt="Logo Raconte-moi un mouton"
+              width={120}
+              height={120}
+              className="w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 object-contain"
+            />
+          </div>
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-courgette mb-4 md:mb-6 leading-tight">
+            Raconte-moi un mouton
+          </h1>
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-2xl mx-auto font-clash-grotesk">
+            Créez une histoire magique et personnalisée pour le coucher de votre enfant
+          </p>
+        </div>
+      </header>
+
+      {/* Contenu principal avec slider */}
+      <main className="relative mx-auto px-2 md:px-4 pb-10 md:pb-20 z-10">
+        <StoryCreationSlider
+          selectedCharacters={storySettings.characters}
+          characterCount={storySettings.characterCount}
+          selectedEnvironment={storySettings.environment}
+          childProfile={childProfile}
+          isGenerating={isGenerating}
+          onCharactersChange={(characters) =>
+            setStorySettings({ ...storySettings, characters })
+          }
+          onCountChange={(count) =>
+            setStorySettings({ ...storySettings, characterCount: count })
+          }
+          onEnvironmentChange={(environment) =>
+            setStorySettings({ ...storySettings, environment })
+          }
+          onChildProfileChange={setChildProfile}
+          onCreateStory={generateStory}
+        />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
