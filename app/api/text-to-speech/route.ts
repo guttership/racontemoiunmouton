@@ -1,3 +1,6 @@
+export async function GET() {
+  return NextResponse.json({ info: 'Utilisez POST pour générer l’audio.' });
+}
 import { NextRequest, NextResponse } from 'next/server';
 import { googleStoryTeller, GoogleTTSOptions, STORY_VOICE_STYLES } from '@/lib/googleStoryTeller';
 
