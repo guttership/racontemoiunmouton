@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import StoryCreationSlider from '@/components/StoryCreationSlider';
 import StoryReader from '@/components/StoryReader';
@@ -55,10 +55,12 @@ export default function Home() {
     }
   };
 
-  // Vue de l'état de génération
-  if (isGenerating) {
-    return <LoadingStory />;
-  }
+  // Scroll automatique en haut lors de l'affichage de l'histoire
+  useEffect(() => {
+    if (generatedStory && typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [generatedStory]);
 
   // Vue de l'histoire générée
   if (generatedStory) {
@@ -119,7 +121,7 @@ export default function Home() {
         </header>
 
         {/* Contenu principal avec slider */}
-        <main className="relative mx-auto px-2 md:px-4 pb-10 md:pb-20 z-10">
+        <main className="relative mx-auto px-2 md:px-4 pb-4 z-10">
           <StoryCreationSlider
             selectedCharacters={storySettings.characters}
             characterCount={storySettings.characterCount}

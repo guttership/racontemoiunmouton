@@ -63,7 +63,7 @@ export default function SelectDropdown({
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {/* Input de recherche avec sélection */}
-      <div className="hand-drawn-input min-h-[48px] p-3 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+      <div className="min-h-[48px] p-3 cursor-pointer bg-gray-100 border border-gray-300 rounded-md" onClick={() => setIsOpen(!isOpen)}>
         <input
           ref={inputRef}
           type="text"

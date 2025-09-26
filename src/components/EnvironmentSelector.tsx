@@ -140,6 +140,16 @@ export default function EnvironmentSelector({
           )}
         </div>
 
+        {/* Affichage du choix */}
+        {selectedEnvironment && (
+          <Button
+            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold px-6 py-3 rounded-2xl mb-6 w-full"
+            disabled
+          >
+            {selectedEnvironment}
+          </Button>
+        )}
+
         {/* Suggestions avec liste déroulante */}
         <div>
           <h4 className="text-sm font-semibold text-gray-700 mb-4">Ou choisis parmi nos suggestions :</h4>

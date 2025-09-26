@@ -67,7 +67,7 @@ export default function MultiSelectDropdown({
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {/* Input de recherche avec selections */}
-      <div className="hand-drawn-input min-h-[40px] md:min-h-[48px] p-2 md:p-3 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+      <div className="min-h-[40px] md:min-h-[48px] p-2 md:p-3 cursor-pointer bg-gray-100 border border-gray-300 rounded-md" onClick={() => setIsOpen(!isOpen)}>
         <div className="flex flex-wrap gap-1 md:gap-2 mb-1 md:mb-2">
           {selectedValues.map((value) => {
             const option = options.find(opt => opt.value === value);

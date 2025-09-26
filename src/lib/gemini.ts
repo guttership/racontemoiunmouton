@@ -38,6 +38,41 @@ ${childPersonality?.length ? `Personnalité : ${childPersonality.join(', ')}.` :
 ${childFavoriteThings?.length ? `Choses préférées : ${childFavoriteThings.join(', ')}.` : ''}
 ` : '';
 
+  // Consignes d'adaptation selon l'âge
+  let ageInstructions = '';
+  if (childAge !== undefined && childAge !== null) {
+    if (childAge <= 3) {
+      ageInstructions = `
+- Utilise des phrases très courtes et un vocabulaire extrêmement simple.
+- Structure l'histoire avec beaucoup de répétitions et de rimes.
+- Mets l'accent sur la douceur, la sécurité et la routine du coucher.
+- Évite toute notion abstraite ou complexe.
+- Utilise des animaux ou objets familiers.
+`;
+    } else if (childAge <= 6) {
+      ageInstructions = `
+- Utilise un vocabulaire simple et des phrases courtes.
+- Mets l'accent sur l'imaginaire, la gentillesse et la découverte.
+- Ajoute des éléments ludiques ou magiques rassurants.
+- Structure l'histoire avec une petite aventure très simple.
+`;
+    } else if (childAge <= 9) {
+      ageInstructions = `
+- Utilise un vocabulaire plus riche et des phrases plus longues.
+- Ajoute une aventure ou un défi adapté à l'âge, mais sans danger ni peur.
+- Mets l'accent sur la curiosité, l'amitié et la confiance en soi.
+- Structure l'histoire avec un début, un développement et une fin apaisante.
+`;
+    } else {
+      ageInstructions = `
+- Utilise un vocabulaire élaboré et des phrases complexes.
+- Propose une aventure imaginative, avec des rebondissements adaptés à l'âge.
+- Mets l'accent sur l'autonomie, la réflexion et l'émotion positive.
+- Structure l'histoire comme un mini-roman, mais toujours rassurant et adapté au coucher.
+`;
+    }
+  }
+
   const prompt = `
 Tu es un conteur expérimenté spécialisé dans les histoires pour enfants au coucher.
 Crée une histoire douce et apaisante avec les éléments suivants :
@@ -55,7 +90,7 @@ Consignes importantes :
 - Évite les éléments effrayants ou trop excitants
 - Intègre subtilement les éléments personnels de l'enfant si fournis
 - Utilise un ton chaleureux et bienveillant
-
+${ageInstructions}
 Raconte l'histoire à la première personne comme si tu parlais directement à l'enfant.
 `;
 

@@ -190,6 +190,24 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
 
   const voiceEntries = Object.entries(GOOGLE_FRENCH_VOICES);
 
+  useEffect(() => {
+    // Correction mobile : lecture audio doit être déclenchée par une interaction utilisateur
+    if (currentAudio) {
+      // Sur mobile, forcer le chargement et la lecture après interaction
+      const playOnInteraction = () => {
+        currentAudio.play().catch(() => {
+          // Certains navigateurs mobiles bloquent l'autoplay, on ignore l'erreur
+        });
+        window.removeEventListener('touchend', playOnInteraction);
+        window.removeEventListener('click', playOnInteraction);
+      };
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        window.addEventListener('touchend', playOnInteraction);
+        window.addEventListener('click', playOnInteraction);
+      }
+    }
+  }, [currentAudio]);
+
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Affichage de l'histoire */}

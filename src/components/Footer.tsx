@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-white border-t border-gray-200 py-6 mt-12" aria-label="Pied de page Raconte-moi un mouton">
+    <footer className="w-full bg-white border-t border-gray-200 py-6" aria-label="Pied de page Raconte-moi un mouton">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-4">
           <Link href="/mentions-legales" className="text-sm text-gray-500 hover:text-[#ff7519] underline">
