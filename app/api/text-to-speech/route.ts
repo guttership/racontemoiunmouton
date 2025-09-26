@@ -69,8 +69,7 @@ export async function POST(request: NextRequest) {
           voice,
           speed,
           pitch,
-          volumeGainDb,
-          ssml: true
+          volumeGainDb
         };
         buffer = await googleStoryTeller.generateSpeech(ssmlText, options);
       }
