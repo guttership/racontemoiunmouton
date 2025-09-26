@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     let processedText = text.replace(/’/g, "'");
 
     // Correction SSML pour les liaisons "d'xxx" et "l'xxx" (sauf pour Neural2/Wavenet)
-    let useSub = !(voice && (voice.includes('Neural2') || voice.includes('Wavenet')));
+  const useSub = !(voice && (voice.includes('Neural2') || voice.includes('Wavenet')));
     if (useSub) {
       processedText = processedText.replace(/\b(d|l)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match, p1, p2) => {
         return `<sub alias='${p1}${p2}'>${p1}'${p2}</sub>`;
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     const ssmlSegments = splitTextToSsmlSegments(processedText);
 
     // Générer l'audio pour chaque segment
-    let audioBuffers: Buffer[] = [];
+  const audioBuffers: Buffer[] = [];
     for (const ssmlText of ssmlSegments) {
       let buffer: Buffer;
       if (autoAnalyze) {
