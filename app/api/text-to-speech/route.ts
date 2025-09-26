@@ -61,9 +61,9 @@ export async function POST(request: NextRequest) {
     for (const ssmlText of ssmlSegments) {
       let buffer: Buffer;
       if (autoAnalyze) {
-        buffer = await googleStoryTeller.generateAutoStyledSpeech(ssmlText, true);
+        buffer = await googleStoryTeller.generateAutoStyledSpeech(ssmlText);
       } else if (style && Object.keys(STORY_VOICE_STYLES).includes(style)) {
-        buffer = await googleStoryTeller.generateStyledSpeech(ssmlText, style as keyof typeof STORY_VOICE_STYLES, true);
+        buffer = await googleStoryTeller.generateStyledSpeech(ssmlText, style as keyof typeof STORY_VOICE_STYLES);
       } else {
         const options: GoogleTTSOptions = {
           voice,
