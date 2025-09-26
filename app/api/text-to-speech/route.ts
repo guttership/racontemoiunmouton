@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     // Correction SSML pour les liaisons "d'xxx" et "l'xxx" (sauf pour Neural2/Wavenet)
   const useSub = !(voice && (voice.includes('Neural2') || voice.includes('Wavenet')));
     if (useSub) {
-      processedText = processedText.replace(/\b(d|l)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match, p1, p2) => {
+      processedText = processedText.replace(/\b(d|l)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match: string, p1: string, p2: string) => {
         return `<sub alias='${p1}${p2}'>${p1}'${p2}</sub>`;
       });
     }
