@@ -22,28 +22,63 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let audioBuffer: Buffer;
+    // Pré-traitement des apostrophes pour améliorer la prononciation
+    let processedText = text.replace(/’/g, "'");
 
-    // 🎭 Si l'analyse automatique est demandée
-    if (autoAnalyze) {
-      console.log('🔍 Génération avec analyse automatique du ton...');
-      audioBuffer = await googleStoryTeller.generateAutoStyledSpeech(text);
+    // Correction SSML pour les liaisons "d'xxx" et "l'xxx" (sauf pour Neural2/Wavenet)
+    let useSub = !(voice && (voice.includes('Neural2') || voice.includes('Wavenet')));
+    if (useSub) {
+      processedText = processedText.replace(/\b(d|l)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match, p1, p2) => {
+        return `<sub alias='${p1}${p2}'>${p1}'${p2}</sub>`;
+      });
     }
-    // Si un style prédéfini est spécifié, l'utiliser
-    else if (style && Object.keys(STORY_VOICE_STYLES).includes(style)) {
-      console.log('🎭 Utilisation du style prédéfini:', style);
-      audioBuffer = await googleStoryTeller.generateStyledSpeech(text, style as keyof typeof STORY_VOICE_STYLES);
-    } else {
-      // Sinon, utiliser les paramètres personnalisés
-      const options: GoogleTTSOptions = {
-        voice,
-        speed,
-        pitch,
-        volumeGainDb
-      };
 
-      audioBuffer = await googleStoryTeller.generateSpeech(text, options);
+    // Génération SSML pour la synthèse vocale
+    const encoder = new TextEncoder();
+    // Fonction utilitaire pour découper le texte en segments SSML < 5000 bytes
+    function splitTextToSsmlSegments(text: string, maxBytes = 5000): string[] {
+      const sentences = text.match(/[^.!?]+[.!?]?/g) || [text];
+      const segments: string[] = [];
+      let current = '';
+      for (const sentence of sentences) {
+        const testSegment = current ? current + ' ' + sentence : sentence;
+        const testSsml = `<speak>${testSegment}</speak>`;
+        if (encoder.encode(testSsml).length > maxBytes) {
+          if (current) segments.push(`<speak>${current}</speak>`);
+          current = sentence;
+        } else {
+          current = testSegment;
+        }
+      }
+      if (current) segments.push(`<speak>${current}</speak>`);
+      return segments;
     }
+
+    const ssmlSegments = splitTextToSsmlSegments(processedText);
+
+    // Générer l'audio pour chaque segment
+    let audioBuffers: Buffer[] = [];
+    for (const ssmlText of ssmlSegments) {
+      let buffer: Buffer;
+      if (autoAnalyze) {
+        buffer = await googleStoryTeller.generateAutoStyledSpeech(ssmlText, true);
+      } else if (style && Object.keys(STORY_VOICE_STYLES).includes(style)) {
+        buffer = await googleStoryTeller.generateStyledSpeech(ssmlText, style as keyof typeof STORY_VOICE_STYLES, true);
+      } else {
+        const options: GoogleTTSOptions = {
+          voice,
+          speed,
+          pitch,
+          volumeGainDb,
+          ssml: true
+        };
+        buffer = await googleStoryTeller.generateSpeech(ssmlText, options);
+      }
+      audioBuffers.push(buffer);
+    }
+
+    // Concaténer les buffers audio
+    const audioBuffer = Buffer.concat(audioBuffers);
 
     // Retourner l'audio MP3
     let audioData: ArrayBuffer;

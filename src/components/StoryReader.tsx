@@ -231,7 +231,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       </div>
 
       {/* Section audio */}
-      <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 no-print">
         <h3 className="text-lg md:text-xl font-courgette mb-4 text-center text-gray-800">
           🎭 Écouter l&apos;histoire
         </h3>
@@ -396,6 +396,17 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
             </p>
           )}
         </div>
+      </div>
+
+      {/* Bouton Imprimer */}
+      <div className="text-center">
+        <button
+          type="button"
+          className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-xl shadow hover:bg-orange-600 print:hidden transition-colors duration-200"
+          onClick={() => window.print()}
+        >
+          Imprimer l’histoire
+        </button>
       </div>
     </div>
   );
