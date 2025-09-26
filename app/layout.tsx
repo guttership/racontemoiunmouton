@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  viewport: 'width=device-width, initial-scale=1',
   title: "Raconte-moi un mouton - Histoires créatives pour enfants",
   description:
     "Créez des histoires personnalisées pour enfants selon leurs goûts et votre imagination ! L'IA s'occupe du reste. Application Next.js, rapide et créative.",

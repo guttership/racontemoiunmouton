@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import StoryCreationSlider from '@/components/StoryCreationSlider';
 import StoryReader from '@/components/StoryReader';
-import LoadingStory from '@/components/LoadingStory';
 import { Button } from '@/components/ui/button';
 import { StorySettings, ChildProfile } from '@/types/story';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';

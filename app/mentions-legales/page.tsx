@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function MentionsLegales() {
   return (
@@ -11,12 +12,14 @@ export default function MentionsLegales() {
         <h1 className="text-3xl font-courgette text-[#ff7519] mb-6 text-center">
           Mentions légales
         </h1>
-        <img
+        <Image
           src="/logo_mouton.svg"
           alt="Logo Raconte-moi un mouton, application d'histoires créatives pour enfants"
           width={60}
           height={60}
           className="mx-auto mb-4"
+          loading="lazy"
+          priority={false}
         />
         <div className="prose prose-lg text-gray-800">
           <h2 className="font-semibold text-xl mb-2">Éditeur du site</h2>
