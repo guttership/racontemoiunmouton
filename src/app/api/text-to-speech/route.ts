@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { googleStoryTeller, GoogleTTSOptions, STORY_VOICE_STYLES } from '@/lib/googleStoryTeller';
 
+export const runtime = 'nodejs';
+
 export async function POST(request: NextRequest) {
   try {
     const { 
