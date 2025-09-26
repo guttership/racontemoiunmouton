@@ -122,8 +122,19 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erreur de génération');
+        let errorMessage = 'Erreur de génération';
+        const contentType = response.headers.get('Content-Type');
+        if (contentType && contentType.includes('application/json')) {
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.error || errorMessage;
+          } catch {
+            // JSON mal formé, garder le message par défaut
+          }
+        } else {
+          errorMessage = `Erreur HTTP ${response.status}`;
+        }
+        throw new Error(errorMessage);
       }
 
       const audioBlob = await response.blob();
