@@ -152,7 +152,8 @@ export class GoogleStoryTeller {
   private client: TextToSpeechClient | null = null;
 
   constructor() {
-    this.cacheDir = path.join(process.cwd(), '.cache', 'audio');
+    // Utilisation de /tmp/audio pour compatibilité serverless Vercel
+    this.cacheDir = path.join('/tmp', 'audio');
     this.ensureCacheDir();
   }
 
