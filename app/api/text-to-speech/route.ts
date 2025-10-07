@@ -5,8 +5,17 @@ export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
   console.log('API TTS appelée');
+  // Déclaration des variables au niveau fonction pour accès dans le bloc catch
+  let text: string = '';
+  let voice: string;
+  let speed: number;
+  let pitch: number;
+  let volumeGainDb: number;
+  let style: string | undefined;
+  let autoAnalyze: boolean;
+  let processedText: string = '';
+  let ssmlSegments: string[] = [];
   try {
-  let text, voice, speed, pitch, volumeGainDb, style, autoAnalyze;
     try {
       const body = await request.json();
       text = body.text;
@@ -40,8 +49,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Pré-traitement pour forcer la liaison : suppression des apostrophes dans les mots liés pour TTS
-    let processedText = text.replace(/’/g, "'");
-    processedText = processedText.replace(/\b(l|d|j|n|s|c|m|t|qu)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match: string, p1: string, p2: string) => {
+    processedText = text.replace(/'/g, "'");
+    processedText = processedText!.replace(/\b(l|d|j|n|s|c|m|t|qu)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match: string, p1: string, p2: string) => {
       return `${p1}${p2}`;
     });
 
@@ -125,7 +134,7 @@ export async function POST(request: NextRequest) {
 
   // Découpage strict : appliquer splitTextToSsmlSegments APRÈS le pré-traitement SSML
   // pour garantir que chaque segment final (avec balises) < 5000 bytes
-  let ssmlSegments = splitTextToSsmlSegments(processedText);
+  ssmlSegments = splitTextToSsmlSegments(processedText);
   ssmlSegments = enforceSsmlLimit(ssmlSegments);
   // Double passe : si un segment dépasse encore la limite, le re-découper
   // Découpage mot par mot si un segment dépasse encore la limite
