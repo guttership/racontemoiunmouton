@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 // Types de voix simplifiés
 const NARRATOR_TYPES = {
   female: {
-    name: '👩 Conteuse',
+    name: 'Conteuse',
     description: 'Une voix féminine chaleureuse',
     voice: 'fr-FR-Wavenet-C' // Sophie - Voix chaleureuse
   },
   male: {
-    name: '👨 Conteur',
+    name: 'Conteur',
     description: 'Une voix masculine expressive',
     voice: 'fr-FR-Wavenet-D' // Thomas - Voix expressive
   }
@@ -43,6 +43,19 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       }
     };
   }, [currentAudio]);
+
+  // Réinitialiser l'audio quand le type de narrateur change
+  useEffect(() => {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.src = '';
+      setCurrentAudio(null);
+      setIsReading(false);
+      setIsPaused(false);
+      setProgress(0);
+      setDuration(0);
+    }
+  }, [narratorType]);
 
   // Gestion des événements audio
   useEffect(() => {
@@ -100,9 +113,9 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         body: JSON.stringify({
           text: story,
           voice: selectedVoice,
-          speed: 0.85,        // Lecture ralentie de 15% pour plus de calme
-          pitch: 0.5,         // Légère élévation pour garder la douceur
-          volumeGainDb: -1,   // Volume légèrement réduit pour un effet apaisant
+          speed: 0.75,        // Lecture ralentie de 25% pour un rythme vraiment posé
+          pitch: 0.0,         // Pitch neutre pour plus de naturel
+          volumeGainDb: -0.5, // Volume légèrement réduit pour un effet apaisant
           autoAnalyze: true   // L'IA adapte le ton selon le contenu (drôle, mystérieux, etc.)
         }),
       });
@@ -217,13 +230,12 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       {/* Section audio */}
       <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 no-print">
         <h3 className="text-lg md:text-xl font-courgette mb-4 text-center text-gray-800">
-          🎭 Écouter l&apos;histoire
+          Écouter l&apos;histoire
         </h3>
         
         {/* Sélecteur de narrateur/narratrice */}
         <div className="text-center mb-4">
           <label className="text-sm font-medium text-gray-700 mb-2 flex items-center justify-center gap-2">
-            <span className="text-[#ff7519] text-lg">🎭</span>
             Qui raconte l&apos;histoire ?
           </label>
           <div className="flex gap-3 justify-center max-w-md mx-auto">
@@ -238,18 +250,16 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
                     : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
                 } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
               >
-                <div className="text-3xl mb-1">{narrator.name.split(' ')[0]}</div>
-                <div className="text-sm font-medium text-gray-700">
-                  {narrator.name.split(' ')[1]}
+                <div className="text-base font-semibold text-gray-800 mb-1">
+                  {narrator.name}
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-gray-500">
                   {narrator.description}
                 </div>
               </button>
             ))}
           </div>
-          <p className="text-xs text-gray-500 mt-2 flex items-center justify-center gap-1">
-            <span className="animate-pulse">🤖</span>
+          <p className="text-xs text-gray-500 mt-2 text-center">
             L&apos;IA adapte automatiquement le ton à l&apos;histoire
           </p>
         </div>
@@ -344,11 +354,11 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         {/* Indications */}
         <div className="text-center text-xs text-gray-500 max-w-md mx-auto space-y-1 mt-4">
           <p>
-            🎧 <strong>Astuce :</strong> Utilisez des écouteurs pour une meilleure expérience
+            <strong>Astuce :</strong> Utilisez des écouteurs pour une meilleure expérience
           </p>
           {!currentAudio && (
             <p className="text-orange-600">
-              💾 L&apos;audio sera mis en cache après génération
+              L&apos;audio sera mis en cache après génération
             </p>
           )}
         </div>

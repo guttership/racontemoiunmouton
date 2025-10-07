@@ -4,18 +4,18 @@ import React, { useState, useEffect } from 'react';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';
 
 const LOADING_MESSAGES = [
-  "🐑 Les moutons rassemblent leurs meilleures idées...",
-  "✨ La magie opère, patience mon petit...",
-  "📚 Je feuillette mon grand livre d'histoires...", 
-  "🌙 Les étoiles chuchotent des secrets merveilleux...",
-  "🎭 Les personnages répètent leur scène...",
-  "🏰 Je construis un château magique...",
-  "🦋 Les fées préparent leurs baguettes...",
-  "🌈 Je mélange les couleurs de l'arc-en-ciel...",
-  "🎪 Le spectacle se prépare en coulisses...",
-  "💫 Je capture un peu de poussière d'étoiles...",
-  "🎨 Je peins le décor de ton aventure...",
-  "🎵 J'accorde les instruments des musiciens magiques..."
+  "Les moutons rassemblent leurs meilleures idées...",
+  "La magie opère, patience mon petit...",
+  "Je feuillette mon grand livre d'histoires...", 
+  "Les étoiles chuchotent des secrets merveilleux...",
+  "Les personnages répètent leur scène...",
+  "Je construis un château magique...",
+  "Les fées préparent leurs baguettes...",
+  "Je mélange les couleurs de l'arc-en-ciel...",
+  "Le spectacle se prépare en coulisses...",
+  "Je capture un peu de poussière d'étoiles...",
+  "Je peins le décor de ton aventure...",
+  "J'accorde les instruments des musiciens magiques..."
 ];
 
 export default function LoadingStory() {

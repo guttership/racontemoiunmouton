@@ -138,9 +138,8 @@ export default function ChildProfileSelector({
 
           {/* Centres d'intérêt */}
           <div>
-            <label className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-              <span>❤️</span>
-              <span>Centres d&apos;intérêt et hobbies</span>
+            <label className="text-sm font-semibold text-gray-700 mb-4">
+              Centres d&apos;intérêt et hobbies
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
               {INTERESTS_OPTIONS.map((interest) => (

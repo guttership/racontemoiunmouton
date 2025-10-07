@@ -72,9 +72,8 @@ export default function EnvironmentSelector({
             </Button>
           ) : (
             <div className="space-y-3">
-              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <span>✍️</span>
-                <span>Décris ton environnement magique</span>
+              <label className="text-sm font-semibold text-gray-700">
+                Décris ton environnement magique
               </label>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Input
