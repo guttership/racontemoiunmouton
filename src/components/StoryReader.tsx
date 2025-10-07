@@ -3,33 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
-// Voix disponibles (définition côté client pour éviter l'import du SDK)
-const GOOGLE_FRENCH_VOICES = {
-  'fr-FR-Standard-A': 'Claire - Voix féminine standard',
-  'fr-FR-Standard-B': 'Henri - Voix masculine standard', 
-  'fr-FR-Standard-C': 'Amélie - Voix féminine douce',
-  'fr-FR-Standard-D': 'Paul - Voix masculine grave',
-  'fr-FR-Wavenet-A': 'Léa - Voix féminine naturelle',
-  'fr-FR-Wavenet-B': 'Marc - Voix masculine naturelle',
-  'fr-FR-Wavenet-C': 'Sophie - Voix chaleureuse',
-  'fr-FR-Wavenet-D': 'Thomas - Voix expressive',
-  'fr-FR-Neural2-A': 'Emma - Voix moderne féminine',
-  'fr-FR-Neural2-B': 'Louis - Voix moderne masculine',
-};
-
-// Styles de voix prédéfinis
-const VOICE_STYLES = {
-  auto: { name: '🤖 Analyse automatique', description: 'L\'IA choisit le ton selon l\'histoire' },
-  gentle: { name: '🌙 Doux et apaisant', description: 'Parfait pour l\'heure du coucher' },
-  animated: { name: '🎭 Animé et expressif', description: 'Plein de vie et d\'énergie' },
-  storyteller: { name: '📚 Conteur traditionnel', description: 'Comme les anciens contes' },
-  motherly: { name: '🤱 Maternel et chaleureux', description: 'Doux comme une maman' },
-  playful: { name: '🎈 Ludique et enjoué', description: 'Amusant et joyeux' },
-  funny: { name: '😂 Drôle et rigolo', description: 'Pour les histoires amusantes' },
-  mysterious: { name: '🕵️ Mystérieux et intriguant', description: 'Pour les mystères et secrets' },
-  adventurous: { name: '⚔️ Aventureux et courageux', description: 'Pour les quêtes héroïques' },
-  magical: { name: '✨ Magique et merveilleux', description: 'Pour la magie et les fées' },
-  scary_light: { name: '👻 Un peu effrayant', description: 'Suspense adapté aux enfants' }
+// Types de voix simplifiés
+const NARRATOR_TYPES = {
+  female: {
+    name: '👩 Conteuse',
+    description: 'Une voix féminine chaleureuse',
+    voice: 'fr-FR-Wavenet-C' // Sophie - Voix chaleureuse
+  },
+  male: {
+    name: '👨 Conteur',
+    description: 'Une voix masculine expressive',
+    voice: 'fr-FR-Wavenet-D' // Thomas - Voix expressive
+  }
 };
 
 interface StoryReaderProps {
@@ -44,8 +29,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
   const [isLoading, setIsLoading] = useState(false);
   const [isReading, setIsReading] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [selectedVoice, setSelectedVoice] = useState('fr-FR-Wavenet-C');
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof VOICE_STYLES>('auto');
+  const [narratorType, setNarratorType] = useState<keyof typeof NARRATOR_TYPES>('female');
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
   const [duration, setDuration] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
@@ -106,6 +90,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
     setIsLoading(true);
     try {
       console.log('🎤 Génération audio avec Google TTS...');
+      const selectedVoice = NARRATOR_TYPES[narratorType].voice;
       
       const response = await fetch('/api/text-to-speech', {
         method: 'POST',
@@ -114,10 +99,8 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         },
         body: JSON.stringify({
           text: story,
-          ...(selectedStyle === 'auto' 
-            ? { autoAnalyze: true } 
-            : { style: selectedStyle }
-          )
+          voice: selectedVoice,
+          autoAnalyze: true // On garde l'analyse automatique pour la prosodie
         }),
       });
 
@@ -199,8 +182,6 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const voiceEntries = Object.entries(GOOGLE_FRENCH_VOICES);
-
   useEffect(() => {
     // Correction mobile : lecture audio doit être déclenchée par une interaction utilisateur
     if (currentAudio) {
@@ -236,66 +217,38 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
           🎭 Écouter l&apos;histoire
         </h3>
         
-        {/* Sélecteur de style de voix */}
+        {/* Sélecteur de narrateur/narratrice */}
         <div className="text-center mb-4">
           <label className="text-sm font-medium text-gray-700 mb-2 flex items-center justify-center gap-2">
             <span className="text-[#ff7519] text-lg">🎭</span>
-            Style de narration
+            Qui raconte l&apos;histoire ?
           </label>
-          <select
-            value={selectedStyle}
-            onChange={(e) => setSelectedStyle(e.target.value as keyof typeof VOICE_STYLES)}
-            className="hand-drawn-input text-sm px-3 py-2 max-w-xs mx-auto"
-            disabled={isReading || isLoading}
-          >
-            {Object.entries(VOICE_STYLES).map(([key, style]) => (
-              <option key={key} value={key}>
-                {style.name}
-              </option>
+          <div className="flex gap-3 justify-center max-w-md mx-auto">
+            {Object.entries(NARRATOR_TYPES).map(([key, narrator]) => (
+              <button
+                key={key}
+                onClick={() => setNarratorType(key as keyof typeof NARRATOR_TYPES)}
+                disabled={isReading || isLoading}
+                className={`flex-1 px-4 py-3 rounded-2xl border-2 transition-all duration-200 ${
+                  narratorType === key
+                    ? 'border-[#ff7519] bg-[#ff7519]/10 shadow-md'
+                    : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
+                } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              >
+                <div className="text-3xl mb-1">{narrator.name.split(' ')[0]}</div>
+                <div className="text-sm font-medium text-gray-700">
+                  {narrator.name.split(' ')[1]}
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {narrator.description}
+                </div>
+              </button>
             ))}
-          </select>
-          <p className="text-xs text-gray-500 mt-1 max-w-xs mx-auto">
-            {selectedStyle === 'auto' ? (
-              <span className="flex items-center justify-center gap-1">
-                <span className="animate-pulse">🤖</span>
-                L&apos;IA analyse l&apos;histoire pour adapter le ton
-              </span>
-            ) : (
-              VOICE_STYLES[selectedStyle].description
-            )}
+          </div>
+          <p className="text-xs text-gray-500 mt-2 flex items-center justify-center gap-1">
+            <span className="animate-pulse">🤖</span>
+            L&apos;IA adapte automatiquement le ton à l&apos;histoire
           </p>
-        </div>
-        
-        {/* Sélecteur de voix - masqué car intégré dans les styles */}
-        <div className="hidden">
-          <label className="text-sm font-medium text-gray-700 mb-2 flex items-center justify-center gap-2">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-[#ff7519]"
-            >
-              <path
-                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"
-                fill="currentColor"
-              />
-            </svg>
-            Choisir la voix du conteur
-          </label>
-          <select
-            value={selectedVoice}
-            onChange={(e) => setSelectedVoice(e.target.value)}
-            className="hand-drawn-input text-sm px-3 py-2 max-w-xs mx-auto"
-            disabled={isReading || isLoading}
-          >
-            {voiceEntries.map(([key, description]) => (
-              <option key={key} value={key}>
-                {description}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* Contrôles audio */}
