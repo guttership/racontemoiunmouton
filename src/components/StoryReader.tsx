@@ -100,7 +100,10 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         body: JSON.stringify({
           text: story,
           voice: selectedVoice,
-          autoAnalyze: true // On garde l'analyse automatique pour la prosodie
+          speed: 0.85,        // Lecture ralentie de 15% pour plus de calme
+          pitch: 0.5,         // Légère élévation pour garder la douceur
+          volumeGainDb: -1,   // Volume légèrement réduit pour un effet apaisant
+          autoAnalyze: true   // L'IA adapte le ton selon le contenu (drôle, mystérieux, etc.)
         }),
       });
 

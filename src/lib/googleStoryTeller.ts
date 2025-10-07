@@ -166,6 +166,11 @@ export class GoogleStoryTeller {
       .replace(/[*_#`~]/g, '')
       // IMPORTANT : Supprimer TOUS les types de guillemets (ASCII, Unicode, français)
       .replace(/["""''«»„‟‹›❝❞❮❯〝〞〟]/g, '')
+      // Supprimer les mentions de ponctuation prononcées (guillemets, parenthèses, etc.)
+      .replace(/\b(guillemets?|ouvre guillemets?|ferme guillemets?|ouverture de guillemets?|fermeture de guillemets?|double guillemets?)\b/gi, '')
+      .replace(/\b(parenthèse|ouvre parenthèse|ferme parenthèse|entre parenthèses)\b/gi, '')
+      .replace(/\b(crochet|ouvre crochet|ferme crochet)\b/gi, '')
+      .replace(/\b(apostrophe|virgule|point|deux points|point virgule)\s+(?=[A-Z])/gi, '')
       // Supprimer les crochets et leur contenu (annotations)
       .replace(/\[[^\]]*\]/g, '')
       // Supprimer les parenthèses avec annotations
@@ -376,6 +381,41 @@ Ton principal :`;
   private preprocessStoryText(text: string, voiceStyle?: keyof typeof STORY_VOICE_STYLES): string {
     // 1. D'abord nettoyer le texte des caractères indésirables
     let cleanedText = this.cleanTextForSpeech(text);
+
+    // 1b. Traiter les onomatopées pour une prononciation naturelle et expressive
+    cleanedText = cleanedText
+      // Onomatopées de rire
+      .replace(/\bhaha+\b/gi, '<say-as interpret-as="verbatim">haha</say-as>')
+      .replace(/\bhehe+\b/gi, '<say-as interpret-as="verbatim">hehe</say-as>')
+      .replace(/\bhihi+\b/gi, '<say-as interpret-as="verbatim">hihi</say-as>')
+      .replace(/\bhoho+\b/gi, '<say-as interpret-as="verbatim">hoho</say-as>')
+      // Onomatopées d'exclamation
+      .replace(/\bpfff+\b/gi, '<prosody rate="slow"><say-as interpret-as="verbatim">pff</say-as></prosody>')
+      .replace(/\bpfou+f+\b/gi, '<prosody rate="slow"><say-as interpret-as="verbatim">pfouf</say-as></prosody>')
+      .replace(/\bouf+\b/gi, '<say-as interpret-as="verbatim">ouf</say-as>')
+      .replace(/\baïe+\b/gi, '<prosody pitch="+2st"><say-as interpret-as="verbatim">aïe</say-as></prosody>')
+      // Onomatopées de froid/frisson
+      .replace(/\bbrrr+\b/gi, '<prosody rate="fast" pitch="-1st"><say-as interpret-as="verbatim">brrr</say-as></prosody>')
+      // Onomatopées de surprise
+      .replace(/\boh+\b/gi, '<prosody pitch="+2st" rate="slow">oh</prosody>')
+      .replace(/\bah+\b/gi, '<prosody pitch="+2st" rate="slow">ah</prosody>')
+      .replace(/\beuh+\b/gi, '<prosody rate="slow">euh</prosody>')
+      // Onomatopées d'animaux
+      .replace(/\bmiaou+\b/gi, '<prosody pitch="+3st"><say-as interpret-as="verbatim">miaou</say-as></prosody>')
+      .replace(/\bwouaf+\b/gi, '<prosody pitch="-1st"><say-as interpret-as="verbatim">ouaf</say-as></prosody>')
+      .replace(/\bmeuh+\b/gi, '<prosody pitch="-2st"><say-as interpret-as="verbatim">meuh</say-as></prosody>')
+      .replace(/\bcoin coin\b/gi, '<say-as interpret-as="verbatim">coin coin</say-as>')
+      .replace(/\bcocorico+\b/gi, '<prosody pitch="+2st"><say-as interpret-as="verbatim">cocorico</say-as></prosody>')
+      // Onomatopées de choc/bruit
+      .replace(/\bboum+\b/gi, '<emphasis level="strong"><say-as interpret-as="verbatim">boum</say-as></emphasis>')
+      .replace(/\bpaf+\b/gi, '<emphasis level="strong"><say-as interpret-as="verbatim">paf</say-as></emphasis>')
+      .replace(/\bbang+\b/gi, '<emphasis level="strong"><say-as interpret-as="verbatim">bang</say-as></emphasis>')
+      .replace(/\bplouf+\b/gi, '<say-as interpret-as="verbatim">plouf</say-as>')
+      .replace(/\bsplash+\b/gi, '<say-as interpret-as="verbatim">splash</say-as>')
+      // Onomatopées de mouvement
+      .replace(/\bzip+\b/gi, '<prosody rate="fast"><say-as interpret-as="verbatim">zip</say-as></prosody>')
+      .replace(/\bvroum+\b/gi, '<prosody pitch="-1st"><say-as interpret-as="verbatim">vroum</say-as></prosody>')
+      .replace(/\btchoutchou+\b/gi, '<prosody rate="medium"><say-as interpret-as="verbatim">tchoutchou</say-as></prosody>');
 
     // 2. Améliorer la prononciation avec <sub alias=""> au lieu de <phoneme>
     // IMPORTANT : Traiter "c'est" et contractions AVANT les autres formes
