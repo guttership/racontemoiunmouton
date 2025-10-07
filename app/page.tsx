@@ -41,6 +41,13 @@ export default function Home() {
       });
 
       if (!response.ok) {
+        let errorDetails = '';
+        try {
+          errorDetails = JSON.stringify(await response.json());
+        } catch {
+          errorDetails = await response.text();
+        }
+        console.error('Erreur Gemini:', errorDetails);
         throw new Error(`Erreur lors de la génération: ${response.status}`);
       }
 

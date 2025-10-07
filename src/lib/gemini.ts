@@ -43,32 +43,28 @@ ${childFavoriteThings?.length ? `Choses préférées : ${childFavoriteThings.joi
   if (childAge !== undefined && childAge !== null) {
     if (childAge <= 3) {
       ageInstructions = `
-- Utilise des phrases très courtes et un vocabulaire extrêmement simple.
-- Structure l'histoire avec beaucoup de répétitions et de rimes.
-- Mets l'accent sur la douceur, la sécurité et la routine du coucher.
-- Évite toute notion abstraite ou complexe.
-- Utilise des animaux ou objets familiers.
 `;
     } else if (childAge <= 6) {
       ageInstructions = `
-- Utilise un vocabulaire simple et des phrases courtes.
-- Mets l'accent sur l'imaginaire, la gentillesse et la découverte.
-- Ajoute des éléments ludiques ou magiques rassurants.
-- Structure l'histoire avec une petite aventure très simple.
 `;
     } else if (childAge <= 9) {
       ageInstructions = `
-- Utilise un vocabulaire plus riche et des phrases plus longues.
-- Ajoute une aventure ou un défi adapté à l'âge, mais sans danger ni peur.
-- Mets l'accent sur la curiosité, l'amitié et la confiance en soi.
-- Structure l'histoire avec un début, un développement et une fin apaisante.
+`;
+    } else if (childAge > 15) {
+      ageInstructions = `
+Pour un adulte (plus de 15 ans) :
+- Utilise un ton mature et immersif.
+- Structure l'histoire comme une nouvelle complète : introduction, développement, conclusion.
+- Vocabulaire riche et évocateur.
+- Propose une aventure ou une expérience narrative adaptée à un public adulte, sans morale, ni conseil, ni développement personnel.
+- La fin doit être neutre et apaisante, invitant simplement à la détente et au sommeil, sans message éducatif ou philosophique.
 `;
     } else {
       ageInstructions = `
-- Utilise un vocabulaire élaboré et des phrases complexes.
-- Propose une aventure imaginative, avec des rebondissements adaptés à l'âge.
-- Mets l'accent sur l'autonomie, la réflexion et l'émotion positive.
-- Structure l'histoire comme un mini-roman, mais toujours rassurant et adapté au coucher.
+Utilise un vocabulaire élaboré et des phrases complexes.
+Propose une aventure imaginative, avec des rebondissements adaptés à l'âge.
+Mets l'accent sur l'autonomie, la réflexion et l'émotion positive.
+Structure l'histoire comme un mini-roman, mais toujours rassurant et adapté au coucher.
 `;
     }
   }
@@ -85,7 +81,7 @@ ${childDetails}
 Consignes importantes :
 - L'histoire doit être adaptée aux enfants, douce et rassurante
 - Durée idéale : 3-5 minutes de lecture
-- Fin apaisante qui aide à s'endormir
+- Fin neutre et apaisante, sans morale, ni conseil, ni développement personnel. La conclusion doit simplement inviter à la détente et au sommeil, sans message éducatif ou philosophique.
 - Langage simple et imagé
 - Évite les éléments effrayants ou trop excitants
 - Intègre subtilement les éléments personnels de l'enfant si fournis

@@ -405,9 +405,30 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
           className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-xl shadow hover:bg-orange-600 print:hidden transition-colors duration-200"
           onClick={() => window.print()}
         >
-          Imprimer l’histoire
+          Imprimer ou sauvegarder l’histoire
         </button>
       </div>
+
+      {/* Bouton Télécharger l'audio */}
+      {currentAudio && (
+        <div className="text-center">
+          <button
+            type="button"
+            className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-xl shadow hover:bg-orange-600 transition-colors duration-200"
+            onClick={() => {
+              const url = currentAudio.src;
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = 'histoire.mp3';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+          >
+          T&eacute;l&eacute;charger l&apos;audio
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -164,8 +164,8 @@ export class GoogleStoryTeller {
       .replace(/\*[^*]*\*/g, '')
       // Supprimer les caractères de formatage markdown
       .replace(/[*_#`~]/g, '')
-      // Remplacer les guillemets par des espaces ou du contexte
-      .replace(/["""''«»]/g, ' ')
+      // IMPORTANT : Supprimer TOUS les types de guillemets (ASCII, Unicode, français)
+      .replace(/["""''«»„‟‹›❝❞❮❯〝〞〟]/g, '')
       // Supprimer les crochets et leur contenu (annotations)
       .replace(/\[[^\]]*\]/g, '')
       // Supprimer les parenthèses avec annotations
@@ -375,37 +375,131 @@ Ton principal :`;
 
   private preprocessStoryText(text: string, voiceStyle?: keyof typeof STORY_VOICE_STYLES): string {
     // 1. D'abord nettoyer le texte des caractères indésirables
-    const cleanedText = this.cleanTextForSpeech(text);
+    let cleanedText = this.cleanTextForSpeech(text);
+
+    // 2. Améliorer la prononciation avec <sub alias=""> au lieu de <phoneme>
+    // IMPORTANT : Traiter "c'est" et contractions AVANT les autres formes
+    cleanedText = cleanedText
+      .replace(/\bc'est\b/gi, '<sub alias="sè">c\'est</sub>')
+      .replace(/\bs'est\b/gi, '<sub alias="sè">s\'est</sub>')
+      .replace(/\bc'était\b/gi, '<sub alias="sétè">c\'était</sub>')
+      .replace(/\bn'est\b/gi, '<sub alias="nè">n\'est</sub>')
+      .replace(/\bqu'est-ce\b/gi, '<sub alias="kèsse">qu\'est-ce</sub>')
+      .replace(/\bqu'est\b/gi, '<sub alias="kè">qu\'est</sub>')
+      .replace(/\bqu'on\b/gi, '<sub alias="kon">qu\'on</sub>')
+      .replace(/\bqu'il\b/gi, '<sub alias="kil">qu\'il</sub>')
+      .replace(/\bqu'elle\b/gi, '<sub alias="kèl">qu\'elle</sub>')
+      .replace(/\bqu'ils\b/gi, '<sub alias="kil">qu\'ils</sub>')
+      .replace(/\bqu'elles\b/gi, '<sub alias="kèl">qu\'elles</sub>')
+      .replace(/\bqu'un\b/gi, '<sub alias="kun">qu\'un</sub>')
+      .replace(/\bqu'une\b/gi, '<sub alias="kune">qu\'une</sub>');
     
-    // 2. Appliquer le style de voix spécifique si fourni
+    // Formes du verbe être avec prononciation simplifiée
+    cleanedText = cleanedText
+      .replace(/\best\b(?!')/gi, '<sub alias="è">est</sub>') // "est" seul
+      .replace(/\bsont\b/gi, '<sub alias="son">sont</sub>') // s muet
+      .replace(/\bsuis\b/gi, '<sub alias="sui">suis</sub>') // s muet
+      .replace(/\bes\b/gi, '<sub alias="è">es</sub>')
+      .replace(/\bsommes\b/gi, '<sub alias="somme">sommes</sub>')
+      .replace(/\bêtes\b/gi, '<sub alias="ète">êtes</sub>');
+
+    // 2b. Améliorer la prononciation d'autres verbes et mots courants avec 's' muet
+    cleanedText = cleanedText
+      .replace(/\btous\b/gi, '<sub alias="tou">tous</sub>')
+      .replace(/\bplus\b(?!\s+de)/gi, '<sub alias="plu">plus</sub>') // "plus" sans liaison
+      .replace(/\bavez\b/gi, '<sub alias="avé">avez</sub>')
+      .replace(/\ballez\b/gi, '<sub alias="allé">allez</sub>')
+      .replace(/\bfaites\b/gi, '<sub alias="fête">faites</sub>')
+      .replace(/\bdites\b/gi, '<sub alias="dite">dites</sub>');
+
+    // 2c. Correction des liaisons obligatoires et prononciation correcte
+    cleanedText = cleanedText
+      .replace(/\bils ont\b/gi, '<sub alias="il zon">ils ont</sub>')
+      .replace(/\belles ont\b/gi, '<sub alias="elle zon">elles ont</sub>')
+      .replace(/\bun enfant\b/gi, '<sub alias="un nanfan">un enfant</sub>')
+      .replace(/\bun ami\b/gi, '<sub alias="un nami">un ami</sub>')
+      .replace(/\bun animal\b/gi, '<sub alias="un nanimal">un animal</sub>')
+      .replace(/\bmon ami\b/gi, '<sub alias="mon nami">mon ami</sub>')
+      .replace(/\bton ami\b/gi, '<sub alias="ton nami">ton ami</sub>')
+      .replace(/\bson ami\b/gi, '<sub alias="son nami">son ami</sub>');
+
+    // 2d. Améliorer la prononciation des mots avec 'e' muet final
+    cleanedText = cleanedText
+      .replace(/\bpetite\b/gi, '<sub alias="petite">petite</sub>')
+      .replace(/\bgrande\b/gi, '<sub alias="grande">grande</sub>')
+      .replace(/\bjolie\b/gi, '<sub alias="joli">jolie</sub>');
+
+    // 2e. Corriger les verbes à l'infinitif en -er (r muet) - RÈGLE GÉNÉRIQUE SIMPLE
+    // Règle générique pour les verbes en -er (r muet)
+    cleanedText = cleanedText.replace(/\b([a-zàâäéèêëïîôùûüÿœæç]{3,})er\b/gi, (match, stem) => {
+      // Ne pas traiter si c'est un nom commun avec "er", ou si le mot est trop court
+      const exceptions = ['mer', 'fer', 'ver', 'cher', 'amer', 'hier', 'fier', 'cuiller', 'enfer', 'hiver', 'super', 'laser', 'poster', 'cancer', 'enter'];
+      if (exceptions.includes(match.toLowerCase())) return match;
+      // Ne pas traiter les mots en -ter, -der, -ger si trop courts (peut être un nom)
+      if (match.length <= 4) return match;
+      return `<sub alias="${stem}é">${match}</sub>`;
+    });
+    
+    // 2f. Corriger les verbes en -ir (prononciation correcte)
+    cleanedText = cleanedText
+      .replace(/\benvahir\b/gi, '<sub alias="anvair">envahir</sub>')
+      .replace(/\bréunir\b/gi, '<sub alias="réunir">réunir</sub>')
+      .replace(/\bchoisir\b/gi, '<sub alias="choazir">choisir</sub>')
+      .replace(/\bfinir\b/gi, '<sub alias="finir">finir</sub>')
+      .replace(/\bpunir\b/gi, '<sub alias="punir">punir</sub>')
+      .replace(/\bréfléchir\b/gi, '<sub alias="réfléchir">réfléchir</sub>');
+
+    // Ajout de pauses SSML après les liaisons et fins de phrases pour une lecture plus naturelle
+    cleanedText = cleanedText
+      .replace(/(\b(?:ils|elles|nous|vous|on|tu|je|le|la|les|des|mes|tes|ses|ces|mon|ton|son|un|une|du|au|aux|en|y)\b [a-zéèêëàâäîïôöùûüçœ]+)( )/gi, '$1<break time="0.2s"/> ')
+      .replace(/([.!?])\s*/g, '$1 <break time="0.5s"/> ');
+
+    // 3. Appliquer le style de voix spécifique si fourni
     const styledText = voiceStyle ? this.applyVoiceStyleToText(cleanedText, voiceStyle) : cleanedText;
-    
-    // 3. Appliquer les améliorations générales pour la lecture
+
+    // 4. Appliquer les améliorations générales pour la lecture
     return styledText
       .replace(/\s+/g, ' ')
       .trim()
-      // Améliorer la prononciation
-      .replace(/\boh\b/gi, 'ô')
-      .replace(/\bah\b/gi, 'ââh')
+      // Améliorer la prononciation des interjections et sons
+      .replace(/\boh\b/gi, '<sub alias="o">oh</sub>')
+      .replace(/\bah\b/gi, '<sub alias="a">ah</sub>')
+      .replace(/\bhé\b/gi, '<sub alias="é">hé</sub>')
+      .replace(/\beh bien\b/gi, '<sub alias="é bien">eh bien</sub>')
+      .replace(/\bouh\b/gi, '<sub alias="ou">ouh</sub>')
+      // Améliorer la prononciation des nombres
+      .replace(/\bsix\b(?!\s+[aeiouyéèêëàâäîïôöùûüh])/gi, '<sub alias="sisse">six</sub>') // six seul
+      .replace(/\bsix\b(?=\s+[aeiouyéèêëàâäîïôöùûüh])/gi, '<sub alias="size">six</sub>') // six + voyelle
+      .replace(/\bdix\b(?!\s+[aeiouyéèêëàâäîïôöùûüh])/gi, '<sub alias="disse">dix</sub>') // dix seul
+      .replace(/\bdix\b(?=\s+[aeiouyéèêëàâäîïôöùûüh])/gi, '<sub alias="dize">dix</sub>') // dix + voyelle
+      .replace(/\bhuit\b/gi, '<sub alias="huit">huit</sub>')
+      .replace(/\bvingt\b(?=\s)/gi, '<sub alias="vin">vingt</sub>')
+      // Améliorer la prononciation des mots avec 'ch'
+      .replace(/\bchut\b/gi, '<sub alias="chute">chut</sub>')
       // Ajouter des pauses avec SSML seulement si pas déjà fait par le style
       .replace(/\. (?!<break)/g, '. <break time="0.5s"/> ')
       .replace(/! (?!<break)/g, '! <break time="0.6s"/> ')
       .replace(/\? (?!<break)/g, '? <break time="0.6s"/> ')
       .replace(/\n\n/g, ' <break time="1s"/> ')
+      .replace(/,(?!\s*<break)/g, ',<break time="0.3s"/> ')
+      .replace(/;(?!\s*<break)/g, ';<break time="0.4s"/> ')
       // Expressivité pour les histoires (si pas déjà appliquée)
       .replace(/(Il était une fois)(?!<\/prosody>)/gi, '<prosody rate="slow">$1</prosody>')
-      .replace(/(Soudain|Tout à coup)(?!<\/prosody>)/gi, '<emphasis level="moderate">$1</emphasis>');
+      .replace(/(Soudain|Tout à coup)(?!<\/prosody>)/gi, '<emphasis level="moderate">$1</emphasis>')
+      .replace(/(chuchot|murmur|doucement)/gi, '<prosody volume="soft">$1</prosody>')
+      .replace(/(cri|hurle|fort)/gi, '<prosody volume="loud">$1</prosody>');
   }
 
   public async generateSpeech(
-    text: string, 
+    text: string,
     options: GoogleTTSOptions = {
-      voice: 'fr-FR-Wavenet-C', // Sophie par défaut
+      voice: 'fr-FR-Wavenet-C',
       speed: 0.9,
       pitch: 0,
       volumeGainDb: 0
     },
-    voiceStyle?: keyof typeof STORY_VOICE_STYLES
+    voiceStyle?: keyof typeof STORY_VOICE_STYLES,
+    isSsml: boolean = false
   ): Promise<Buffer> {
     
     // Vérifier le cache d'abord
@@ -424,8 +518,21 @@ Ton principal :`;
 
     console.log('🎤 Génération audio avec Google Cloud TTS...');
 
-    // Préparer le texte avec SSML pour une meilleure expressivité
-    const ssmlText = `<speak>${this.preprocessStoryText(text, voiceStyle)}</speak>`;
+    // Si le texte est déjà SSML, ne pas retraiter ni encapsuler
+    let ssmlText = isSsml ? text : `<speak>${this.preprocessStoryText(text, voiceStyle)}</speak>`;
+    
+    // Protection contre le double encapsulation
+    if (ssmlText.includes('<speak><speak>')) {
+      console.warn('⚠️ Double encapsulation SSML détectée, nettoyage...');
+      ssmlText = ssmlText.replace(/<speak><speak>/g, '<speak>').replace(/<\/speak><\/speak>/g, '</speak>');
+    }
+
+    // Vérification stricte de la taille SSML avant envoi
+    const encoder = new TextEncoder();
+    const ssmlSize = encoder.encode(ssmlText).length;
+    if (ssmlSize > 5000) {
+      throw new Error(`Segment SSML trop long pour Google TTS: ${ssmlSize} bytes (limite: 5000 bytes). Texte: ${ssmlText.substring(0, 100)}...`);
+    }
 
     // Configuration de la requête
     const request = {
@@ -485,13 +592,17 @@ Ton principal :`;
       emphasis: style.emphasis
     };
 
-    return this.generateSpeech(text, options, styleKey);
+    // Détecter si le texte est déjà SSML
+    const isSsml = text.trim().startsWith('<speak>');
+    return this.generateSpeech(text, options, styleKey, isSsml);
   }
 
   // 🎭 NOUVELLE MÉTHODE : Génération automatique avec analyse du ton
   public async generateAutoStyledSpeech(text: string): Promise<Buffer> {
     console.log('🔍 Analyse automatique du ton de l\'histoire...');
-    const detectedStyle = await this.analyzeStoryTone(text);
+    // Extraire le texte brut pour l'analyse (sans balises SSML)
+    const plainText = text.replace(/<[^>]+>/g, '');
+    const detectedStyle = await this.analyzeStoryTone(plainText);
     console.log('🎭 Style détecté:', detectedStyle, '-', STORY_VOICE_STYLES[detectedStyle].name);
     
     return this.generateStyledSpeech(text, detectedStyle);
