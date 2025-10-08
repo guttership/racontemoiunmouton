@@ -50,9 +50,9 @@ export default function LoadingStory() {
         {/* Animation de chargement avec mouton */}
         <div className="mb-8">
           <div className="relative inline-block">
-            {/* Mouton qui tourne */}
+            {/* Animation de chargement */}
             <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 animate-bounce">
-              <div className="text-6xl md:text-8xl animate-pulse">🐑</div>
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-orange-400 to-orange-600 animate-pulse"></div>
             </div>
             
             {/* Cercles de chargement */}

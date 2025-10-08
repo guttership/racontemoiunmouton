@@ -120,9 +120,8 @@ export default function ChildProfileSelector({
               />
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                <span>🎂</span>
-                <span>Âge (optionnel)</span>
+              <label className="text-sm font-semibold text-gray-700 mb-3">
+                Âge (optionnel)
               </label>
               <Input
                 type="number"
@@ -198,8 +197,7 @@ export default function ChildProfileSelector({
 
           {/* Choses préférées */}
           <div>
-            <label className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-              <span>🎁</span>
+            <label className="text-sm font-semibold text-gray-700 mb-3">
               Choses préférées (jouets, aliments, activités spécifiques...)
             </label>
             <textarea
