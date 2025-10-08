@@ -1,0 +1,13 @@
+# robots.txt pour Raconte-moi un mouton
+# Autoriser tous les moteurs de recherche
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://racontemoiunmouton.vercel.app/sitemap.xml
+
+# Bloquer les dossiers internes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
