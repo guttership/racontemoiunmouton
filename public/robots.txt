@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://racontemoiunmouton.vercel.app/sitemap.xml
+Sitemap: https://racontemoiunmouton.dmum.eu/sitemap.xml
 
 # Bloquer les dossiers internes
 Disallow: /api/

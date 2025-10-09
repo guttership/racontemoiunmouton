@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://racontemoiunmouton.vercel.app'),
+  metadataBase: new URL('https://racontemoiunmouton.dmum.eu'),
   title: {
     default: "Raconte-moi un mouton - Histoires personnalisées pour enfants avec l'IA",
     template: "%s | Raconte-moi un mouton",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Raconte-moi un mouton - Histoires personnalisées pour enfants avec l'IA",
     description:
       "Créez des histoires personnalisées pour le coucher de vos enfants avec l'IA. Choisissez les personnages, l'environnement et le nombre magique.",
-    url: "https://racontemoiunmouton.vercel.app",
+    url: "https://racontemoiunmouton.dmum.eu",
     siteName: "Raconte-moi un mouton",
     images: [
       {
@@ -99,7 +99,7 @@ export default function RootLayout({
               '@type': 'WebApplication',
               name: 'Raconte-moi un mouton',
               description: 'Application de création d\'histoires personnalisées pour enfants avec l\'intelligence artificielle',
-              url: 'https://racontemoiunmouton.vercel.app',
+              url: 'https://racontemoiunmouton.dmum.eu',
               applicationCategory: 'EntertainmentApplication',
               operatingSystem: 'Web',
               offers: {
