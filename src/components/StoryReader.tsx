@@ -1,19 +1,29 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
-// Types de voix simplifiés
-const NARRATOR_TYPES = {
-  female: {
-    name: 'Conteuse',
-    description: 'Une voix féminine chaleureuse',
-    voice: 'fr-FR-Wavenet-C' // Sophie - Voix chaleureuse
+// Types de voix par langue
+const VOICE_CONFIG: Record<string, {
+  female: { voice: string };
+  male: { voice: string };
+}> = {
+  'fr': {
+    female: { voice: 'fr-FR-Wavenet-C' }, // Sophie
+    male: { voice: 'fr-FR-Wavenet-D' } // Thomas
   },
-  male: {
-    name: 'Conteur',
-    description: 'Une voix masculine expressive',
-    voice: 'fr-FR-Wavenet-D' // Thomas - Voix expressive
+  'en': {
+    female: { voice: 'en-US-Journey-F' }, // Female
+    male: { voice: 'en-US-Journey-D' } // Male
+  },
+  'es': {
+    female: { voice: 'es-ES-Polyglot-1' }, // Polyglot
+    male: { voice: 'es-ES-Polyglot-1' } // Polyglot (pas de distinction)
+  },
+  'de': {
+    female: { voice: 'de-DE-Polyglot-1' }, // Polyglot
+    male: { voice: 'de-DE-Polyglot-1' } // Polyglot (pas de distinction)
   }
 };
 
@@ -23,13 +33,16 @@ interface StoryReaderProps {
 }
 
 export default function StoryReader({ story, className = '' }: StoryReaderProps) {
+  const t = useTranslations('StoryReader');
+  const locale = useLocale();
+  
   console.log('📚 StoryReader reçu:', story?.length, 'caractères');
   console.log('📚 Contenu reçu:', story?.substring(0, 50));
   
   const [isLoading, setIsLoading] = useState(false);
   const [isReading, setIsReading] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [narratorType, setNarratorType] = useState<keyof typeof NARRATOR_TYPES>('female');
+  const [narratorType, setNarratorType] = useState<'female' | 'male'>('female');
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
   const [duration, setDuration] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
@@ -103,7 +116,8 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
     setIsLoading(true);
     try {
       console.log('🎤 Génération audio avec Google TTS...');
-      const selectedVoice = NARRATOR_TYPES[narratorType].voice;
+      const voiceConfig = VOICE_CONFIG[locale] || VOICE_CONFIG['fr'];
+      const selectedVoice = voiceConfig[narratorType].voice;
       
       const response = await fetch('/api/text-to-speech', {
         method: 'POST',
@@ -113,6 +127,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         body: JSON.stringify({
           text: story,
           voice: selectedVoice,
+          locale: locale, // Passer la locale au TTS
           speed: 0.75,        // Lecture ralentie de 25% pour un rythme vraiment posé
           pitch: 0.0,         // Pitch neutre pour plus de naturel
           volumeGainDb: -0.5, // Volume légèrement réduit pour un effet apaisant
@@ -230,38 +245,42 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       {/* Section audio */}
       <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 no-print">
         <h3 className="text-lg md:text-xl font-courgette mb-4 text-center text-gray-800">
-          Écouter l&apos;histoire
+          {t('listen')}
         </h3>
         
         {/* Sélecteur de narrateur/narratrice */}
         <div className="text-center mb-4">
           <label className="text-sm font-medium text-gray-700 mb-2 flex items-center justify-center gap-2">
-            Qui raconte l&apos;histoire ?
+            {t('narratorChoice')}
           </label>
           <div className="flex gap-3 justify-center max-w-md mx-auto">
-            {Object.entries(NARRATOR_TYPES).map(([key, narrator]) => (
-              <button
-                key={key}
-                onClick={() => setNarratorType(key as keyof typeof NARRATOR_TYPES)}
-                disabled={isReading || isLoading}
-                className={`flex-1 px-4 py-3 rounded-2xl border-2 transition-all duration-200 ${
-                  narratorType === key
-                    ? 'border-[#ff7519] bg-[#ff7519]/10 shadow-md'
-                    : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
-                } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-              >
-                <div className="text-base font-semibold text-gray-800 mb-1">
-                  {narrator.name}
-                </div>
-                <div className="text-xs text-gray-500">
-                  {narrator.description}
-                </div>
-              </button>
-            ))}
+            <button
+              onClick={() => setNarratorType('male')}
+              disabled={isReading || isLoading}
+              className={`flex-1 px-4 py-3 rounded-2xl border-2 transition-all duration-200 ${
+                narratorType === 'male'
+                  ? 'border-[#ff7519] bg-[#ff7519]/10 shadow-md'
+                  : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
+              } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            >
+              <div className="text-base font-semibold text-gray-800">
+                {t('narrator')}
+              </div>
+            </button>
+            <button
+              onClick={() => setNarratorType('female')}
+              disabled={isReading || isLoading}
+              className={`flex-1 px-4 py-3 rounded-2xl border-2 transition-all duration-200 ${
+                narratorType === 'female'
+                  ? 'border-[#ff7519] bg-[#ff7519]/10 shadow-md'
+                  : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
+              } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            >
+              <div className="text-base font-semibold text-gray-800">
+                {t('narratorFemale')}
+              </div>
+            </button>
           </div>
-          <p className="text-xs text-gray-500 mt-2 text-center">
-            L&apos;IA adapte automatiquement le ton à l&apos;histoire
-          </p>
         </div>
 
         {/* Contrôles audio */}
@@ -274,7 +293,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
             {isLoading ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>Génération...</span>
+                <span>{t('loading')}</span>
               </>
             ) : isReading && !isPaused ? (
               <>
@@ -291,7 +310,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
                     fill="currentColor"
                   />
                 </svg>
-                <span>Pause</span>
+                <span>{t('pause')}</span>
               </>
             ) : (
               <>
@@ -308,7 +327,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
                     fill="currentColor"
                   />
                 </svg>
-                <span>{isPaused ? 'Reprendre' : 'Lire l\'histoire'}</span>
+                <span>{t('play')}</span>
               </>
             )}
           </Button>
@@ -330,7 +349,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
                   fill="currentColor"
                 />
               </svg>
-              <span>Arrêter</span>
+              <span>{t('stop')}</span>
             </Button>
           )}
         </div>

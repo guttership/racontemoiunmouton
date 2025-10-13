@@ -1,0 +1,104 @@
+{
+  "App": {
+    "title": "Erzähl mir ein Schaf",
+    "description": "Erstelle personalisierte Gute-Nacht-Geschichten mit KI",
+    "tagline": "Personalisierte Kindergeschichten mit KI"
+  },
+  "HomePage": {
+    "title": "Willkommen bei Erzähl mir ein Schaf",
+    "subtitle": "Erstelle magische personalisierte Geschichten für deine Kinder",
+    "newStory": "Neue Geschichte",
+    "backToCreation": "Neue Geschichte erstellen"
+  },
+  "StoryCreation": {
+    "step": "Schritt {step} von {total}",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "generate": "Geschichte erstellen",
+    "generating": "Deine Geschichte wird erstellt..."
+  },
+  "ChildProfile": {
+    "title": "Kinderprofil",
+    "name": "Vorname",
+    "namePlaceholder": "Gib den Vornamen des Kindes ein",
+    "age": "Alter",
+    "ageYears": "{age} Jahre alt",
+    "interests": "Interessen",
+    "interestsPlaceholder": "Z.B.: Dinosaurier, Weltraum, Prinzessinnen...",
+    "personality": "Persönlichkeit",
+    "personalityPlaceholder": "Z.B.: neugierig, abenteuerlustig, schüchtern...",
+    "favoriteThings": "Lieblingsthemen",
+    "favoriteThingsPlaceholder": "Z.B.: Katzen, bunte Farben..."
+  },
+  "Characters": {
+    "title": "Wähle die Charaktere",
+    "count": "Anzahl der Charaktere",
+    "countValue": "{count} Charakter(e)",
+    "selectCharacters": "Wähle bis zu {count} Charakter(e)",
+    "types": {
+      "cat": "Katze",
+      "dog": "Hund",
+      "rabbit": "Hase",
+      "bear": "Bär",
+      "fox": "Fuchs",
+      "owl": "Eule",
+      "dragon": "Drache",
+      "unicorn": "Einhorn",
+      "dinosaur": "Dinosaurier",
+      "robot": "Roboter"
+    }
+  },
+  "Environment": {
+    "title": "Wähle die Umgebung",
+    "custom": "Eigene Umgebung",
+    "customPlaceholder": "Beschreibe deine eigene Umgebung...",
+    "types": {
+      "forest": "Zauberwald",
+      "ocean": "Unterwasserwelt",
+      "space": "Weltraum",
+      "castle": "Schloss",
+      "city": "Moderne Stadt",
+      "mountain": "Berg",
+      "desert": "Wüste",
+      "jungle": "Dschungel"
+    }
+  },
+  "StoryReader": {
+    "title": "Deine Geschichte ist fertig!",
+    "listen": "Geschichte anhören",
+    "narratorChoice": "Wähle deinen Erzähler",
+    "narrator": "Erzähler",
+    "narratorFemale": "Erzählerin",
+    "loading": "Audio wird generiert...",
+    "error": "Fehler beim Generieren des Audios",
+    "play": "Abspielen",
+    "pause": "Pause",
+    "stop": "Stopp"
+  },
+  "Loading": {
+    "title": "Deine Geschichte wird erstellt...",
+    "subtitle": "Die KI arbeitet für dich",
+    "wait": "Bitte warte einen Moment"
+  },
+  "Footer": {
+    "legalNotice": "Impressum",
+    "madeWith": "Erstellt mit",
+    "by": "von"
+  },
+  "LegalNotice": {
+    "title": "Impressum",
+    "editor": "Herausgeber",
+    "hosting": "Hosting",
+    "data": "Personenbezogene Daten",
+    "dataText": "Diese Website sammelt keine personenbezogenen Daten. Geschichten werden in Echtzeit generiert und nicht gespeichert.",
+    "cookies": "Cookies",
+    "cookiesText": "Diese Website verwendet nur technische Cookies, die für den Betrieb erforderlich sind.",
+    "ai": "Künstliche Intelligenz",
+    "aiText": "Die Geschichten werden von der Google Gemini API generiert. Inhalte werden automatisch erstellt und können eine elterliche Aufsicht erfordern."
+  },
+  "Meta": {
+    "title": "Erzähl mir ein Schaf - Personalisierte KI-Geschichten für Kinder",
+    "description": "Erstelle personalisierte Gute-Nacht-Geschichten mit KI. Wähle Charaktere, Umgebung und die magische Zahl. Audio-Erzählung inklusive.",
+    "keywords": "Kindergeschichten, personalisierte Geschichten, künstliche Intelligenz, KI für Kinder, Gute-Nacht-Geschichten, personalisierte Märchen, Audio-Erzählung"
+  }
+}

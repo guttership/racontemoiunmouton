@@ -2,15 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslations, useLocale } from 'next-intl';
 import StoryCreationSlider from '@/components/StoryCreationSlider';
 import StoryReader from '@/components/StoryReader';
-import LoadingStory from '@/components/LoadingStory';
 import { Button } from '@/components/ui/button';
 import { StorySettings, ChildProfile } from '@/types/story';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';
 import { StoryIcon } from '@/components/illustrations/ModernIcons';
 
 export default function Home() {
+  const t = useTranslations('HomePage');
+  const tApp = useTranslations('App');
+  const locale = useLocale();
   const [storySettings, setStorySettings] = useState<StorySettings>({
     characters: [],
     characterCount: 1,
@@ -38,18 +41,19 @@ export default function Home() {
         body: JSON.stringify({
           ...storySettings,
           childProfile,
+          locale, // Passer la langue à l'API
         }),
       });
 
       if (!response.ok) {
-        throw new Error(`Erreur lors de la génération: ${response.status}`);
+        throw new Error(`Error generating story: ${response.status}`);
       }
 
       const data = await response.json();
       setGeneratedStory(data.story);
     } catch (error) {
-      console.error('Erreur:', error);
-      alert('Une erreur est survenue lors de la génération');
+      console.error('Error:', error);
+      alert('An error occurred during generation');
     } finally {
       setIsGenerating(false);
     }
@@ -75,10 +79,10 @@ export default function Home() {
                 <StoryIcon className="w-12 h-12 md:w-16 md:h-16" />
                 <div>
                   <h1 className="text-2xl md:text-3xl lg:text-4xl font-courgette">
-                    Votre histoire magique
+                    {t('title')}
                   </h1>
                   <p className="text-gray-600 mt-1 font-clash-grotesk text-sm md:text-base">
-                    Une création unique pour votre enfant
+                    {t('subtitle')}
                   </p>
                 </div>
               </div>
@@ -88,7 +92,7 @@ export default function Home() {
                 onClick={() => setGeneratedStory('')}
                 className="bg-gray-100 text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-2xl font-clash-grotesk font-semibold text-sm md:text-base"
               >
-                Nouvelle histoire
+                {t('newStory')}
               </Button>
             </div>
           </div>
@@ -109,14 +113,13 @@ export default function Home() {
       <main itemScope itemType="https://schema.org/WebSite">
         {/* Header */}
         <header className="flex flex-col items-center justify-center py-8">
-          <Image src="/logo_mouton.svg" alt="Logo Raconte-moi un mouton, application d'histoires créatives pour enfants" width={80} height={80} className="mb-4" priority aria-label="Logo Raconte-moi un mouton" />
+          <Image src="/logo_mouton.svg" alt={tApp('title')} width={80} height={80} className="mb-4" priority aria-label={tApp('title')} />
           <h1 itemProp="name" className="text-3xl md:text-4xl font-courgette text-[#ff7519] mb-2 text-center">
-            Raconte-moi un mouton
+            {tApp('title')}
           </h1>
           <p itemProp="description" className="text-lg text-gray-700 text-center max-w-2xl mx-auto">
-            Créez des histoires personnalisées pour enfants selon leurs goûts et votre imagination.<br />
-            L&apos;IA s&apos;occupe du reste !<br />
-            <span className="text-sm text-gray-500">Application Next.js rapide, créative et adaptée aux familles.</span>
+            {tApp('description')}<br />
+            <span className="text-sm text-gray-500">{tApp('tagline')}</span>
           </p>
         </header>
 

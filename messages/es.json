@@ -1,0 +1,104 @@
+{
+  "App": {
+    "title": "Cuéntame una oveja",
+    "description": "Crea historias personalizadas para dormir con IA",
+    "tagline": "Historias personalizadas para niños con IA"
+  },
+  "HomePage": {
+    "title": "Bienvenido a Cuéntame una oveja",
+    "subtitle": "Crea historias mágicas personalizadas para tus hijos",
+    "newStory": "Nueva historia",
+    "backToCreation": "Crear una nueva historia"
+  },
+  "StoryCreation": {
+    "step": "Paso {step} de {total}",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "generate": "Generar historia",
+    "generating": "Creando tu historia..."
+  },
+  "ChildProfile": {
+    "title": "Perfil del niño",
+    "name": "Nombre",
+    "namePlaceholder": "Introduce el nombre del niño",
+    "age": "Edad",
+    "ageYears": "{age} años",
+    "interests": "Intereses",
+    "interestsPlaceholder": "Ej: dinosaurios, espacio, princesas...",
+    "personality": "Personalidad",
+    "personalityPlaceholder": "Ej: curioso, aventurero, tímido...",
+    "favoriteThings": "Lo que le gusta",
+    "favoriteThingsPlaceholder": "Ej: gatos, colores brillantes..."
+  },
+  "Characters": {
+    "title": "Elige los personajes",
+    "count": "Número de personajes",
+    "countValue": "{count} personaje(s)",
+    "selectCharacters": "Selecciona hasta {count} personaje(s)",
+    "types": {
+      "cat": "Gato",
+      "dog": "Perro",
+      "rabbit": "Conejo",
+      "bear": "Oso",
+      "fox": "Zorro",
+      "owl": "Búho",
+      "dragon": "Dragón",
+      "unicorn": "Unicornio",
+      "dinosaur": "Dinosaurio",
+      "robot": "Robot"
+    }
+  },
+  "Environment": {
+    "title": "Elige el entorno",
+    "custom": "Entorno personalizado",
+    "customPlaceholder": "Describe tu entorno personalizado...",
+    "types": {
+      "forest": "Bosque encantado",
+      "ocean": "Fondo marino",
+      "space": "El espacio",
+      "castle": "Castillo",
+      "city": "Ciudad moderna",
+      "mountain": "Montaña",
+      "desert": "Desierto",
+      "jungle": "Jungla"
+    }
+  },
+  "StoryReader": {
+    "title": "¡Tu historia está lista!",
+    "listen": "Escuchar la historia",
+    "narratorChoice": "Elige tu narrador",
+    "narrator": "Narrador",
+    "narratorFemale": "Narradora",
+    "loading": "Generando audio...",
+    "error": "Error al generar audio",
+    "play": "Reproducir",
+    "pause": "Pausa",
+    "stop": "Detener"
+  },
+  "Loading": {
+    "title": "Creando tu historia...",
+    "subtitle": "La IA está trabajando para ti",
+    "wait": "Espera unos momentos"
+  },
+  "Footer": {
+    "legalNotice": "Aviso legal",
+    "madeWith": "Hecho con",
+    "by": "por"
+  },
+  "LegalNotice": {
+    "title": "Aviso Legal",
+    "editor": "Editor del sitio",
+    "hosting": "Alojamiento",
+    "data": "Datos personales",
+    "dataText": "Este sitio no recopila ningún dato personal. Las historias se generan en tiempo real y no se almacenan.",
+    "cookies": "Cookies",
+    "cookiesText": "Este sitio solo utiliza cookies técnicas necesarias para su funcionamiento.",
+    "ai": "Inteligencia Artificial",
+    "aiText": "Las historias son generadas por la API de Google Gemini. El contenido se crea automáticamente y puede requerir supervisión parental."
+  },
+  "Meta": {
+    "title": "Cuéntame una oveja - Historias personalizadas con IA para niños",
+    "description": "Crea historias personalizadas para dormir con IA. Elige personajes, entorno y el número mágico. Narración de audio incluida.",
+    "keywords": "historias para niños, historias personalizadas, inteligencia artificial, IA para niños, cuentos para dormir, cuento personalizado, narración de audio"
+  }
+}

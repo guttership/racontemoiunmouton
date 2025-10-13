@@ -1,0 +1,104 @@
+{
+  "App": {
+    "title": "Raconte-moi un mouton",
+    "description": "Créez des histoires personnalisées pour le coucher de vos enfants avec l'IA",
+    "tagline": "Histoires personnalisées pour enfants avec l'IA"
+  },
+  "HomePage": {
+    "title": "Bienvenue sur Raconte-moi un mouton",
+    "subtitle": "Créez des histoires magiques personnalisées pour vos enfants",
+    "newStory": "Nouvelle histoire",
+    "backToCreation": "Créer une nouvelle histoire"
+  },
+  "StoryCreation": {
+    "step": "Étape {step} sur {total}",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "generate": "Générer l'histoire",
+    "generating": "Création de l'histoire en cours..."
+  },
+  "ChildProfile": {
+    "title": "Profil de l'enfant",
+    "name": "Prénom",
+    "namePlaceholder": "Entrez le prénom de l'enfant",
+    "age": "Âge",
+    "ageYears": "{age} ans",
+    "interests": "Centres d'intérêt",
+    "interestsPlaceholder": "Ex: dinosaures, espace, princesses...",
+    "personality": "Personnalité",
+    "personalityPlaceholder": "Ex: curieux, aventurier, timide...",
+    "favoriteThings": "Ce qu'il/elle aime",
+    "favoriteThingsPlaceholder": "Ex: les chats, les couleurs vives..."
+  },
+  "Characters": {
+    "title": "Choisissez les personnages",
+    "count": "Nombre de personnages",
+    "countValue": "{count} personnage(s)",
+    "selectCharacters": "Sélectionnez jusqu'à {count} personnage(s)",
+    "types": {
+      "cat": "Chat",
+      "dog": "Chien",
+      "rabbit": "Lapin",
+      "bear": "Ours",
+      "fox": "Renard",
+      "owl": "Chouette",
+      "dragon": "Dragon",
+      "unicorn": "Licorne",
+      "dinosaur": "Dinosaure",
+      "robot": "Robot"
+    }
+  },
+  "Environment": {
+    "title": "Choisissez l'environnement",
+    "custom": "Environnement personnalisé",
+    "customPlaceholder": "Décrivez l'environnement de votre choix...",
+    "types": {
+      "forest": "Forêt enchantée",
+      "ocean": "Fond marin",
+      "space": "L'espace",
+      "castle": "Château",
+      "city": "Ville moderne",
+      "mountain": "Montagne",
+      "desert": "Désert",
+      "jungle": "Jungle"
+    }
+  },
+  "StoryReader": {
+    "title": "Votre histoire est prête !",
+    "listen": "Écouter l'histoire",
+    "narratorChoice": "Choisissez votre narrateur",
+    "narrator": "Conteur",
+    "narratorFemale": "Conteuse",
+    "loading": "Génération de l'audio...",
+    "error": "Erreur lors de la génération de l'audio",
+    "play": "Lire",
+    "pause": "Pause",
+    "stop": "Arrêter"
+  },
+  "Loading": {
+    "title": "Création de votre histoire...",
+    "subtitle": "L'intelligence artificielle travaille pour vous",
+    "wait": "Veuillez patienter quelques instants"
+  },
+  "Footer": {
+    "legalNotice": "Mentions légales",
+    "madeWith": "Fait avec",
+    "by": "par"
+  },
+  "LegalNotice": {
+    "title": "Mentions légales",
+    "editor": "Éditeur du site",
+    "hosting": "Hébergement",
+    "data": "Données personnelles",
+    "dataText": "Ce site ne collecte aucune donnée personnelle. Les histoires sont générées en temps réel et ne sont pas stockées.",
+    "cookies": "Cookies",
+    "cookiesText": "Ce site utilise uniquement des cookies techniques nécessaires à son fonctionnement.",
+    "ai": "Intelligence Artificielle",
+    "aiText": "Les histoires sont générées par l'API Google Gemini. Le contenu est créé automatiquement et peut nécessiter une supervision parentale."
+  },
+  "Meta": {
+    "title": "Raconte-moi un mouton - Histoires personnalisées pour enfants avec l'IA",
+    "description": "Créez des histoires personnalisées pour le coucher de vos enfants avec l'IA. Choisissez les personnages, l'environnement et le nombre magique. Lecture audio incluse.",
+    "keywords": "histoires pour enfants, histoires personnalisées, intelligence artificielle, IA pour enfants, histoires du soir, conte personnalisé, narration audio"
+  }
+}

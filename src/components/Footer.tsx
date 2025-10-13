@@ -1,13 +1,18 @@
-import Link from 'next/link';
+'use client';
+
+import { Link } from '@/navigation';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+  
   return (
-    <footer className="w-full bg-white border-t border-gray-200 py-6" aria-label="Pied de page Raconte-moi un mouton">
+    <footer className="w-full bg-white border-t border-gray-200 py-6" aria-label={t('legalNotice')}>
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-4">
           <Link href="/mentions-legales" className="text-sm text-gray-500 hover:text-[#ff7519] underline">
-            Mentions légales
+            {t('legalNotice')}
           </Link>
           <a href="https://dmum.eu" target="_blank" rel="noopener" aria-label="Site de Yann Gutter (dmum.eu)" className="ml-2 flex items-center">
             <Image src="/logo_mouton.svg" alt="Logo dmum.eu" width={28} height={28} style={{ filter: 'grayscale(1)', opacity: 0.7 }} className="inline align-middle" aria-label="Logo dmum.eu" />
