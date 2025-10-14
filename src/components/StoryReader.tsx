@@ -120,6 +120,9 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
   }, [currentAudio]);
 
   const generateAudio = async () => {
+    console.log('🚀 START generateAudio - Version:', new Date().toISOString());
+    console.log('📊 Story length:', story?.length, 'chars');
+    
     setIsLoading(true);
     try {
       console.log('🎤 Génération audio avec Google TTS...');
