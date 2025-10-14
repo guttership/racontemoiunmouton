@@ -2,7 +2,8 @@
 
 import { createContext, useContext, ReactNode } from 'react';
 
-type Messages = Record<string, any>;
+type MessageValue = string | Record<string, MessageValue>;
+type Messages = Record<string, MessageValue>;
 
 const I18nContext = createContext<{ messages: Messages; locale: string } | null>(null);
 
@@ -18,9 +19,9 @@ export function useTranslations(namespace: string) {
   const context = useContext(I18nContext);
   if (!context) throw new Error('useTranslations doit être utilisé dans I18nProvider');
   
-  return (key: string, params?: Record<string, any>) => {
+  return (key: string, params?: Record<string, string | number>) => {
     const keys = `${namespace}.${key}`.split('.');
-    let value: any = context.messages;
+    let value: MessageValue = context.messages;
     
     for (const k of keys) {
       value = value?.[k];

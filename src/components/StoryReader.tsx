@@ -69,7 +69,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       setProgress(0);
       setDuration(0);
     }
-  }, [narratorType]);
+  }, [narratorType, currentAudio]);
 
   // Gestion des événements audio
   useEffect(() => {
