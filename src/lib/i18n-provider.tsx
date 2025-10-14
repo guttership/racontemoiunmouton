@@ -24,17 +24,22 @@ export function useTranslations(namespace: string) {
   
   return (key: string, params?: Record<string, string | number>) => {
     const keys = `${namespace}.${key}`.split('.');
-    let value: MessageValue = context.messages;
+    let value: string | MessageValue | undefined = context.messages;
     
     for (const k of keys) {
-      value = value?.[k];
+      if (value && typeof value === 'object') {
+        value = value[k];
+      } else {
+        value = undefined;
+        break;
+      }
     }
     
     if (typeof value === 'string' && params) {
       return value.replace(/\{(\w+)\}/g, (_, key) => params[key] ?? `{${key}}`);
     }
     
-    return value || key;
+    return typeof value === 'string' ? value : key;
   };
 }
 
