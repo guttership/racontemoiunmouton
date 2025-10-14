@@ -11,7 +11,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+// Root layout minimaliste - les métadonnées sont dans [locale]/layout.tsx
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

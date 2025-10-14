@@ -1,17 +1,18 @@
 'use client';
 
-import { Link } from '@/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from '@/lib/i18n-provider';
 
 export default function Footer() {
   const t = useTranslations('Footer');
+  const locale = useLocale();
   
   return (
     <footer className="w-full bg-white border-t border-gray-200 py-6" aria-label={t('legalNotice')}>
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-4">
-          <Link href="/mentions-legales" className="text-sm text-gray-500 hover:text-[#ff7519] underline">
+          <Link href={`/${locale}/mentions-legales`} className="text-sm text-gray-500 hover:text-[#ff7519] underline">
             {t('legalNotice')}
           </Link>
           <a href="https://dmum.eu" target="_blank" rel="noopener" aria-label="Site de Yann Gutter (dmum.eu)" className="ml-2 flex items-center">

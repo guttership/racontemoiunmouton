@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { googleStoryTeller, GoogleTTSOptions, STORY_VOICE_STYLES } from '@/lib/googleStoryTeller';
+import { googleStoryTeller, GoogleTTSOptions } from '@/lib/googleStoryTeller';
 
 export const runtime = 'nodejs';
 
@@ -11,10 +11,9 @@ export async function POST(request: NextRequest) {
   let speed: number;
   let pitch: number;
   let volumeGainDb: number;
-  let style: string | undefined;
-  let autoAnalyze: boolean;
   let processedText: string = '';
   let ssmlSegments: string[] = [];
+  let locale: string = 'fr';
   try {
     try {
       const body = await request.json();
@@ -23,8 +22,7 @@ export async function POST(request: NextRequest) {
       speed = body.speed ?? 1.0;
       pitch = body.pitch ?? 0.0;
       volumeGainDb = body.volumeGainDb ?? 0.0;
-      style = body.style;
-      autoAnalyze = body.autoAnalyze ?? false;
+      locale = body.locale ?? 'fr'; // Récupérer la locale
     } catch (jsonError) {
       return new NextResponse(
         JSON.stringify({
@@ -48,11 +46,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Pré-traitement pour forcer la liaison : suppression des apostrophes dans les mots liés pour TTS
+    // Pré-traitement selon la langue
     processedText = text.replace(/'/g, "'");
-    processedText = processedText!.replace(/\b(l|d|j|n|s|c|m|t|qu)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match: string, p1: string, p2: string) => {
-      return `${p1}${p2}`;
-    });
+    
+    // Traitement spécifique au français pour les élisions
+    if (locale === 'fr') {
+      processedText = processedText!.replace(/\b(l|d|j|n|s|c|m|t|qu)'([a-zA-Zéèêëàâäîïôöùûüçœ]+)/g, (match: string, p1: string, p2: string) => {
+        return `${p1}${p2}`;
+      });
+    }
+    // Pour l'anglais, améliorer les contractions
+    else if (locale === 'en') {
+      // Normaliser les contractions anglaises
+      processedText = processedText.replace(/(\w+)'(s|re|ve|d|ll|t|m)/gi, (match, p1, p2) => {
+        return `${p1}'${p2}`;
+      });
+    }
+    // Pour l'espagnol et l'allemand, garder le texte tel quel
+    // (pas de traitement spécifique nécessaire)
 
     // Génération SSML pour la synthèse vocale
     const encoder = new TextEncoder();
@@ -179,15 +190,6 @@ export async function POST(request: NextRequest) {
     return segments;
   }).flat();
 
-    // Détection du mode adulte (âge > 15 ans)
-    let isAdult = false;
-    if (request.body) {
-      try {
-        const body = typeof request.body === 'string' ? JSON.parse(request.body) : request.body;
-        if (body.childAge && body.childAge > 15) isAdult = true;
-      } catch {}
-    }
-
     // Vérification FINALE : s'assurer que tous les segments sont < 5000 bytes
     const finalSegments: string[] = [];
     for (const seg of ssmlSegments) {
@@ -225,17 +227,9 @@ export async function POST(request: NextRequest) {
       }
       
       // Appel TTS normal
-      let buffer: Buffer;
-      if (autoAnalyze) {
-        buffer = await googleStoryTeller.generateAutoStyledSpeech(ssmlText);
-      } else if (isAdult) {
-        buffer = await googleStoryTeller.generateStyledSpeech(ssmlText, 'storyteller');
-      } else if (style && Object.keys(STORY_VOICE_STYLES).includes(style)) {
-        buffer = await googleStoryTeller.generateStyledSpeech(ssmlText, style as keyof typeof STORY_VOICE_STYLES);
-      } else {
-        const options: GoogleTTSOptions = { voice, speed, pitch, volumeGainDb };
-        buffer = await googleStoryTeller.generateSpeech(ssmlText, options, undefined, true);
-      }
+      // Toujours utiliser la voix spécifiée (pas de style auto qui force une voix française)
+      const options: GoogleTTSOptions = { voice, speed, pitch, volumeGainDb };
+      const buffer = await googleStoryTeller.generateSpeech(ssmlText, options, undefined, true);
       audioBuffers.push(buffer);
     }
 

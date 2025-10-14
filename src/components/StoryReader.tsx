@@ -1,29 +1,30 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations, useLocale } from '@/lib/i18n-provider';
 import { Button } from '@/components/ui/button';
 
 // Types de voix par langue
+// Documentation: https://cloud.google.com/text-to-speech/docs/voices
 const VOICE_CONFIG: Record<string, {
-  female: { voice: string };
-  male: { voice: string };
+  female: { voice: string; name: string };
+  male: { voice: string; name: string };
 }> = {
   'fr': {
-    female: { voice: 'fr-FR-Wavenet-C' }, // Sophie
-    male: { voice: 'fr-FR-Wavenet-D' } // Thomas
+    female: { voice: 'fr-FR-Wavenet-C', name: 'Sophie' }, // Voix chaleureuse française
+    male: { voice: 'fr-FR-Wavenet-D', name: 'Thomas' } // Voix expressive française
   },
   'en': {
-    female: { voice: 'en-US-Journey-F' }, // Female
-    male: { voice: 'en-US-Journey-D' } // Male
+    female: { voice: 'en-US-Wavenet-C', name: 'Female Voice' }, // Voix Wavenet US féminine
+    male: { voice: 'en-US-Wavenet-D', name: 'Male Voice' } // Voix Wavenet US masculine
   },
   'es': {
-    female: { voice: 'es-ES-Polyglot-1' }, // Polyglot
-    male: { voice: 'es-ES-Polyglot-1' } // Polyglot (pas de distinction)
+    female: { voice: 'es-ES-Wavenet-C', name: 'Voz Femenina' }, // Voix Wavenet espagnole féminine
+    male: { voice: 'es-ES-Wavenet-B', name: 'Voz Masculina' } // Voix Wavenet espagnole masculine
   },
   'de': {
-    female: { voice: 'de-DE-Polyglot-1' }, // Polyglot
-    male: { voice: 'de-DE-Polyglot-1' } // Polyglot (pas de distinction)
+    female: { voice: 'de-DE-Wavenet-C', name: 'Weibliche Stimme' }, // Voix Wavenet allemande féminine
+    male: { voice: 'de-DE-Wavenet-D', name: 'Männliche Stimme' } // Voix Wavenet allemande masculine
   }
 };
 
@@ -116,8 +117,14 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
     setIsLoading(true);
     try {
       console.log('🎤 Génération audio avec Google TTS...');
+      console.log('🌍 Locale actuelle:', locale);
+      console.log('🎭 Type narrateur:', narratorType);
+      
       const voiceConfig = VOICE_CONFIG[locale] || VOICE_CONFIG['fr'];
       const selectedVoice = voiceConfig[narratorType].voice;
+      
+      console.log('🔊 Voix sélectionnée:', selectedVoice);
+      console.log('📋 Configuration voix:', voiceConfig);
       
       const response = await fetch('/api/text-to-speech', {
         method: 'POST',
@@ -130,8 +137,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
           locale: locale, // Passer la locale au TTS
           speed: 0.75,        // Lecture ralentie de 25% pour un rythme vraiment posé
           pitch: 0.0,         // Pitch neutre pour plus de naturel
-          volumeGainDb: -0.5, // Volume légèrement réduit pour un effet apaisant
-          autoAnalyze: true   // L'IA adapte le ton selon le contenu (drôle, mystérieux, etc.)
+          volumeGainDb: -0.5  // Volume légèrement réduit pour un effet apaisant
         }),
       });
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from '@/lib/i18n-provider';
 import { Button } from '@/components/ui/button';
 import CharacterSelector from '@/components/CharacterSelector';
 import EnvironmentSelector from '@/components/EnvironmentSelector';
@@ -32,12 +33,17 @@ export default function StoryCreationSlider({
   onChildProfileChange,
   onCreateStory,
 }: StoryCreationSliderProps) {
+  const t = useTranslations('StoryCreation');
+  const tChar = useTranslations('Characters');
+  const tEnv = useTranslations('Environment');
+  const tProfile = useTranslations('ChildProfile');
+  
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = [
     {
       id: 'characters',
-      title: 'Personnages',
+      title: tChar('title'),
       component: (
         <CharacterSelector
           selectedCharacters={selectedCharacters}
@@ -50,7 +56,7 @@ export default function StoryCreationSlider({
     },
     {
       id: 'environment',
-      title: 'Environnement',
+      title: tEnv('title'),
       component: (
         <EnvironmentSelector
           selectedEnvironment={selectedEnvironment}
@@ -61,7 +67,7 @@ export default function StoryCreationSlider({
     },
     {
       id: 'profile',
-      title: 'Profil de l\'enfant',
+      title: tProfile('title'),
       component: (
         <ChildProfileSelector
           childProfile={childProfile}
@@ -140,7 +146,7 @@ export default function StoryCreationSlider({
             {currentStepData.title}
           </h2>
           <p className="text-gray-600 font-clash-grotesk text-sm md:text-base">
-            Étape {currentStep + 1} sur {steps.length}
+            {t('step', { step: currentStep + 1, total: steps.length })}
           </p>
         </div>
       </div>
@@ -181,8 +187,7 @@ export default function StoryCreationSlider({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="hidden sm:inline">Précédent</span>
-          <span className="sm:hidden">Préc.</span>
+          {t('previous')}
         </Button>
 
         <div className="flex gap-1 md:gap-2">
@@ -223,8 +228,7 @@ export default function StoryCreationSlider({
                       />
                     </svg>
                   </div>
-                  <span className="hidden sm:inline">Création...</span>
-                  <span className="sm:hidden">...</span>
+                  {t('generating')}
                 </>
               ) : (
                 <>
@@ -241,15 +245,13 @@ export default function StoryCreationSlider({
                       fill="currentColor"
                     />
                   </svg>
-                  <span className="hidden sm:inline">Créer l&apos;histoire</span>
-                  <span className="sm:hidden">Créer</span>
+                  {t('generate')}
                 </>
               )}
             </>
           ) : (
             <>
-              <span className="hidden sm:inline">Suivant</span>
-              <span className="sm:hidden">Suiv.</span>
+              {t('next')}
               <svg
                 width="14"
                 height="14"

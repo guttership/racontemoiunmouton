@@ -1,26 +1,12 @@
 import createMiddleware from 'next-intl/middleware';
-import { locales, defaultLocale } from './i18n';
+import { locales, defaultLocale } from './i18n/config';
 
 export default createMiddleware({
-  // Langues supportées
-  locales,
-  
-  // Langue par défaut
+  locales: [...locales],
   defaultLocale,
-  
-  // Stratégie de détection de locale
-  localeDetection: true,
-  
-  // Préfixe toujours visible dans l'URL (meilleur pour SEO)
-  localePrefix: 'always',
+  localePrefix: 'always'
 });
 
 export const config = {
-  // Matcher pour exclure les fichiers statiques et API
-  matcher: [
-    // Inclure toutes les routes sauf :
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-    // Mais inclure les routes API de l'app si nécessaire
-    // '/(api|trpc)(.*)',
-  ],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

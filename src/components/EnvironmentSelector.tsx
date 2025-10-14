@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useTranslations } from '@/lib/i18n-provider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import SelectDropdown from '@/components/ui/select-dropdown';
-import { ENVIRONMENT_OPTIONS } from '@/types/story';
 
 interface EnvironmentSelectorProps {
   selectedEnvironment: string;
@@ -15,8 +15,24 @@ export default function EnvironmentSelector({
   selectedEnvironment,
   onEnvironmentChange,
 }: EnvironmentSelectorProps) {
+  const t = useTranslations('Environment');
   const [customEnvironment, setCustomEnvironment] = useState('');
   const [showCustom, setShowCustom] = useState(false);
+  
+  const ENVIRONMENT_OPTIONS = useMemo(() => [
+    t('options.enchantedForest'),
+    t('options.floweryGarden'),
+    t('options.sunsetBeach'),
+    t('options.snowyMountain'),
+    t('options.colorfulMeadow'),
+    t('options.magicCastle'),
+    t('options.spaceship'),
+    t('options.tropicalIsland'),
+    t('options.cottageVillage'),
+    t('options.crystalCave'),
+    t('options.countryFarm'),
+    t('options.underwaterKingdom'),
+  ], [t]);
 
   const handleCustomEnvironment = () => {
     if (customEnvironment.trim()) {
@@ -45,7 +61,7 @@ export default function EnvironmentSelector({
               />
             </svg>
           </div>
-          <span className="font-courgette text-xl sm:text-2xl text-gray-800">Choisis l&apos;environnement de l&apos;histoire</span>
+          <span className="font-courgette text-xl sm:text-2xl text-gray-800">{t('title')}</span>
         </div>
         
         {/* Saisie libre */}
@@ -68,12 +84,12 @@ export default function EnvironmentSelector({
                   fill="currentColor"
                 />
               </svg>
-              <span>Créer un environnement personnalisé</span>
+              <span>{t('createCustom')}</span>
             </Button>
           ) : (
             <div className="space-y-3">
               <label className="text-sm font-semibold text-gray-700">
-                Décris ton environnement magique
+                {t('describeCustom')}
               </label>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -81,7 +97,7 @@ export default function EnvironmentSelector({
                   onChange={(e) => setCustomEnvironment(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleCustomEnvironment()}
                   className="hand-drawn-input flex-1"
-                  placeholder="Ex: Une maison dans les nuages, un jardin de bonbons..."
+                  placeholder={t('placeholder')}
                   autoFocus
                 />
                 <div className="flex gap-2 sm:gap-3">
@@ -106,7 +122,7 @@ export default function EnvironmentSelector({
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span>Valider</span>
+                    <span>{t('validate')}</span>
                   </Button>
                   <Button
                     variant="outline"
@@ -131,7 +147,7 @@ export default function EnvironmentSelector({
                         strokeLinecap="round"
                       />
                     </svg>
-                    <span>Annuler</span>
+                    <span>{t('cancel')}</span>
                   </Button>
                 </div>
               </div>
@@ -151,12 +167,12 @@ export default function EnvironmentSelector({
 
         {/* Suggestions avec liste déroulante */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-700 mb-4">Ou choisis parmi nos suggestions :</h4>
+          <h4 className="text-sm font-semibold text-gray-700 mb-4">{t('suggestions')}</h4>
           <SelectDropdown
             options={ENVIRONMENT_OPTIONS.map(env => ({ value: env, label: env }))}
             selectedValue={selectedEnvironment}
             onSelectionChange={onEnvironmentChange}
-            placeholder="Sélectionner un environnement..."
+            placeholder={t('selectPlaceholder')}
             className="w-full"
           />
         </div>

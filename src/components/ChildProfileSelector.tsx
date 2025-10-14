@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useTranslations } from '@/lib/i18n-provider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ChildProfile, INTERESTS_OPTIONS, PERSONALITY_OPTIONS } from '@/types/story';
+import { ChildProfile } from '@/types/story';
 
 interface ChildProfileSelectorProps {
   childProfile: ChildProfile;
@@ -14,7 +15,40 @@ export default function ChildProfileSelector({
   childProfile,
   onProfileChange,
 }: ChildProfileSelectorProps) {
+  const t = useTranslations('ChildProfile');
   const [showProfile, setShowProfile] = useState(false);
+  
+  const INTERESTS_OPTIONS = useMemo(() => [
+    t('interests.animals'),
+    t('interests.music'),
+    t('interests.drawing'),
+    t('interests.sport'),
+    t('interests.dance'),
+    t('interests.cooking'),
+    t('interests.gardening'),
+    t('interests.reading'),
+    t('interests.videoGames'),
+    t('interests.construction'),
+    t('interests.adventure'),
+    t('interests.magic'),
+    t('interests.science'),
+    t('interests.cars'),
+    t('interests.planes'),
+    t('interests.dinosaurs'),
+  ], [t]);
+  
+  const PERSONALITY_OPTIONS = useMemo(() => [
+    t('personality.curious'),
+    t('personality.brave'),
+    t('personality.shy'),
+    t('personality.funny'),
+    t('personality.kind'),
+    t('personality.creative'),
+    t('personality.energetic'),
+    t('personality.calm'),
+    t('personality.dreamy'),
+    t('personality.determined'),
+  ], [t]);
 
   const updateProfile = (updates: Partial<ChildProfile>) => {
     onProfileChange({ ...childProfile, ...updates });
@@ -56,7 +90,7 @@ export default function ChildProfileSelector({
                 />
               </svg>
             </div>
-            <span className="font-courgette text-xl sm:text-2xl text-gray-800">Personnaliser pour votre enfant</span>
+            <span className="font-courgette text-xl sm:text-2xl text-gray-800">{t('title')}</span>
           </div>
           <Button
             onClick={() => setShowProfile(!showProfile)}
@@ -85,7 +119,7 @@ export default function ChildProfileSelector({
                 />
               )}
             </svg>
-            <span>{showProfile ? 'Masquer' : 'Personnaliser'}</span>
+            <span>{showProfile ? t('hide') : t('customize')}</span>
           </Button>
         </div>
       </div>
@@ -109,11 +143,11 @@ export default function ChildProfileSelector({
                     fill="currentColor"
                   />
                 </svg>
-                <span>Prénom de l&apos;enfant (optionnel)</span>
+                <span>{t('nameLabel')}</span>
               </label>
               <Input
                 type="text"
-                placeholder="Ex: Emma, Lucas..."
+                placeholder={t('namePlaceholder')}
                 value={childProfile.name || ''}
                 onChange={(e) => updateProfile({ name: e.target.value })}
                 className="hand-drawn-input"
@@ -121,13 +155,13 @@ export default function ChildProfileSelector({
             </div>
             <div>
               <label className="text-sm font-semibold text-gray-700 mb-3">
-                Âge (optionnel)
+                {t('ageLabel')}
               </label>
               <Input
                 type="number"
                 min="1"
                 max="12"
-                placeholder="Ex: 5"
+                placeholder={t('agePlaceholder')}
                 value={childProfile.age || ''}
                 onChange={(e) => updateProfile({ age: e.target.value ? parseInt(e.target.value) : undefined })}
                 className="hand-drawn-input"
@@ -138,7 +172,7 @@ export default function ChildProfileSelector({
           {/* Centres d'intérêt */}
           <div>
             <label className="text-sm font-semibold text-gray-700 mb-4">
-              Centres d&apos;intérêt et hobbies
+              {t('interestsLabel')}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
               {INTERESTS_OPTIONS.map((interest) => (
@@ -175,7 +209,7 @@ export default function ChildProfileSelector({
                   fill="currentColor"
                 />
               </svg>
-              <span>Traits de personnalité</span>
+              <span>{t('personalityLabel')}</span>
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
               {PERSONALITY_OPTIONS.map((trait) => (
@@ -198,12 +232,12 @@ export default function ChildProfileSelector({
           {/* Choses préférées */}
           <div>
             <label className="text-sm font-semibold text-gray-700 mb-3">
-              Choses préférées (jouets, aliments, activités spécifiques...)
+              {t('favoriteThingsLabel')}
             </label>
             <textarea
               className="hand-drawn-input min-h-[80px] w-full px-3 py-2 text-sm resize-none"
               rows={3}
-              placeholder="Ex: son doudou lapin, les cookies, nager dans la piscine..."
+              placeholder={t('favoriteThingsPlaceholder')}
               value={(childProfile.favoriteThings || []).join(', ')}
               onChange={(e) => updateProfile({ 
                 favoriteThings: e.target.value.split(',').map(s => s.trim()).filter(s => s.length > 0)

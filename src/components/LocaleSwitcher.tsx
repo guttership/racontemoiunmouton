@@ -1,80 +1,60 @@
 'use client';
 
-import { usePathname, useRouter } from '@/navigation';
-import { locales, localeNames, type Locale } from '@/i18n';
-import { useState } from 'react';
+import { useLocale } from '@/lib/i18n-provider';
+import { usePathname, useRouter } from 'next/navigation';
+import { Globe } from 'lucide-react';
 
-export default function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
-  const router = useRouter();
+const locales = [
+  { code: 'fr', label: 'FR', name: 'Français' },
+  { code: 'en', label: 'EN', name: 'English' },
+  { code: 'es', label: 'ES', name: 'Español' },
+  { code: 'de', label: 'DE', name: 'Deutsch' },
+];
+
+export default function LocaleSwitcher() {
+  const locale = useLocale();
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
-  const handleLocaleChange = (newLocale: string) => {
-    router.push(pathname, { locale: newLocale });
-    router.refresh();
-    setIsOpen(false);
-  };
-
-  const flagEmojis: Record<Locale, string> = {
-    fr: '🇫🇷',
-    en: '🇬🇧',
-    es: '🇪🇸',
-    de: '🇩🇪',
+  const switchLocale = (newLocale: string) => {
+    // Remplace la locale dans l'URL : /fr/path -> /en/path
+    const segments = pathname.split('/');
+    segments[1] = newLocale;
+    const newPath = segments.join('/');
+    router.push(newPath);
   };
 
   return (
-    <div className="relative inline-block text-left">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"
-        aria-label="Change language"
-      >
-        <span className="text-xl">{flagEmojis[currentLocale as Locale]}</span>
-        <span>{localeNames[currentLocale as Locale]}</span>
-        <svg
-          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+    <div className="fixed top-4 right-4 z-50">
+      <div className="relative group">
+        <button
+          className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all border border-orange-200"
+          aria-label="Changer de langue"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          <Globe className="w-5 h-5 text-orange-500" />
+          <span className="font-semibold text-gray-700 uppercase">{locale}</span>
+        </button>
 
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 z-10"
-            onClick={() => setIsOpen(false)}
-          />
-          
-          {/* Dropdown menu */}
-          <div className="absolute right-0 z-20 w-48 mt-2 origin-top-right bg-white border border-gray-200 rounded-lg shadow-lg">
-            <div className="py-1">
-              {locales.map((locale) => (
-                <button
-                  key={locale}
-                  onClick={() => handleLocaleChange(locale)}
-                  className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-left transition-colors ${
-                    locale === currentLocale
-                      ? 'bg-orange-50 text-orange-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-                >
-                  <span className="text-xl">{flagEmojis[locale]}</span>
-                  <span>{localeNames[locale]}</span>
-                  {locale === currentLocale && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                </button>
-              ))}
-            </div>
+        {/* Dropdown */}
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div className="p-2">
+            {locales.map((loc) => (
+              <button
+                key={loc.code}
+                onClick={() => switchLocale(loc.code)}
+                className={`w-full text-left px-4 py-2 rounded-xl transition-colors ${
+                  locale === loc.code
+                    ? 'bg-orange-100 text-orange-700 font-semibold'
+                    : 'hover:bg-gray-100 text-gray-700'
+                }`}
+              >
+                <span className="font-semibold">{loc.label}</span>
+                <span className="ml-2 text-sm">{loc.name}</span>
+              </button>
+            ))}
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useTranslations } from '@/lib/i18n-provider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import MultiSelectDropdown from '@/components/ui/multi-select-dropdown';
-import { CHARACTER_OPTIONS } from '@/types/story';
 
 interface CharacterSelectorProps {
   selectedCharacters: string[];
@@ -20,7 +20,23 @@ export default function CharacterSelector({
   onCharactersChange,
   onCountChange,
 }: CharacterSelectorProps) {
+  const t = useTranslations('Characters');
   const [customCharacter, setCustomCharacter] = useState('');
+  
+  const CHARACTER_OPTIONS = useMemo(() => [
+    t('options.forestAnimals'),
+    t('options.farmAnimals'),
+    t('options.seaAnimals'),
+    t('options.magicDragons'),
+    t('options.fairiesElves'),
+    t('options.astronauts'),
+    t('options.kindPirates'),
+    t('options.princessesPrinces'),
+    t('options.friendlyRobots'),
+    t('options.kindWitches'),
+    t('options.superheroes'),
+    t('options.dinosaurs'),
+  ], [t]);
 
   const addCustomCharacter = () => {
     if (customCharacter.trim() && !selectedCharacters.includes(customCharacter.trim())) {
@@ -53,7 +69,7 @@ export default function CharacterSelector({
               />
             </svg>
           </div>
-          <span className="font-courgette text-xl sm:text-2xl text-gray-800">Choisis les personnages de l&apos;histoire</span>
+          <span className="font-courgette text-xl sm:text-2xl text-gray-800">{t('title')}</span>
         </div>
         
         <div className="space-y-4 sm:space-y-6">
@@ -73,7 +89,7 @@ export default function CharacterSelector({
                 fill="currentColor"
               />
             </svg>
-            <span>Ajouter un personnage personnalisé</span>
+            <span>{t('addCustom')}</span>
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
             <Input
@@ -81,7 +97,7 @@ export default function CharacterSelector({
               onChange={(e) => setCustomCharacter(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && addCustomCharacter()}
               className="hand-drawn-input flex-1"
-              placeholder="Ex: Un dragon rose, une licorne magique..."
+              placeholder={t('placeholder')}
             />
             <Button
               onClick={addCustomCharacter}
@@ -103,7 +119,7 @@ export default function CharacterSelector({
                   strokeLinecap="round"
                 />
               </svg>
-              <span>Ajouter</span>
+              <span>{t('addButton')}</span>
             </Button>
           </div>
         </div>
@@ -111,7 +127,7 @@ export default function CharacterSelector({
         {/* Personnages sélectionnés */}
         {selectedCharacters.length > 0 && (
           <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-3">Personnages choisis :</h4>
+            <h4 className="text-sm font-semibold text-gray-700 mb-3">{t('selected')}</h4>
             <div className="flex flex-wrap gap-2">
               {selectedCharacters.map((character) => (
                 <Badge
@@ -148,12 +164,12 @@ export default function CharacterSelector({
 
         {/* Suggestions avec liste déroulante */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-700 mb-3">Ou choisis parmi nos suggestions :</h4>
+          <h4 className="text-sm font-semibold text-gray-700 mb-3">{t('suggestions')}</h4>
           <MultiSelectDropdown
             options={CHARACTER_OPTIONS.map(char => ({ value: char, label: char }))}
             selectedValues={selectedCharacters}
             onSelectionChange={onCharactersChange}
-            placeholder="Sélectionner des personnages..."
+            placeholder={t('selectPlaceholder')}
             className="w-full"
           />
         </div>
@@ -173,7 +189,7 @@ export default function CharacterSelector({
                 fill="currentColor"
               />
             </svg>
-            <span>Combien de personnages dans l&apos;histoire ?</span>
+            <span>{t('howMany')}</span>
           </h4>
           <div className="flex gap-2 sm:gap-3 justify-center flex-wrap">
             {[1, 2, 3, 4, 5].map((count) => (
