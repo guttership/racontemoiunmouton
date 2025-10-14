@@ -58,19 +58,6 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
     };
   }, [currentAudio]);
 
-  // Réinitialiser l'audio quand le type de narrateur change
-  useEffect(() => {
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.src = '';
-      setCurrentAudio(null);
-      setIsReading(false);
-      setIsPaused(false);
-      setProgress(0);
-      setDuration(0);
-    }
-  }, [narratorType, currentAudio]);
-
   // Gestion des événements audio
   useEffect(() => {
     if (currentAudio) {
