@@ -2,7 +2,10 @@
 
 import { createContext, useContext, ReactNode } from 'react';
 
-type MessageValue = string | Record<string, MessageValue>;
+interface MessageValue {
+  [key: string]: string | MessageValue;
+}
+
 type Messages = Record<string, MessageValue>;
 
 const I18nContext = createContext<{ messages: Messages; locale: string } | null>(null);
