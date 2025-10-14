@@ -61,7 +61,7 @@ export default function EnvironmentSelector({
               />
             </svg>
           </div>
-          <span className="font-courgette text-xl sm:text-2xl text-gray-800">{t('title')}</span>
+          <span className="font-courgette text-xl sm:text-2xl text-gray-800 dark:text-gray-100">{t('title')}</span>
         </div>
         
         {/* Saisie libre */}
@@ -167,7 +167,7 @@ export default function EnvironmentSelector({
 
         {/* Suggestions avec liste déroulante */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-700 mb-4">{t('suggestions')}</h4>
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">{t('suggestions')}</h4>
           <SelectDropdown
             options={ENVIRONMENT_OPTIONS.map(env => ({ value: env, label: env }))}
             selectedValue={selectedEnvironment}

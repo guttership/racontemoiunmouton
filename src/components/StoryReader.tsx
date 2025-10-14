@@ -250,23 +250,23 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Affichage de l'histoire */}
-      <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#2a2a29] rounded-2xl p-6 md:p-8 shadow-sm dark:shadow-none border border-gray-100 dark:border-[#3f3f3e] transition-colors duration-300">
         <div className="prose prose-lg max-w-none">
-          <div className="text-gray-800 font-clash-grotesk leading-relaxed text-base md:text-lg whitespace-pre-line">
+          <div className="text-gray-800 dark:text-gray-100 font-clash-grotesk leading-relaxed text-base md:text-lg whitespace-pre-line">
             {story}
           </div>
         </div>
       </div>
 
       {/* Section audio */}
-      <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 no-print">
-        <h3 className="text-lg md:text-xl font-courgette mb-4 text-center text-gray-800">
+      <div className="bg-white dark:bg-[#2a2a29] rounded-2xl p-4 md:p-6 shadow-sm dark:shadow-none border border-gray-100 dark:border-[#3f3f3e] no-print transition-colors duration-300">
+        <h3 className="text-lg md:text-xl font-courgette mb-4 text-center text-gray-800 dark:text-gray-100">
           {t('listen')}
         </h3>
         
         {/* Sélecteur de narrateur/narratrice */}
         <div className="text-center mb-4">
-          <label className="text-sm font-medium text-gray-700 mb-2 flex items-center justify-center gap-2">
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2 flex items-center justify-center gap-2">
             {t('narratorChoice')}
           </label>
           <div className="flex gap-3 justify-center max-w-md mx-auto">
@@ -275,11 +275,11 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
               disabled={isReading || isLoading}
               className={`flex-1 px-4 py-3 rounded-2xl border-2 transition-all duration-200 ${
                 narratorType === 'male'
-                  ? 'border-[#ff7519] bg-[#ff7519]/10 shadow-md'
-                  : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
+                  ? 'border-[#ff7519] bg-[#ff7519]/10 dark:bg-[#ff7519]/20 shadow-md'
+                  : 'border-gray-200 dark:border-[#3f3f3e] bg-white dark:bg-[#3f3f3e] hover:border-[#ff7519]/50 dark:hover:border-[#ff7519]/50'
               } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             >
-              <div className="text-base font-semibold text-gray-800">
+              <div className="text-base font-semibold text-gray-800 dark:text-gray-100">
                 {t('narrator')}
               </div>
             </button>
@@ -288,11 +288,11 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
               disabled={isReading || isLoading}
               className={`flex-1 px-4 py-3 rounded-2xl border-2 transition-all duration-200 ${
                 narratorType === 'female'
-                  ? 'border-[#ff7519] bg-[#ff7519]/10 shadow-md'
-                  : 'border-gray-200 bg-white hover:border-[#ff7519]/50'
+                  ? 'border-[#ff7519] bg-[#ff7519]/10 dark:bg-[#ff7519]/20 shadow-md'
+                  : 'border-gray-200 dark:border-[#3f3f3e] bg-white dark:bg-[#3f3f3e] hover:border-[#ff7519]/50 dark:hover:border-[#ff7519]/50'
               } ${isReading || isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             >
-              <div className="text-base font-semibold text-gray-800">
+              <div className="text-base font-semibold text-gray-800 dark:text-gray-100">
                 {t('narratorFemale')}
               </div>
             </button>
@@ -373,11 +373,11 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         {/* Barre de progression */}
         {currentAudio && duration > 0 && (
           <div className="max-w-md mx-auto space-y-2 mt-4">
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-300">
               <span>{formatTime(currentAudio.currentTime || 0)}</span>
               <span>{formatTime(duration)}</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-gray-200 dark:bg-[#4a4a49] rounded-full h-2">
               <div 
                 className="bg-[#ff7519] h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
@@ -387,12 +387,12 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         )}
         
         {/* Indications */}
-        <div className="text-center text-xs text-gray-500 max-w-md mx-auto space-y-1 mt-4">
+        <div className="text-center text-xs text-gray-500 dark:text-gray-300 max-w-md mx-auto space-y-1 mt-4">
           <p>
             <strong>Astuce :</strong> Utilisez des écouteurs pour une meilleure expérience
           </p>
           {!currentAudio && (
-            <p className="text-orange-600">
+            <p className="text-orange-600 dark:text-[#ff7519]">
               L&apos;audio sera mis en cache après génération
             </p>
           )}

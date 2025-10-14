@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from '@/lib/i18n-provider';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';
-import LocaleSwitcher from '@/components/LocaleSwitcher';
 
 export default function LegalNoticePage() {
   const t = useTranslations('LegalNotice');
@@ -12,14 +11,13 @@ export default function LegalNoticePage() {
   const locale = useLocale();
 
   return (
-    <div className="min-h-screen bg-gray-100 relative">
+    <div className="min-h-screen bg-gray-100 dark:bg-[#313231] relative transition-colors duration-300">
       <ModernBackground />
-      <LocaleSwitcher />
 
       <div className="relative max-w-4xl mx-auto p-4 md:p-8 z-10">
         {/* Header */}
-        <div className="bg-white rounded-3xl p-6 md:p-8 mb-6 shadow-sm">
-          <h1 className="text-3xl md:text-4xl font-courgette text-gray-800 mb-2">
+        <div className="bg-white dark:bg-[#2a2a29] rounded-3xl p-6 md:p-8 mb-6 shadow-sm dark:shadow-none transition-colors duration-300">
+          <h1 className="text-3xl md:text-4xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
             {t('title')}
           </h1>
           <Link
@@ -31,14 +29,14 @@ export default function LegalNoticePage() {
         </div>
 
         {/* Content */}
-        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm">
+        <div className="bg-white dark:bg-[#2a2a29] rounded-3xl p-6 md:p-8 shadow-sm dark:shadow-none transition-colors duration-300">
           <div className="prose prose-lg max-w-none space-y-6">
             {/* Éditeur */}
             <section>
-              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 mb-3">
+              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
                 {t('editor')}
               </h2>
-              <div className="text-gray-700 font-clash-grotesk space-y-2">
+              <div className="text-gray-700 dark:text-gray-200 font-clash-grotesk space-y-2">
                 <p><strong>Yann Gutter</strong></p>
                 <p>Email: <a href="mailto:designmoiunmouton@gmail.com" className="text-[#ff7519] hover:underline">designmoiunmouton@gmail.com</a></p>
                 <p>Site web: <a href="https://dmum.eu" target="_blank" rel="noopener" className="text-[#ff7519] hover:underline">dmum.eu</a></p>
@@ -47,10 +45,10 @@ export default function LegalNoticePage() {
 
             {/* Hébergement */}
             <section>
-              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 mb-3">
+              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
                 {t('hosting')}
               </h2>
-              <div className="text-gray-700 font-clash-grotesk">
+              <div className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
                 <p><strong>Vercel Inc.</strong></p>
                 <p>340 S Lemon Ave #4133</p>
                 <p>Walnut, CA 91789, USA</p>
@@ -60,30 +58,30 @@ export default function LegalNoticePage() {
 
             {/* Données personnelles */}
             <section>
-              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 mb-3">
+              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
                 {t('data')}
               </h2>
-              <p className="text-gray-700 font-clash-grotesk">
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
                 {t('dataText')}
               </p>
             </section>
 
             {/* Cookies */}
             <section>
-              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 mb-3">
+              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
                 {t('cookies')}
               </h2>
-              <p className="text-gray-700 font-clash-grotesk">
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
                 {t('cookiesText')}
               </p>
             </section>
 
             {/* Intelligence Artificielle */}
             <section>
-              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 mb-3">
+              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
                 {t('ai')}
               </h2>
-              <p className="text-gray-700 font-clash-grotesk">
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
                 {t('aiText')}
               </p>
             </section>

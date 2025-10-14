@@ -63,7 +63,7 @@ export default function SelectDropdown({
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {/* Input de recherche avec sélection */}
-      <div className="min-h-[48px] p-3 cursor-pointer bg-gray-100 border border-gray-300 rounded-md" onClick={() => setIsOpen(!isOpen)}>
+      <div className="min-h-[48px] p-3 cursor-pointer bg-gray-100 dark:bg-[#3f3f3e] border border-gray-300 dark:border-[#555554] rounded-md transition-colors duration-300" onClick={() => setIsOpen(!isOpen)}>
         <input
           ref={inputRef}
           type="text"
@@ -71,7 +71,7 @@ export default function SelectDropdown({
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleInputFocus}
           placeholder={placeholder}
-          className="w-full bg-transparent border-none outline-none text-gray-700 placeholder-gray-400"
+          className="w-full bg-transparent border-none outline-none text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500"
         />
         
         {/* Flèche */}
@@ -97,9 +97,9 @@ export default function SelectDropdown({
 
       {/* Liste déroulante */}
       {isOpen && (
-        <div className={`absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg z-50 ${maxHeight} overflow-y-auto`}>
+        <div className={`absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#3f3f3e] rounded-lg shadow-lg dark:shadow-none border dark:border-[#555554] z-50 ${maxHeight} overflow-y-auto transition-colors duration-300`}>
           {filteredOptions.length === 0 ? (
-            <div className="p-4 text-gray-500 text-center">Aucune option trouvée</div>
+            <div className="p-4 text-gray-500 dark:text-gray-400 text-center">Aucune option trouvée</div>
           ) : (
             filteredOptions.map((option) => {
               const isSelected = selectedValue === option.value;
@@ -107,11 +107,11 @@ export default function SelectDropdown({
                 <div
                   key={option.value}
                   onClick={() => handleSelectOption(option.value)}
-                  className={`p-3 cursor-pointer hover:bg-orange-50 transition-colors flex items-center justify-between ${
-                    isSelected ? 'bg-orange-100' : ''
+                  className={`p-3 cursor-pointer hover:bg-orange-50 dark:hover:bg-[#4a4a49] transition-colors flex items-center justify-between ${
+                    isSelected ? 'bg-orange-100 dark:bg-[#ff7519]/20' : ''
                   }`}
                 >
-                  <span className="text-gray-700 flex-1">{option.label}</span>
+                  <span className="text-gray-700 dark:text-gray-200 flex-1">{option.label}</span>
                   {isSelected && (
                     <svg
                       width="16"

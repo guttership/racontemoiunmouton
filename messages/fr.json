@@ -6,11 +6,11 @@
   },
   "HomePage": {
     "title": "Raconte-moi un mouton",
-    "subtitle": "Créez des histoires magiques personnalisées pour vos enfants",
+    "subtitle": "Crée des histoires magiques personnalisées pour tes enfants",
     "newStory": "Nouvelle histoire",
     "backToCreation": "Créer une nouvelle histoire",
-    "storyTitle": "Votre histoire magique",
-    "storySubtitle": "Une création unique pour votre enfant"
+    "storyTitle": "Ton histoire magique",
+    "storySubtitle": "Une création unique pour toi"
   },
   "StoryCreation": {
     "step": "Étape {step} sur {total}",
@@ -20,7 +20,7 @@
     "generating": "Création de l'histoire en cours..."
   },
   "ChildProfile": {
-    "title": "Personnaliser pour votre enfant",
+    "title": "Caractérise ton enfant",
     "customize": "Personnaliser",
     "hide": "Masquer",
     "nameLabel": "Prénom de l'enfant (optionnel)",
@@ -63,7 +63,7 @@
     }
   },
   "Characters": {
-    "title": "Choisissez les personnages",
+    "title": "Choisis les personnages",
     "addCustom": "Ajouter un personnage personnalisé",
     "placeholder": "Ex: Un dragon rose, une licorne magique...",
     "addButton": "Ajouter",
@@ -111,9 +111,9 @@
     }
   },
   "StoryReader": {
-    "title": "Votre histoire est prête !",
+    "title": "Ton histoire est prête !",
     "listen": "Écouter l'histoire",
-    "narratorChoice": "Choisissez votre narrateur",
+    "narratorChoice": "Choisis ton narrateur",
     "narrator": "Conteur",
     "narratorFemale": "Conteuse",
     "loading": "Génération de l'audio...",
@@ -147,5 +147,11 @@
     "title": "Raconte-moi un mouton - Histoires personnalisées pour enfants avec l'IA",
     "description": "Créez des histoires personnalisées pour le coucher de vos enfants avec l'IA. Choisissez les personnages, l'environnement et le nombre magique. Lecture audio incluse.",
     "keywords": "histoires pour enfants, histoires personnalisées, intelligence artificielle, IA pour enfants, histoires du soir, conte personnalisé, narration audio"
+  },
+  "Theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système",
+    "toggle": "Changer de thème"
   }
 }

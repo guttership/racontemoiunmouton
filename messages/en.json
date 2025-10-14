@@ -147,5 +147,11 @@
     "title": "Tell Me a Sheep - Personalized AI Stories for Children",
     "description": "Create personalized bedtime stories for your children with AI. Choose characters, environment, and the magic number. Audio narration included.",
     "keywords": "children's stories, personalized stories, artificial intelligence, AI for kids, bedtime stories, custom tales, audio narration"
+  },
+  "Theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Change theme"
   }
 }

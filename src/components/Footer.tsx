@@ -9,10 +9,10 @@ export default function Footer() {
   const locale = useLocale();
   
   return (
-    <footer className="w-full bg-white border-t border-gray-200 py-6" aria-label={t('legalNotice')}>
+    <footer className="w-full bg-white dark:bg-[#2a2a29] border-t border-gray-200 dark:border-[#3f3f3e] py-6 transition-colors duration-300" aria-label={t('legalNotice')}>
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-4">
-          <Link href={`/${locale}/mentions-legales`} className="text-sm text-gray-500 hover:text-[#ff7519] underline">
+          <Link href={`/${locale}/mentions-legales`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-[#ff7519] underline">
             {t('legalNotice')}
           </Link>
           <a href="https://dmum.eu" target="_blank" rel="noopener" aria-label="Site de Yann Gutter (dmum.eu)" className="ml-2 flex items-center">
@@ -21,7 +21,7 @@ export default function Footer() {
         </div>
         <div className="flex items-center gap-4">
           <a href="https://www.linkedin.com/in/yann-gutter-9192337a/" target="_blank" rel="noopener" aria-label="Profil LinkedIn Yann Gutter" className="hover:text-[#ff7519]">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 hover:text-[#ff7519]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 dark:text-gray-400 hover:text-[#ff7519]">
               <rect x="2" y="2" width="20" height="20" rx="4" fill="none" />
               <path d="M8 11v5" />
               <path d="M8 8v.01" />
@@ -30,14 +30,14 @@ export default function Footer() {
             </svg>
           </a>
           <a href="https://www.facebook.com/profile.php?id=61571889646567" target="_blank" rel="noopener" aria-label="Profil Facebook Yann Gutter" className="hover:text-[#ff7519]">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 hover:text-[#ff7519]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 dark:text-gray-400 hover:text-[#ff7519]">
               <rect x="2" y="2" width="20" height="20" rx="4" fill="none" />
               <path d="M16 8h-2a2 2 0 0 0-2 2v2h4" />
               <path d="M12 16v-4" />
             </svg>
           </a>
         </div>
-        <div className="text-xs text-gray-400 text-center md:text-right">
+        <div className="text-xs text-gray-400 dark:text-gray-500 text-center md:text-right">
           &copy; {new Date().getFullYear()} Yann Gutter
         </div>
       </div>

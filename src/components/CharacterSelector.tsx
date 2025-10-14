@@ -69,12 +69,12 @@ export default function CharacterSelector({
               />
             </svg>
           </div>
-          <span className="font-courgette text-xl sm:text-2xl text-gray-800">{t('title')}</span>
+          <span className="font-courgette text-xl sm:text-2xl text-gray-800 dark:text-gray-100">{t('title')}</span>
         </div>
         
         <div className="space-y-4 sm:space-y-6">
         <div>
-          <label className="text-sm font-clash-grotesk font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <label className="text-sm font-clash-grotesk font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-2">
             {/* Icône d'écriture SVG */}
             <svg
               width="16"
@@ -127,7 +127,7 @@ export default function CharacterSelector({
         {/* Personnages sélectionnés */}
         {selectedCharacters.length > 0 && (
           <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-3">{t('selected')}</h4>
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">{t('selected')}</h4>
             <div className="flex flex-wrap gap-2">
               {selectedCharacters.map((character) => (
                 <Badge
@@ -164,7 +164,7 @@ export default function CharacterSelector({
 
         {/* Suggestions avec liste déroulante */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-700 mb-3">{t('suggestions')}</h4>
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">{t('suggestions')}</h4>
           <MultiSelectDropdown
             options={CHARACTER_OPTIONS.map(char => ({ value: char, label: char }))}
             selectedValues={selectedCharacters}
@@ -175,7 +175,7 @@ export default function CharacterSelector({
         </div>
 
         <div>
-          <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <h4 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
             <svg
               width="20"
               height="20"

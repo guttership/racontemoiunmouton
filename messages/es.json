@@ -147,5 +147,11 @@
     "title": "Cuéntame una oveja - Historias personalizadas con IA para niños",
     "description": "Crea historias personalizadas para dormir con IA. Elige personajes, entorno y el número mágico. Narración de audio incluida.",
     "keywords": "historias para niños, historias personalizadas, inteligencia artificial, IA para niños, cuentos para dormir, cuento personalizado, narración de audio"
+  },
+  "Theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "toggle": "Cambiar tema"
   }
 }

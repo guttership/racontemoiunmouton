@@ -90,7 +90,7 @@ export default function ChildProfileSelector({
                 />
               </svg>
             </div>
-            <span className="font-courgette text-xl sm:text-2xl text-gray-800">{t('title')}</span>
+            <span className="font-courgette text-xl sm:text-2xl text-gray-800 dark:text-gray-100">{t('title')}</span>
           </div>
           <Button
             onClick={() => setShowProfile(!showProfile)}
@@ -125,11 +125,11 @@ export default function ChildProfileSelector({
       </div>
 
       {showProfile && (
-        <div className="space-y-6 sm:space-y-8 bg-white rounded-xl m-4 sm:m-6 p-4 sm:p-6">
+        <div className="space-y-6 sm:space-y-8 bg-white dark:bg-[#3f3f3e] rounded-xl m-4 sm:m-6 p-4 sm:p-6 transition-colors duration-300">
           {/* Nom et âge */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <label className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+              <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-2">
                 <svg
                   width="16"
                   height="16"
@@ -154,7 +154,7 @@ export default function ChildProfileSelector({
               />
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-700 mb-3">
+              <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">
                 {t('ageLabel')}
               </label>
               <Input
@@ -171,7 +171,7 @@ export default function ChildProfileSelector({
 
           {/* Centres d'intérêt */}
           <div>
-            <label className="text-sm font-semibold text-gray-700 mb-4">
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">
               {t('interestsLabel')}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
@@ -194,7 +194,7 @@ export default function ChildProfileSelector({
 
           {/* Traits de personnalité */}
           <div>
-            <label className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
               {/* Icône d'étoile SVG */}
               <svg
                 width="16"
@@ -231,7 +231,7 @@ export default function ChildProfileSelector({
 
           {/* Choses préférées */}
           <div>
-            <label className="text-sm font-semibold text-gray-700 mb-3">
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">
               {t('favoriteThingsLabel')}
             </label>
             <textarea

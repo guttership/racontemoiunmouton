@@ -1,7 +1,8 @@
 ﻿import { ReactNode } from 'react';
 import { Metadata } from 'next';
-import { I18nProvider } from '@/lib/i18n-provider';
+import { Providers } from '@/components/Providers';
 import { messages } from '@/lib/messages';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export function generateStaticParams() {
@@ -74,9 +75,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const localeMessages = messages[locale as keyof typeof messages];
   
   return (
-    <I18nProvider messages={localeMessages} locale={locale}>
+    <Providers locale={locale} messages={localeMessages}>
+      <Header />
       {children}
       <Footer />
-    </I18nProvider>
+    </Providers>
   );
 }

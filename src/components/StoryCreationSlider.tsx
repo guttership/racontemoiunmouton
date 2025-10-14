@@ -107,7 +107,7 @@ export default function StoryCreationSlider({
                     ? 'bg-[#ff7519] text-white'
                     : index < currentStep
                     ? 'bg-green-500 text-white'
-                    : 'bg-gray-300 text-gray-600'
+                    : 'bg-gray-300 dark:bg-[#555554] text-gray-600 dark:text-gray-300'
                 }`}
               >
                 {index < currentStep ? (
@@ -134,7 +134,7 @@ export default function StoryCreationSlider({
               {index < steps.length - 1 && (
                 <div
                   className={`w-8 md:w-16 h-1 mx-1 md:mx-2 transition-colors flex-shrink-0 ${
-                    index < currentStep ? 'bg-green-500' : 'bg-gray-300'
+                    index < currentStep ? 'bg-green-500' : 'bg-gray-300 dark:bg-[#555554]'
                   }`}
                 />
               )}
@@ -142,10 +142,10 @@ export default function StoryCreationSlider({
           ))}
         </div>
         <div className="text-center px-2">
-          <h2 className="font-courgette text-xl sm:text-2xl md:text-3xl mb-2">
+          <h2 className="font-courgette text-xl sm:text-2xl md:text-3xl mb-2 dark:text-gray-100">
             {currentStepData.title}
           </h2>
-          <p className="text-gray-600 font-clash-grotesk text-sm md:text-base">
+          <p className="text-gray-600 dark:text-gray-200 font-clash-grotesk text-sm md:text-base">
             {t('step', { step: currentStep + 1, total: steps.length })}
           </p>
         </div>
@@ -196,7 +196,7 @@ export default function StoryCreationSlider({
               key={index}
               onClick={() => setCurrentStep(index)}
               className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors ${
-                index === currentStep ? 'bg-[#ff7519]' : 'bg-gray-300'
+                index === currentStep ? 'bg-[#ff7519]' : 'bg-gray-300 dark:bg-[#555554]'
               }`}
             />
           ))}

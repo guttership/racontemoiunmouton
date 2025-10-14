@@ -43,25 +43,26 @@
   }
 
   .dark {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 14 100% 57%;
+    /* Palette sombre avec gris chaud #313231 */
+    --background: 0 2% 16%; /* #292928 - Fond encore plus sombre */
+    --foreground: 0 0% 92%; /* Textes légèrement moins blancs */
+    --card: 0 2% 20%; /* #333332 - Cartes plus sombres */
+    --card-foreground: 0 0% 92%;
+    --popover: 0 2% 20%;
+    --popover-foreground: 0 0% 92%;
+    --primary: 21 100% 54%; /* Orange vif conservé */
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 63% 31%;
+    --secondary: 0 2% 25%; /* Gris chaud pour secondaire */
+    --secondary-foreground: 0 0% 92%;
+    --muted: 0 2% 25%;
+    --muted-foreground: 0 0% 65%; /* Gris clair pour texte muted */
+    --accent: 0 2% 25%;
+    --accent-foreground: 0 0% 92%;
+    --destructive: 0 63% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 14 100% 57%;
+    --border: 0 2% 28%; /* Bordures grises chaudes */
+    --input: 0 2% 25%;
+    --ring: 21 100% 54%; /* Orange vif pour les focus */
   }
 
   * {
@@ -79,6 +80,12 @@
     position: relative;
     background: white;
     border-radius: 24px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .dark .hand-drawn-card {
+    background: #2a2a29;
+    border-color: #3f3f3e;
   }
   
   .hand-drawn-card::before {
@@ -157,11 +164,20 @@
     color: hsl(var(--black-primary));
     border: none;
   }
+
+  .dark .hand-drawn-button-outline {
+    background: #3f3f3e;
+    color: hsl(var(--foreground));
+  }
   
   .hand-drawn-button-outline:hover {
     background: #F5F5F5;
     color: hsl(var(--orange-primary));
     transform: none;
+  }
+
+  .dark .hand-drawn-button-outline:hover {
+    background: #4a4a49;
   }
   
   .hand-drawn-input {
@@ -170,10 +186,19 @@
     background: #F5F5F5;
     transition: all 0.2s ease;
   }
+
+  .dark .hand-drawn-input {
+    background: #3f3f3e;
+    color: hsl(var(--foreground));
+  }
   
   .hand-drawn-input:focus {
     background: white;
     outline: none;
+  }
+
+  .dark .hand-drawn-input:focus {
+    background: #4a4a49;
   }
   
   .illustration-container {

@@ -147,5 +147,11 @@
     "title": "Erzähl mir ein Schaf - Personalisierte KI-Geschichten für Kinder",
     "description": "Erstelle personalisierte Gute-Nacht-Geschichten mit KI. Wähle Charaktere, Umgebung und die magische Zahl. Audio-Erzählung inklusive.",
     "keywords": "Kindergeschichten, personalisierte Geschichten, künstliche Intelligenz, KI für Kinder, Gute-Nacht-Geschichten, personalisierte Märchen, Audio-Erzählung"
+  },
+  "Theme": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System",
+    "toggle": "Thema wechseln"
   }
 }
