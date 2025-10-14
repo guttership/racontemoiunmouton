@@ -147,6 +147,13 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         }),
       });
 
+      console.log('📡 Réponse API:', {
+        status: response.status,
+        statusText: response.statusText,
+        contentType: response.headers.get('Content-Type'),
+        url: response.url
+      });
+
       if (!response.ok) {
         let errorMessage = 'Erreur de génération';
         const contentType = response.headers.get('Content-Type');
@@ -164,7 +171,13 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       }
 
       const audioBlob = await response.blob();
+      console.log('🎵 Blob audio reçu:', {
+        size: audioBlob.size,
+        type: audioBlob.type
+      });
+      
       const audioUrl = URL.createObjectURL(audioBlob);
+      console.log('🔗 URL blob créée:', audioUrl);
       
       // Nettoyer l'ancien audio
       if (currentAudio) {
