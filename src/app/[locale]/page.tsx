@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from '@/lib/i18n-provider';
 import StoryCreationSlider from '@/components/StoryCreationSlider';
 import StoryReader from '@/components/StoryReader';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
+import StructuredData from '@/components/StructuredData';
 import { Button } from '@/components/ui/button';
 import { StorySettings, ChildProfile } from '@/types/story';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';
@@ -70,6 +71,7 @@ export default function Home() {
   if (generatedStory) {
     return (
       <div className="min-h-screen bg-gray-100 relative">
+        <StructuredData />
         <ModernBackground />
         <LocaleSwitcher />
 
@@ -106,6 +108,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 relative">
+      <StructuredData />
       <ModernBackground />
       <LocaleSwitcher />
 

@@ -11,6 +11,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  metadataBase: new URL('https://racontemoiunmouton.dmum.eu'),
+  verification: {
+    google: 'your-google-verification-code', // À remplacer par votre code Google Search Console
+  },
+};
+
 // Root layout minimaliste - les métadonnées sont dans [locale]/layout.tsx
 export default async function RootLayout({
   children,
@@ -19,6 +26,12 @@ export default async function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/logo_mouton.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/logo_mouton.svg" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
