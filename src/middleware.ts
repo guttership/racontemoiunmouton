@@ -8,5 +8,6 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  // Exclude API routes, Next.js internals, static files, and SEO files (sitemap, robots)
+  matcher: ['/((?!api|_next|_vercel|sitemap\\.xml|robots\\.txt|favicon\\.ico|.*\\.svg|.*\\.png|.*\\.jpg).*)']
 };
