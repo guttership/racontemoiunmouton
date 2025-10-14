@@ -93,8 +93,14 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         setProgress(0);
       };
 
-      const handleError = () => {
-        console.error('Erreur lors de la lecture audio');
+      const handleError = (e: Event) => {
+        const audioElement = e.target as HTMLAudioElement;
+        console.error('❌ Erreur lors de la lecture audio:', {
+          error: audioElement.error,
+          errorCode: audioElement.error?.code,
+          errorMessage: audioElement.error?.message,
+          src: audioElement.src
+        });
         setIsReading(false);
         setIsLoading(false);
       };
@@ -179,8 +185,9 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       };
 
     } catch (error) {
-      console.error('Erreur génération TTS:', error);
-      alert('Erreur lors de la génération audio. Veuillez réessayer.');
+      console.error('❌ Erreur génération TTS:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
+      alert(`Erreur lors de la génération audio: ${errorMessage}\nVeuillez réessayer.`);
       setIsLoading(false);
     }
   };
