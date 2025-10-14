@@ -123,8 +123,7 @@ export default function Home() {
             {t('title')}
           </h1>
           <p itemProp="description" className="text-lg text-gray-700 dark:text-gray-200 text-center max-w-2xl mx-auto px-4">
-            {t('subtitle')}<br />
-            {t('subtitle2') || "L'IA s'occupe du reste !"}
+            {t('subtitle')}
           </p>
         </header>
 
