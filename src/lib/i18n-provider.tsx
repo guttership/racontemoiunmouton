@@ -36,7 +36,7 @@ export function useTranslations(namespace: string) {
     }
     
     if (typeof value === 'string' && params) {
-      return value.replace(/\{(\w+)\}/g, (_, key) => params[key] ?? `{${key}}`);
+      return value.replace(/\{(\w+)\}/g, (_, key) => String(params[key] ?? `{${key}}`));
     }
     
     return typeof value === 'string' ? value : key;
