@@ -79,6 +79,15 @@ export default async function RootLayout({
           }}
         />
         
+        {/* DataFast Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src="https://datafa.st/js/script.js"
+          data-website-id="dfid_83K7WzoSGbjQ5t054w2Co"
+          data-domain="racontemoiunmouton.fr"
+          data-allow-localhost="true"
+        />
+        
         {children}
       </body>
     </html>
