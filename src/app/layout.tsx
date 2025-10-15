@@ -31,6 +31,18 @@ export default async function RootLayout({
         <link rel="icon" href="/logo_mouton.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/logo_mouton.svg" />
         <meta name="theme-color" content="#ffffff" />
+        
+        {/* Consent Manager - Bannière cookies Google */}
+        <script 
+          type="text/javascript" 
+          data-cmp-ab="1" 
+          src="https://cdn.consentmanager.net/delivery/autoblocking/60d005e8b2661.js" 
+          data-cmp-host="d.delivery.consentmanager.net" 
+          data-cmp-cdn="cdn.consentmanager.net" 
+          data-cmp-codesrc="16"
+        />
+        
+        {/* Theme initialization script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
