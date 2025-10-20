@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const hostname = request.headers.get('host') || '';
   
   // Allow SEO files to pass through without modification
   if (pathname === '/sitemap.xml' || pathname === '/robots.txt') {
@@ -25,7 +26,12 @@ export function middleware(request: NextRequest) {
   }
   
   const locales = ['fr', 'en', 'es', 'de'];
-  const defaultLocale = 'fr';
+  
+  // Determine default locale based on domain
+  let defaultLocale = 'fr';
+  if (hostname.includes('tellmeasheep.com')) {
+    defaultLocale = 'en';
+  }
   
   // Check if pathname already has a locale
   const pathnameHasLocale = locales.some(
