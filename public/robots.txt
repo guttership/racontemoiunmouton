@@ -1,0 +1,20 @@
+# robots.txt pour racontemoiunmouton.fr / tellmeasheep.com
+
+# Autoriser tous les robots
+User-agent: *
+Allow: /
+
+# Fichiers sitemap - UN PAR DOMAINE PRINCIPAL
+Sitemap: https://racontemoiunmouton.fr/sitemap.xml
+Sitemap: https://tellmeasheep.com/sitemap_en.xml
+
+# Bloquer les dossiers internes Next.js
+Disallow: /_next/
+Disallow: /api/
+Disallow: /_vercel/
+
+# Permettre l'accès aux pages de contenu
+Allow: /fr/
+Allow: /en/
+Allow: /es/
+Allow: /de/

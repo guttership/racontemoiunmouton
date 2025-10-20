@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Sitemap pour racontemoiunmouton.fr - FRANÇAIS UNIQUEMENT -->
+  
+  <!-- Page d'accueil FR -->
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr</loc>
+    <lastmod>2025-10-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de" />
+  </url>
+
+  <!-- Mentions légales FR -->
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr/mentions-legales</loc>
+    <lastmod>2025-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/mentions-legales" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/mentions-legales" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/mentions-legales" />
+  </url>
+
+</urlset>
