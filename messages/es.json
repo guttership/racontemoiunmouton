@@ -120,7 +120,11 @@
     "error": "Error al generar audio",
     "play": "Reproducir",
     "pause": "Pausa",
-    "stop": "Detener"
+    "stop": "Detener",
+    "tip": "Consejo:",
+    "useHeadphones": "Usa auriculares para una mejor experiencia",
+    "audioCached": "El audio se almacenará en caché después de la generación",
+    "printOrSave": "Imprimir o guardar la historia"
   },
   "Loading": {
     "title": "Creando tu historia...",

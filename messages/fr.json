@@ -120,7 +120,11 @@
     "error": "Erreur lors de la génération de l'audio",
     "play": "Lire",
     "pause": "Pause",
-    "stop": "Arrêter"
+    "stop": "Arrêter",
+    "tip": "Astuce :",
+    "useHeadphones": "Utilisez des écouteurs pour une meilleure expérience",
+    "audioCached": "L'audio sera mis en cache après génération",
+    "printOrSave": "Imprimer ou sauvegarder l'histoire"
   },
   "Loading": {
     "title": "Création de votre histoire...",

@@ -120,7 +120,11 @@
     "error": "Error generating audio",
     "play": "Play",
     "pause": "Pause",
-    "stop": "Stop"
+    "stop": "Stop",
+    "tip": "Tip:",
+    "useHeadphones": "Use headphones for a better experience",
+    "audioCached": "Audio will be cached after generation",
+    "printOrSave": "Print or save the story"
   },
   "Loading": {
     "title": "Creating your story...",

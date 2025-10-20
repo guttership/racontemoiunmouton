@@ -120,7 +120,11 @@
     "error": "Fehler beim Generieren des Audios",
     "play": "Abspielen",
     "pause": "Pause",
-    "stop": "Stopp"
+    "stop": "Stopp",
+    "tip": "Tipp:",
+    "useHeadphones": "Verwenden Sie Kopfhörer für ein besseres Erlebnis",
+    "audioCached": "Audio wird nach der Generierung zwischengespeichert",
+    "printOrSave": "Geschichte drucken oder speichern"
   },
   "Loading": {
     "title": "Deine Geschichte wird erstellt...",

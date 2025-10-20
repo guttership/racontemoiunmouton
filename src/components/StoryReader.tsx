@@ -389,11 +389,11 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
         {/* Indications */}
         <div className="text-center text-xs text-gray-500 dark:text-gray-300 max-w-md mx-auto space-y-1 mt-4">
           <p>
-            <strong>Astuce :</strong> Utilisez des écouteurs pour une meilleure expérience
+            <strong>{t('tip')}</strong> {t('useHeadphones')}
           </p>
           {!currentAudio && (
             <p className="text-orange-600 dark:text-[#ff7519]">
-              L&apos;audio sera mis en cache après génération
+              {t('audioCached')}
             </p>
           )}
         </div>
@@ -406,7 +406,7 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
           className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-xl shadow hover:bg-orange-600 print:hidden transition-colors duration-200"
           onClick={() => window.print()}
         >
-          Imprimer ou sauvegarder l’histoire
+          {t('printOrSave')}
         </button>
       </div>
 
