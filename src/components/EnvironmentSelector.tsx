@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { useTranslations } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
+import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import SelectDropdown from '@/components/ui/select-dropdown';
+import { VoiceInputRecorder } from '@/components/VoiceInputRecorder';
 
 interface EnvironmentSelectorProps {
   selectedEnvironment: string;
@@ -16,6 +18,8 @@ export default function EnvironmentSelector({
   onEnvironmentChange,
 }: EnvironmentSelectorProps) {
   const t = useTranslations('Environment');
+  const locale = useLocale();
+  const { data: session } = useSession();
   const [customEnvironment, setCustomEnvironment] = useState('');
   const [showCustom, setShowCustom] = useState(false);
   
@@ -92,14 +96,21 @@ export default function EnvironmentSelector({
                 {t('describeCustom')}
               </label>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Input
-                  value={customEnvironment}
-                  onChange={(e) => setCustomEnvironment(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleCustomEnvironment()}
-                  className="hand-drawn-input flex-1"
-                  placeholder={t('placeholder')}
-                  autoFocus
-                />
+                <div className="flex gap-2 flex-1">
+                  <Input
+                    value={customEnvironment}
+                    onChange={(e) => setCustomEnvironment(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleCustomEnvironment()}
+                    className="hand-drawn-input flex-1"
+                    placeholder={t('placeholder')}
+                    autoFocus
+                  />
+                  <VoiceInputRecorder
+                    onTranscript={(text) => setCustomEnvironment(text)}
+                    locale={locale}
+                    isPremium={session?.user?.isPremium || false}
+                  />
+                </div>
                 <div className="flex gap-2 sm:gap-3">
                   <Button
                     onClick={handleCustomEnvironment}

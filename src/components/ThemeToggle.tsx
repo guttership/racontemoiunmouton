@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from '@/lib/theme-provider';
-import { useTranslations } from '@/lib/i18n-provider';
+import { useTranslations } from 'next-intl';
 import { Moon, Sun, Monitor } from 'lucide-react';
 
 export default function ThemeToggle() {

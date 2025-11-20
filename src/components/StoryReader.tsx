@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 // Types de voix par langue
@@ -11,20 +11,20 @@ const VOICE_CONFIG: Record<string, {
   male: { voice: string; name: string };
 }> = {
   'fr': {
-    female: { voice: 'fr-FR-Wavenet-C', name: 'Sophie' }, // Voix chaleureuse française
-    male: { voice: 'fr-FR-Wavenet-D', name: 'Thomas' } // Voix expressive française
+    female: { voice: 'fr-FR-Neural2-A', name: 'Sophie' }, // Voix Neural2 chaleureuse
+    male: { voice: 'fr-FR-Neural2-B', name: 'Thomas' } // Voix Neural2 expressive
   },
   'en': {
-    female: { voice: 'en-US-Wavenet-C', name: 'Female Voice' }, // Voix Wavenet US féminine
-    male: { voice: 'en-US-Wavenet-D', name: 'Male Voice' } // Voix Wavenet US masculine
+    female: { voice: 'en-US-Neural2-C', name: 'Female Voice' }, // Voix Neural2 US féminine
+    male: { voice: 'en-US-Neural2-D', name: 'Male Voice' } // Voix Neural2 US masculine
   },
   'es': {
-    female: { voice: 'es-ES-Wavenet-C', name: 'Voz Femenina' }, // Voix Wavenet espagnole féminine
-    male: { voice: 'es-ES-Wavenet-B', name: 'Voz Masculina' } // Voix Wavenet espagnole masculine
+    female: { voice: 'es-ES-Neural2-C', name: 'Voz Femenina' }, // Voix Neural2 espagnole féminine
+    male: { voice: 'es-ES-Neural2-B', name: 'Voz Masculina' } // Voix Neural2 espagnole masculine
   },
   'de': {
-    female: { voice: 'de-DE-Wavenet-C', name: 'Weibliche Stimme' }, // Voix Wavenet allemande féminine
-    male: { voice: 'de-DE-Wavenet-D', name: 'Männliche Stimme' } // Voix Wavenet allemande masculine
+    female: { voice: 'de-DE-Neural2-C', name: 'Weibliche Stimme' }, // Voix Neural2 allemande féminine
+    male: { voice: 'de-DE-Neural2-D', name: 'Männliche Stimme' } // Voix Neural2 allemande masculine
   }
 };
 
@@ -122,18 +122,27 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
       console.log('🔊 Voix sélectionnée:', selectedVoice);
       console.log('📋 Configuration voix:', voiceConfig);
       
+      // Nettoyer les didascalies (texte entre parenthèses, crochets, etc.)
+      const cleanedStory = story
+        .replace(/\([^)]+\)/g, '') // Supprimer (texte)
+        .replace(/\[[^\]]+\]/g, '') // Supprimer [texte]
+        .replace(/\*[^*]+\*/g, '')  // Supprimer *texte*
+        .replace(/_{1,2}[^_]+_{1,2}/g, '') // Supprimer _texte_ ou __texte__
+        .replace(/\s+/g, ' ')       // Normaliser espaces
+        .trim();
+      
       const response = await fetch('/api/text-to-speech', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          text: story,
+          text: cleanedStory,
           voice: selectedVoice,
-          locale: locale, // Passer la locale au TTS
-          speed: 0.75,        // Lecture ralentie de 25% pour un rythme vraiment posé
-          pitch: 0.0,         // Pitch neutre pour plus de naturel
-          volumeGainDb: -0.5  // Volume légèrement réduit pour un effet apaisant
+          locale: locale,
+          speed: 0.90,        // Ralenti de 10% pour un rythme d'histoire
+          pitch: -1.5,        // Pitch un peu plus grave pour apaiser
+          volumeGainDb: 0.0   // Volume normal
         }),
       });
 
@@ -212,13 +221,22 @@ export default function StoryReader({ story, className = '' }: StoryReaderProps)
     }
   };
 
-  const handleStop = () => {
+  const handleStop = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.nativeEvent.stopImmediatePropagation();
+    }
+    
     if (currentAudio) {
       currentAudio.pause();
       currentAudio.currentTime = 0;
+      currentAudio.src = ''; // Vider la source
+      setCurrentAudio(null); // Réinitialiser l'état
       setIsReading(false);
       setIsPaused(false);
       setProgress(0);
+      setDuration(0);
     }
   };
 

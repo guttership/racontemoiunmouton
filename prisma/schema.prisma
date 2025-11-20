@@ -1,0 +1,109 @@
+// Prisma schema for Raconte-moi un mouton
+// NextAuth + Premium Stripe integration
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// NextAuth.js Models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String? // Pour l'authentification par email/password
+
+  // Premium & Stripe
+  isPremium            Boolean   @default(false)
+  stripeCustomerId     String?   @unique
+  stripeSubscriptionId String?   @unique
+  premiumSince         DateTime?
+
+  // Story generation tracking (freemium limitation: 1 story / 5 days)
+  lastStoryDate     DateTime? // Date de la dernière histoire générée
+  storiesGenerated  Int       @default(0) // Compteur total d'histoires
+
+  // Email verification
+  verificationToken String?   @unique
+  tokenExpiry       DateTime? // Expiration du token (24h)
+
+  accounts Account[]
+  sessions Session[]
+  stories  Story[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Application Models
+model Story {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Story parameters
+  characters String // JSON array: ["Lila", "Léo"]
+  setting    String // environnement: "forêt", "château", etc.
+  number     Int    // nombre choisi
+  locale     String @default("fr") // fr, en, es, de
+
+  // Generated content
+  title   String? @db.Text
+  content String  @db.Text
+
+  // Audio
+  audioUrl String? // URL du fichier audio sur Vercel Blob ou autre
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, createdAt], map: "idx_stories_userId_createdAt")
+  @@map("stories")
+}

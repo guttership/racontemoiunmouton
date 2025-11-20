@@ -1,0 +1,313 @@
+"""
+Script de génération de modèle PowerPoint pour Pomme et Chou
+Respecte la charte graphique du site www.pomme-et-chou.fr
+"""
+
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.dml.color import RGBColor
+import os
+
+# Charte graphique Pomme et Chou (extraite du site)
+COLORS = {
+    'primary_green': RGBColor(139, 195, 74),      # Vert principal
+    'dark_green': RGBColor(76, 175, 80),          # Vert foncé
+    'orange': RGBColor(255, 152, 0),               # Orange accent
+    'white': RGBColor(255, 255, 255),
+    'dark_gray': RGBColor(66, 66, 66),             # Texte foncé
+    'light_gray': RGBColor(245, 245, 245),         # Fond clair
+}
+
+# Typographie (à adapter selon les fonts disponibles)
+FONT_TITLE = 'Arial Rounded MT Bold'  # Remplacer par font du site si disponible
+FONT_BODY = 'Arial'
+
+def create_pomme_chou_template(logo_path=None):
+    """
+    Crée un modèle PowerPoint pour Pomme et Chou
+    
+    Args:
+        logo_path: Chemin vers le logo (logo_couleur.png ou logo_couleur.svg)
+    """
+    
+    # Créer une présentation vide
+    prs = Presentation()
+    prs.slide_width = Inches(10)
+    prs.slide_height = Inches(7.5)
+    
+    # Slide 1: Page de titre
+    slide1 = prs.slides.add_slide(prs.slide_layouts[6])  # Blank layout
+    
+    # Fond vert dégradé
+    background = slide1.background
+    fill = background.fill
+    fill.solid()
+    fill.fore_color.rgb = COLORS['primary_green']
+    
+    # Ajouter le logo si fourni
+    if logo_path and os.path.exists(logo_path):
+        left = Inches(0.5)
+        top = Inches(0.5)
+        height = Inches(1)
+        slide1.shapes.add_picture(logo_path, left, top, height=height)
+    
+    # Titre principal
+    title_box = slide1.shapes.add_textbox(Inches(1), Inches(2.5), Inches(8), Inches(1.5))
+    title_frame = title_box.text_frame
+    title_frame.text = "Pomme et Chou"
+    title_para = title_frame.paragraphs[0]
+    title_para.font.name = FONT_TITLE
+    title_para.font.size = Pt(60)
+    title_para.font.bold = True
+    title_para.font.color.rgb = COLORS['white']
+    title_para.alignment = PP_ALIGN.CENTER
+    
+    # Sous-titre
+    subtitle_box = slide1.shapes.add_textbox(Inches(1), Inches(4.2), Inches(8), Inches(1))
+    subtitle_frame = subtitle_box.text_frame
+    subtitle_frame.text = "Le restaurateur dédié aux enfants en collectivité"
+    subtitle_para = subtitle_frame.paragraphs[0]
+    subtitle_para.font.name = FONT_BODY
+    subtitle_para.font.size = Pt(24)
+    subtitle_para.font.color.rgb = COLORS['white']
+    subtitle_para.alignment = PP_ALIGN.CENTER
+    
+    # Slide 2: Modèle avec titre et contenu
+    slide2 = prs.slides.add_slide(prs.slide_layouts[6])
+    
+    # Fond blanc
+    background2 = slide2.background
+    fill2 = background2.fill
+    fill2.solid()
+    fill2.fore_color.rgb = COLORS['white']
+    
+    # Bande verte en haut
+    header_shape = slide2.shapes.add_shape(
+        1,  # Rectangle
+        Inches(0), Inches(0),
+        Inches(10), Inches(1.2)
+    )
+    header_fill = header_shape.fill
+    header_fill.solid()
+    header_fill.fore_color.rgb = COLORS['primary_green']
+    header_shape.line.fill.background()
+    
+    # Logo dans l'en-tête
+    if logo_path and os.path.exists(logo_path):
+        left_logo = Inches(0.5)
+        top_logo = Inches(0.3)
+        height_logo = Inches(0.6)
+        slide2.shapes.add_picture(logo_path, left_logo, top_logo, height=height_logo)
+    
+    # Titre du slide
+    title_box2 = slide2.shapes.add_textbox(Inches(3), Inches(0.3), Inches(6), Inches(0.6))
+    title_frame2 = title_box2.text_frame
+    title_frame2.text = "Titre du slide"
+    title_frame2.vertical_anchor = MSO_ANCHOR.MIDDLE
+    title_para2 = title_frame2.paragraphs[0]
+    title_para2.font.name = FONT_TITLE
+    title_para2.font.size = Pt(32)
+    title_para2.font.bold = True
+    title_para2.font.color.rgb = COLORS['white']
+    title_para2.alignment = PP_ALIGN.LEFT
+    
+    # Zone de contenu
+    content_box = slide2.shapes.add_textbox(Inches(0.8), Inches(1.8), Inches(8.4), Inches(4.5))
+    content_frame = content_box.text_frame
+    content_frame.word_wrap = True
+    
+    # Texte d'exemple
+    p1 = content_frame.paragraphs[0]
+    p1.text = "Cuisine maison avec des produits frais et locaux"
+    p1.font.name = FONT_BODY
+    p1.font.size = Pt(20)
+    p1.font.color.rgb = COLORS['dark_gray']
+    p1.level = 0
+    
+    # Puces
+    for bullet_text in [
+        "Produits locaux et de saison",
+        "Cuisine sur place ou livraison",
+        "Engagement qualité",
+        "Équipe dédiée"
+    ]:
+        p = content_frame.add_paragraph()
+        p.text = bullet_text
+        p.font.name = FONT_BODY
+        p.font.size = Pt(18)
+        p.font.color.rgb = COLORS['dark_gray']
+        p.level = 1
+    
+    # Pied de page avec coordonnées
+    footer_box = slide2.shapes.add_textbox(Inches(0.5), Inches(6.8), Inches(9), Inches(0.5))
+    footer_frame = footer_box.text_frame
+    footer_frame.text = "Zone d'activités, 1 rue Saint Ulrich - 67390 Marckolsheim | www.pomme-et-chou.fr"
+    footer_para = footer_frame.paragraphs[0]
+    footer_para.font.name = FONT_BODY
+    footer_para.font.size = Pt(10)
+    footer_para.font.color.rgb = COLORS['dark_gray']
+    footer_para.alignment = PP_ALIGN.CENTER
+    
+    # Slide 3: Modèle deux colonnes
+    slide3 = prs.slides.add_slide(prs.slide_layouts[6])
+    
+    # Fond
+    background3 = slide3.background
+    fill3 = background3.fill
+    fill3.solid()
+    fill3.fore_color.rgb = COLORS['white']
+    
+    # En-tête identique
+    header_shape3 = slide3.shapes.add_shape(
+        1,
+        Inches(0), Inches(0),
+        Inches(10), Inches(1.2)
+    )
+    header_fill3 = header_shape3.fill
+    header_fill3.solid()
+    header_fill3.fore_color.rgb = COLORS['primary_green']
+    header_shape3.line.fill.background()
+    
+    if logo_path and os.path.exists(logo_path):
+        slide3.shapes.add_picture(logo_path, Inches(0.5), Inches(0.3), height=Inches(0.6))
+    
+    title_box3 = slide3.shapes.add_textbox(Inches(3), Inches(0.3), Inches(6), Inches(0.6))
+    title_frame3 = title_box3.text_frame
+    title_frame3.text = "Nos engagements"
+    title_frame3.vertical_anchor = MSO_ANCHOR.MIDDLE
+    title_para3 = title_frame3.paragraphs[0]
+    title_para3.font.name = FONT_TITLE
+    title_para3.font.size = Pt(32)
+    title_para3.font.bold = True
+    title_para3.font.color.rgb = COLORS['white']
+    
+    # Colonne gauche
+    left_col = slide3.shapes.add_textbox(Inches(0.8), Inches(1.8), Inches(4), Inches(4.5))
+    left_frame = left_col.text_frame
+    left_frame.word_wrap = True
+    
+    left_title = left_frame.paragraphs[0]
+    left_title.text = "Cuisine sur place"
+    left_title.font.name = FONT_TITLE
+    left_title.font.size = Pt(22)
+    left_title.font.bold = True
+    left_title.font.color.rgb = COLORS['dark_green']
+    
+    for item in ["Équipe qualifiée", "Respect des normes", "Traçabilité"]:
+        p = left_frame.add_paragraph()
+        p.text = item
+        p.font.name = FONT_BODY
+        p.font.size = Pt(16)
+        p.font.color.rgb = COLORS['dark_gray']
+        p.level = 1
+    
+    # Colonne droite
+    right_col = slide3.shapes.add_textbox(Inches(5.2), Inches(1.8), Inches(4), Inches(4.5))
+    right_frame = right_col.text_frame
+    right_frame.word_wrap = True
+    
+    right_title = right_frame.paragraphs[0]
+    right_title.text = "Cuisine livrée"
+    right_title.font.name = FONT_TITLE
+    right_title.font.size = Pt(22)
+    right_title.font.bold = True
+    right_title.font.color.rgb = COLORS['dark_green']
+    
+    for item in ["Livraison quotidienne", "Liaison froide", "Flexibilité"]:
+        p = right_frame.add_paragraph()
+        p.text = item
+        p.font.name = FONT_BODY
+        p.font.size = Pt(16)
+        p.font.color.rgb = COLORS['dark_gray']
+        p.level = 1
+    
+    # Pied de page
+    footer_box3 = slide3.shapes.add_textbox(Inches(0.5), Inches(6.8), Inches(9), Inches(0.5))
+    footer_frame3 = footer_box3.text_frame
+    footer_frame3.text = "Zone d'activités, 1 rue Saint Ulrich - 67390 Marckolsheim | www.pomme-et-chou.fr"
+    footer_para3 = footer_frame3.paragraphs[0]
+    footer_para3.font.name = FONT_BODY
+    footer_para3.font.size = Pt(10)
+    footer_para3.font.color.rgb = COLORS['dark_gray']
+    footer_para3.alignment = PP_ALIGN.CENTER
+    
+    # Slide 4: Merci / Contact
+    slide4 = prs.slides.add_slide(prs.slide_layouts[6])
+    
+    background4 = slide4.background
+    fill4 = background4.fill
+    fill4.solid()
+    fill4.fore_color.rgb = COLORS['primary_green']
+    
+    if logo_path and os.path.exists(logo_path):
+        logo_center = slide4.shapes.add_picture(
+            logo_path, 
+            Inches(3.5), 
+            Inches(1.5), 
+            height=Inches(2)
+        )
+    
+    # Message de fin
+    thank_box = slide4.shapes.add_textbox(Inches(1), Inches(4), Inches(8), Inches(1))
+    thank_frame = thank_box.text_frame
+    thank_frame.text = "Merci de votre attention"
+    thank_para = thank_frame.paragraphs[0]
+    thank_para.font.name = FONT_TITLE
+    thank_para.font.size = Pt(44)
+    thank_para.font.bold = True
+    thank_para.font.color.rgb = COLORS['white']
+    thank_para.alignment = PP_ALIGN.CENTER
+    
+    # Contact
+    contact_box = slide4.shapes.add_textbox(Inches(1), Inches(5.2), Inches(8), Inches(1.5))
+    contact_frame = contact_box.text_frame
+    contact_frame.text = "Zone d'activités, 1 rue Saint Ulrich\n67390 Marckolsheim\nwww.pomme-et-chou.fr"
+    for paragraph in contact_frame.paragraphs:
+        paragraph.font.name = FONT_BODY
+        paragraph.font.size = Pt(18)
+        paragraph.font.color.rgb = COLORS['white']
+        paragraph.alignment = PP_ALIGN.CENTER
+    
+    return prs
+
+
+def main():
+    """Fonction principale"""
+    
+    # Chercher le logo
+    logo_candidates = [
+        'logo_couleur.png',
+        'logo_couleur.svg',
+        'logo.png',
+        'logo.svg'
+    ]
+    
+    logo_path = None
+    for logo in logo_candidates:
+        if os.path.exists(logo):
+            logo_path = logo
+            print(f"Logo trouvé: {logo_path}")
+            break
+    
+    if not logo_path:
+        print("Attention: Aucun logo trouvé. Téléchargez logo_couleur.png ou logo_couleur.svg")
+        print("Création du modèle sans logo...")
+    
+    # Créer la présentation
+    print("Création du modèle PowerPoint pour Pomme et Chou...")
+    prs = create_pomme_chou_template(logo_path)
+    
+    # Sauvegarder
+    output_file = 'Pomme_et_Chou_Template.pptx'
+    prs.save(output_file)
+    print(f"Modèle créé avec succès: {output_file}")
+    print("\nContenu:")
+    print("- Slide 1: Page de titre")
+    print("- Slide 2: Modèle standard avec titre et contenu")
+    print("- Slide 3: Modèle deux colonnes")
+    print("- Slide 4: Page de remerciement/contact")
+
+
+if __name__ == '__main__':
+    main()

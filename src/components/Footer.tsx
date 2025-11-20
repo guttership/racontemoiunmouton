@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTranslations, useLocale } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function Footer() {
   const t = useTranslations('Footer');
@@ -16,7 +16,7 @@ export default function Footer() {
             {t('legalNotice')}
           </Link>
           <a href="https://dmum.eu" target="_blank" rel="noopener" aria-label="Site de Yann Gutter (dmum.eu)" className="ml-2 flex items-center">
-            <Image src="/logo_mouton.svg" alt="Logo dmum.eu" width={28} height={28} style={{ filter: 'grayscale(1)', opacity: 0.7 }} className="inline align-middle" aria-label="Logo dmum.eu" />
+            <Image src="/logo_mouton.svg" alt="Logo dmum.eu" width={28} height={28} style={{ filter: 'grayscale(1)', opacity: 0.7, width: 'auto', height: 'auto' }} className="inline align-middle" aria-label="Logo dmum.eu" />
           </a>
         </div>
         <div className="flex items-center gap-4">

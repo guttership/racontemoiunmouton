@@ -47,46 +47,85 @@ export default async function RootLayout({
             `,
           }}
         />
+        
+        {/* Unregister old service workers - Fix OAuth issues */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for (let registration of registrations) {
+                    registration.unregister().then(function(success) {
+                      if (success) {
+                        console.log('Service Worker unregistered successfully');
+                        window.location.reload();
+                      }
+                    });
+                  }
+                });
+                
+                // Force immediate unregister on controller
+                if (navigator.serviceWorker.controller) {
+                  navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+                }
+                
+                // Clear all caches
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (let name of names) {
+                      caches.delete(name);
+                    }
+                  });
+                }
+              }
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Consent Manager - Bannière cookies Google */}
-        <Script
-          strategy="beforeInteractive"
-          src="https://cdn.consentmanager.net/delivery/autoblocking/60d005e8b2661.js"
-          data-cmp-ab="1"
-          data-cmp-host="d.delivery.consentmanager.net"
-          data-cmp-cdn="cdn.consentmanager.net"
-          data-cmp-codesrc="16"
-        />
-        
-        {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-MW948L3Z01"
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-MW948L3Z01');
-            `,
-          }}
-        />
-        
-        {/* DataFast Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src="https://datafa.st/js/script.js"
-          data-website-id="dfid_83K7WzoSGbjQ5t054w2Co"
-          data-domain="racontemoiunmouton.fr"
-          data-allow-localhost="true"
-        />
+        {/* Analytics scripts - Only in production */}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            {/* Consent Manager - Bannière cookies Google */}
+            <Script
+              strategy="beforeInteractive"
+              src="https://cdn.consentmanager.net/delivery/autoblocking/60d005e8b2661.js"
+              data-cmp-ab="1"
+              data-cmp-host="d.delivery.consentmanager.net"
+              data-cmp-cdn="cdn.consentmanager.net"
+              data-cmp-codesrc="16"
+            />
+            
+            {/* Google Analytics */}
+            <Script
+              strategy="afterInteractive"
+              src="https://www.googletagmanager.com/gtag/js?id=G-MW948L3Z01"
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-MW948L3Z01');
+                `,
+              }}
+            />
+            
+            {/* DataFast Analytics */}
+            <Script
+              strategy="afterInteractive"
+              src="https://datafa.st/js/script.js"
+              data-website-id="dfid_83K7WzoSGbjQ5t054w2Co"
+              data-domain="racontemoiunmouton.fr"
+              data-allow-localhost="true"
+            />
+          </>
+        )}
         
         {children}
       </body>

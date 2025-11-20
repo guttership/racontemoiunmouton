@@ -1,8 +1,9 @@
 ﻿'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useTranslations, useLocale } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
+import { useSession } from 'next-auth/react';
 import StoryCreationSlider from '@/components/StoryCreationSlider';
 import StoryReader from '@/components/StoryReader';
 import StructuredData from '@/components/StructuredData';
@@ -10,11 +11,14 @@ import { Button } from '@/components/ui/button';
 import { StorySettings, ChildProfile } from '@/types/story';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';
 import { StoryIcon } from '@/components/illustrations/ModernIcons';
+import { Hero } from '@/components/Hero';
+import { PremiumBanner } from '@/components/PremiumBanner';
 
 export default function Home() {
+  const { data: session } = useSession();
   const t = useTranslations('HomePage');
-  const tApp = useTranslations('App');
   const locale = useLocale();
+  const creatorRef = useRef<HTMLDivElement>(null);
   
   const [storySettings, setStorySettings] = useState<StorySettings>({
     characters: [],
@@ -31,9 +35,15 @@ export default function Home() {
   });
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedStory, setGeneratedStory] = useState<string>('');
+  const [showPremiumBanner, setShowPremiumBanner] = useState(false);
+
+  const scrollToCreator = () => {
+    creatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const generateStory = async () => {
     setIsGenerating(true);
+    setShowPremiumBanner(false);
     try {
       const response = await fetch('/api/generate-story', {
         method: 'POST',
@@ -47,11 +57,17 @@ export default function Home() {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
+        // Si erreur de limite premium
+        if (response.status === 403 && data.requiresPremium) {
+          setShowPremiumBanner(true);
+          return;
+        }
         throw new Error(`Erreur lors de la génération: ${response.status}`);
       }
 
-      const data = await response.json();
       setGeneratedStory(data.story);
     } catch (error) {
       console.error('Erreur:', error);
@@ -93,7 +109,7 @@ export default function Home() {
                 onClick={() => setGeneratedStory('')}
                 className="bg-gray-100 dark:bg-[#3f3f3e] text-gray-800 dark:text-gray-100 px-4 md:px-6 py-2 md:py-3 rounded-2xl font-clash-grotesk font-semibold text-sm md:text-base hover:bg-gray-200 dark:hover:bg-[#4a4a49] transition-colors border-gray-200 dark:border-[#3f3f3e]"
               >
-                {tApp('newStory') || 'Nouvelle histoire'}
+                {t('newStory')}
               </Button>
             </div>
           </div>
@@ -109,25 +125,41 @@ export default function Home() {
       <StructuredData />
       <ModernBackground />
 
-      <main itemScope itemType="https://schema.org/WebSite">
-        <header className="flex flex-col items-center justify-center py-8">
-          <Image 
-            src="/logo_mouton.svg" 
-            alt="Logo Raconte-moi un mouton" 
-            width={80} 
-            height={80} 
-            className="mb-4" 
-            priority 
-          />
-          <h1 itemProp="name" className="text-3xl md:text-4xl font-courgette text-[#ff7519] dark:text-[#ff7519] mb-2 text-center">
-            {t('title')}
-          </h1>
-          <p itemProp="description" className="text-lg text-gray-700 dark:text-gray-200 text-center max-w-2xl mx-auto px-4">
-            {t('subtitle')}
-          </p>
-        </header>
+      {/* Hero Section - Landing page style */}
+      {!session?.user && !generatedStory && (
+        <Hero onStartCreating={scrollToCreator} />
+      )}
 
-        <main className="relative mx-auto px-2 md:px-4 pb-4 z-10">
+      <main itemScope itemType="https://schema.org/WebSite">
+        {/* Header classique pour utilisateurs connectés */}
+        {session?.user && !generatedStory && (
+          <header className="flex flex-col items-center justify-center py-8">
+            <Image 
+              src="/logo_mouton.svg" 
+              alt="Logo Raconte-moi un mouton" 
+              width={80} 
+              height={80} 
+              className="mb-4" 
+              priority 
+            />
+            <h1 itemProp="name" className="text-3xl md:text-4xl font-courgette text-[#ff7519] dark:text-[#ff7519] mb-2 text-center">
+              {t('title')}
+            </h1>
+            <p itemProp="description" className="text-lg text-gray-700 dark:text-gray-200 text-center max-w-2xl mx-auto px-4">
+              {t('subtitle')}
+            </p>
+          </header>
+        )}
+
+        {/* Premium Banner si limite atteinte */}
+        {showPremiumBanner && (
+          <div className="max-w-3xl mx-auto px-4 mb-8">
+            <PremiumBanner />
+          </div>
+        )}
+
+        {/* Story Creator */}
+        <div ref={creatorRef} className="relative mx-auto px-2 md:px-4 pb-4 z-10">
           <StoryCreationSlider
             selectedCharacters={storySettings.characters}
             characterCount={storySettings.characterCount}
@@ -146,7 +178,7 @@ export default function Home() {
             onChildProfileChange={setChildProfile}
             onCreateStory={generateStory}
           />
-        </main>
+        </div>
       </main>
     </div>
   );

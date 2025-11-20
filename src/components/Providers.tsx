@@ -1,8 +1,9 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
+import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from '@/lib/theme-provider';
-import { I18nProvider } from '@/lib/i18n-provider';
 
 interface MessageValue {
   [key: string]: string | MessageValue;
@@ -18,10 +19,12 @@ interface ProvidersProps {
 
 export function Providers({ children, locale, messages }: ProvidersProps) {
   return (
-    <ThemeProvider>
-      <I18nProvider messages={messages} locale={locale}>
-        {children}
-      </I18nProvider>
-    </ThemeProvider>
+    <SessionProvider>
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </NextIntlClientProvider>
+    </SessionProvider>
   );
 }

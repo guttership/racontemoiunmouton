@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { useTranslations } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
+import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChildProfile } from '@/types/story';
+import { VoiceInputRecorder } from '@/components/VoiceInputRecorder';
 
 interface ChildProfileSelectorProps {
   childProfile: ChildProfile;
@@ -16,6 +18,8 @@ export default function ChildProfileSelector({
   onProfileChange,
 }: ChildProfileSelectorProps) {
   const t = useTranslations('ChildProfile');
+  const locale = useLocale();
+  const { data: session } = useSession();
   const [showProfile, setShowProfile] = useState(false);
   
   const INTERESTS_OPTIONS = useMemo(() => [
@@ -125,18 +129,18 @@ export default function ChildProfileSelector({
       </div>
 
       {showProfile && (
-        <div className="space-y-6 sm:space-y-8 bg-white dark:bg-[#3f3f3e] rounded-xl m-4 sm:m-6 p-4 sm:p-6 transition-colors duration-300">
+        <div className="space-y-6 sm:space-y-8 m-4 sm:m-6 p-4 sm:p-6">
           {/* Nom et âge */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-2">
+              <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 block">
                 <svg
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-[#ff7519]"
+                  className="text-[#ff7519] inline-block mr-2"
                 >
                   <path
                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
@@ -145,16 +149,23 @@ export default function ChildProfileSelector({
                 </svg>
                 <span>{t('nameLabel')}</span>
               </label>
-              <Input
-                type="text"
-                placeholder={t('namePlaceholder')}
-                value={childProfile.name || ''}
-                onChange={(e) => updateProfile({ name: e.target.value })}
-                className="hand-drawn-input"
-              />
+              <div className="flex gap-2 items-center">
+                <Input
+                  type="text"
+                  placeholder={t('namePlaceholder')}
+                  value={childProfile.name || ''}
+                  onChange={(e) => updateProfile({ name: e.target.value })}
+                  className="hand-drawn-input flex-1"
+                />
+                <VoiceInputRecorder
+                  onTranscript={(text) => updateProfile({ name: text })}
+                  locale={locale}
+                  isPremium={session?.user?.isPremium || false}
+                />
+              </div>
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">
+              <label className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 block">
                 {t('ageLabel')}
               </label>
               <Input

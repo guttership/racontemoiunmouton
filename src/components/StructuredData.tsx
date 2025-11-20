@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale, useTranslations } from '@/lib/i18n-provider';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function StructuredData() {
   const locale = useLocale();

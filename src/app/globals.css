@@ -166,8 +166,9 @@
   }
 
   .dark .hand-drawn-button-outline {
-    background: #3f3f3e;
+    background: #4a4a49;
     color: hsl(var(--foreground));
+    border: none;
   }
   
   .hand-drawn-button-outline:hover {
@@ -177,7 +178,7 @@
   }
 
   .dark .hand-drawn-button-outline:hover {
-    background: #4a4a49;
+    background: #5a5a59;
   }
   
   .hand-drawn-input {
@@ -188,8 +189,9 @@
   }
 
   .dark .hand-drawn-input {
-    background: #3f3f3e;
+    background: #4a4a49;
     color: hsl(var(--foreground));
+    border: 1px solid #5a5a59;
   }
   
   .hand-drawn-input:focus {
@@ -198,7 +200,8 @@
   }
 
   .dark .hand-drawn-input:focus {
-    background: #4a4a49;
+    background: #2a2a29;
+    border-color: #ff7519;
   }
   
   .illustration-container {
@@ -250,5 +253,19 @@
   .text-body-bold {
     font-family: 'ClashGrotesk-Semibold', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 600;
+  }
+  
+  /* Animation personnalisée */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
   }
 }

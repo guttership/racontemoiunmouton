@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useTranslations, useLocale } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
 import { ModernBackground } from '@/components/illustrations/OrganicShapes';
 
 export default function LegalNoticePage() {
@@ -56,13 +56,109 @@ export default function LegalNoticePage() {
               </div>
             </section>
 
+            {/* CGU */}
+            <section>
+              <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
+                {t('terms')}
+              </h2>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk mb-4">
+                {t('termsIntro')}
+              </p>
+            </section>
+
+            {/* Description du service */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('serviceDescription')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk mb-2">
+                {t('serviceDescriptionText')}
+              </p>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-200 font-clash-grotesk space-y-1">
+                <li><strong>{t('freePlan')} :</strong> {t('freePlanText')}</li>
+                <li><strong>{t('premiumPlan')} :</strong> {t('premiumPlanText')}</li>
+              </ul>
+            </section>
+
+            {/* Paiement */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('payment')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('paymentText')}
+              </p>
+            </section>
+
+            {/* Remboursement */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('refund')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('refundText')}
+              </p>
+            </section>
+
+            {/* Propriété intellectuelle */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('intellectualProperty')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('intellectualPropertyText')}
+              </p>
+            </section>
+
+            {/* Responsabilité utilisateur */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('userResponsibility')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('userResponsibilityText')}
+              </p>
+            </section>
+
+            {/* Limitation de responsabilité */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('limitation')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('limitationText')}
+              </p>
+            </section>
+
+            {/* Résiliation */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('termination')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('terminationText')}
+              </p>
+            </section>
+
             {/* Données personnelles */}
             <section>
               <h2 className="text-xl md:text-2xl font-courgette text-gray-800 dark:text-gray-100 mb-3">
                 {t('data')}
               </h2>
-              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk mb-3">
                 {t('dataText')}
+              </p>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('dataUsage')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk mb-3">
+                {t('dataUsageText')}
+              </p>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('dataRights')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('dataRightsText')}
               </p>
             </section>
 
@@ -83,6 +179,26 @@ export default function LegalNoticePage() {
               </h2>
               <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
                 {t('aiText')}
+              </p>
+            </section>
+
+            {/* Modifications */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('updates')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('updatesText')}
+              </p>
+            </section>
+
+            {/* Contact */}
+            <section>
+              <h3 className="text-lg md:text-xl font-courgette text-gray-800 dark:text-gray-100 mb-2">
+                {t('contact')}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 font-clash-grotesk">
+                {t('contactText')}
               </p>
             </section>
           </div>

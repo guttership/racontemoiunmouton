@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { useTranslations } from '@/lib/i18n-provider';
+import { useTranslations, useLocale } from 'next-intl';
+import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import MultiSelectDropdown from '@/components/ui/multi-select-dropdown';
+import { VoiceInputRecorder } from '@/components/VoiceInputRecorder';
 
 interface CharacterSelectorProps {
   selectedCharacters: string[];
@@ -21,6 +23,8 @@ export default function CharacterSelector({
   onCountChange,
 }: CharacterSelectorProps) {
   const t = useTranslations('Characters');
+  const locale = useLocale();
+  const { data: session } = useSession();
   const [customCharacter, setCustomCharacter] = useState('');
   
   const CHARACTER_OPTIONS = useMemo(() => [
@@ -92,13 +96,20 @@ export default function CharacterSelector({
             <span>{t('addCustom')}</span>
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Input
-              value={customCharacter}
-              onChange={(e) => setCustomCharacter(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && addCustomCharacter()}
-              className="hand-drawn-input flex-1"
-              placeholder={t('placeholder')}
-            />
+            <div className="flex gap-2 flex-1">
+              <Input
+                value={customCharacter}
+                onChange={(e) => setCustomCharacter(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && addCustomCharacter()}
+                className="hand-drawn-input flex-1"
+                placeholder={t('placeholder')}
+              />
+              <VoiceInputRecorder
+                onTranscript={(text) => setCustomCharacter(text)}
+                locale={locale}
+                isPremium={session?.user?.isPremium || false}
+              />
+            </div>
             <Button
               onClick={addCustomCharacter}
               disabled={!customCharacter.trim()}

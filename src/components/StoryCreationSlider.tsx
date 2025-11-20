@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTranslations } from '@/lib/i18n-provider';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import CharacterSelector from '@/components/CharacterSelector';
 import EnvironmentSelector from '@/components/EnvironmentSelector';
