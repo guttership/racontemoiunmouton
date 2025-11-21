@@ -9,18 +9,24 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     
     // Vérifier la limite d'histoires (sauf pour les utilisateurs premium)
-    if (!session?.user?.isPremium) {
-      const limitCheck = await checkStoryLimit(session?.user?.email || null);
-      if (!limitCheck.canGenerate) {
-        return NextResponse.json(
-          { 
-            error: 'Story limit reached',
-            requiresPremium: true,
-            daysRemaining: limitCheck.daysUntilNext
-          },
-          { status: 403 }
-        );
+    if (session?.user) {
+      // Utilisateur connecté
+      if (!session.user.isPremium) {
+        const limitCheck = await checkStoryLimit(session.user.id);
+        if (!limitCheck.canGenerate) {
+          return NextResponse.json(
+            { 
+              error: 'Story limit reached',
+              requiresPremium: true,
+              daysRemaining: limitCheck.daysUntilNext
+            },
+            { status: 403 }
+          );
+        }
       }
+    } else {
+      // Utilisateur anonyme - pas de limitation pour le moment
+      // TODO: Implémenter limitation par IP si nécessaire
     }
     
     const storyParams: StoryParams = {
