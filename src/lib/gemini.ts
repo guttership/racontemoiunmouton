@@ -1,13 +1,20 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import { getStoryPrompt } from './story-prompts';
 
-if (!process.env.GOOGLE_AI_API_KEY) {
-  throw new Error('GOOGLE_AI_API_KEY is not defined in environment variables');
+// Lazy initialization pour éviter les erreurs au build time
+let genAI: GoogleGenerativeAI | null = null;
+let model: GenerativeModel | null = null;
+
+function getGeminiModel(): GenerativeModel {
+  if (!model) {
+    if (!process.env.GOOGLE_AI_API_KEY) {
+      throw new Error('GOOGLE_AI_API_KEY is not defined in environment variables');
+    }
+    genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+    model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+  }
+  return model;
 }
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
-
-export const geminiModel = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
 export interface StoryParams {
   characters: string[];
@@ -72,7 +79,8 @@ ${p.narrator}
     console.log(`🤖 Gemini [${locale.toUpperCase()}]: Envoi du prompt...`);
     console.log('📝 Gemini: Prompt:', prompt.substring(0, 200) + '...');
     
-    const result = await geminiModel.generateContent(prompt);
+    const model = getGeminiModel();
+    const result = await model.generateContent(prompt);
     const response = await result.response;
     const storyText = response.text();
     

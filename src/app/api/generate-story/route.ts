@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateStory, StoryParams } from '@/lib/gemini';
+import type { StoryParams } from '@/lib/gemini';
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,6 +30,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Dynamic import pour éviter le chargement du SDK au build time
+    const { generateStory } = await import('@/lib/gemini');
     const story = await generateStory(storyParams);
     
     return NextResponse.json({ story });
