@@ -8,6 +8,9 @@ export async function POST(request: NextRequest) {
     const session = await auth();
     const body = await request.json();
     
+    // Mode checkOnly : retourner uniquement le statut de la limite sans générer
+    const checkOnly = body.checkOnly === true;
+    
     // Vérifier la limite d'histoires
     if (session?.user) {
       // Utilisateur connecté
@@ -41,6 +44,11 @@ export async function POST(request: NextRequest) {
           { status: 403 }
         );
       }
+    }
+    
+    // Si checkOnly, retourner OK sans générer
+    if (checkOnly) {
+      return NextResponse.json({ canGenerate: true });
     }
     
     const storyParams: StoryParams = {

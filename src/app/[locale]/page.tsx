@@ -38,6 +38,50 @@ export default function Home() {
   const [showPremiumBanner, setShowPremiumBanner] = useState(false);
   const [showAccountBanner, setShowAccountBanner] = useState(false);
   const [daysUntilNext, setDaysUntilNext] = useState<number>(0);
+  const [isCheckingLimit, setIsCheckingLimit] = useState(false);
+
+  // Vérifier la limite au chargement de la page pour les utilisateurs non-premium
+  useEffect(() => {
+    const checkLimit = async () => {
+      if (session === undefined || isCheckingLimit) return; // Attendre le chargement de la session
+      
+      // Premium = pas de limite
+      if (session?.user?.isPremium) return;
+      
+      setIsCheckingLimit(true);
+      try {
+        const response = await fetch('/api/generate-story', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            characters: ['test'],
+            characterCount: 1,
+            environment: 'test',
+            locale,
+            // Flag pour indiquer qu'on veut juste vérifier la limite
+            checkOnly: true,
+          }),
+        });
+
+        if (response.status === 403) {
+          const data = await response.json();
+          if (data.requiresPremium) {
+            setShowPremiumBanner(true);
+            setDaysUntilNext(data.daysUntilNext || 0);
+          } else if (data.requiresAccount) {
+            setShowAccountBanner(true);
+            setDaysUntilNext(data.daysUntilNext || 0);
+          }
+        }
+      } catch (error) {
+        console.error('Error checking limit:', error);
+      } finally {
+        setIsCheckingLimit(false);
+      }
+    };
+
+    checkLimit();
+  }, [session, locale, isCheckingLimit]);
 
   const scrollToCreator = () => {
     creatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
