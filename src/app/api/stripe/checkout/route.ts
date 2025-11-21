@@ -3,12 +3,15 @@ import { auth } from "@/auth";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-10-29.clover",
-});
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: "2025-10-29.clover",
+  });
+}
 
 export async function POST(req: NextRequest) {
   try {
+    const stripe = getStripe();
     const session = await auth();
 
     if (!session?.user?.email) {
