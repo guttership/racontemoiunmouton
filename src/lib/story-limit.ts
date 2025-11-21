@@ -67,9 +67,9 @@ export async function checkAnonymousStoryLimit(
   daysUntilNext?: number;
 }> {
   // Chercher une génération récente avec cette IP
-  const recentStory = await prisma.story.findFirst({
+  const recentGeneration = await prisma.anonymousGeneration.findFirst({
     where: {
-      userId: ipAddress, // On stocke l'IP comme userId pour les anonymes
+      ipAddress,
       createdAt: {
         gte: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // Derniers 5 jours
       },
@@ -79,13 +79,13 @@ export async function checkAnonymousStoryLimit(
     },
   });
 
-  if (!recentStory) {
+  if (!recentGeneration) {
     // Aucune histoire dans les derniers 5 jours
     return { canGenerate: true };
   }
 
   const daysSinceLastStory = Math.floor(
-    (Date.now() - recentStory.createdAt.getTime()) / (1000 * 60 * 60 * 24)
+    (Date.now() - recentGeneration.createdAt.getTime()) / (1000 * 60 * 60 * 24)
   );
 
   if (daysSinceLastStory >= 5) {
@@ -104,25 +104,26 @@ export async function checkAnonymousStoryLimit(
  * Met à jour la date de dernière génération d'histoire
  */
 export async function updateLastStoryDate(userId: string): Promise<void> {
-  // Vérifier si l'utilisateur existe (pas une IP anonyme)
-  const user = await prisma.user.findUnique({
+  await prisma.user.update({
     where: { id: userId },
+    data: {
+      lastStoryDate: new Date(),
+      storiesGenerated: { increment: 1 },
+    },
   });
-  
-  if (user) {
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        lastStoryDate: new Date(),
-        storiesGenerated: { increment: 1 },
-      },
-    });
-  }
-  // Pour les utilisateurs anonymes (IP), pas besoin de mettre à jour user
 }
 
 /**
- * Sauvegarde une histoire dans la base de données
+ * Enregistre une génération anonyme
+ */
+export async function recordAnonymousGeneration(ipAddress: string): Promise<void> {
+  await prisma.anonymousGeneration.create({
+    data: { ipAddress },
+  });
+}
+
+/**
+ * Sauvegarde une histoire dans la base de données (pour utilisateurs connectés uniquement)
  */
 export async function saveStory(data: {
   userId: string;

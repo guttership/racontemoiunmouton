@@ -107,3 +107,13 @@ model Story {
   @@index([userId, createdAt], map: "idx_stories_userId_createdAt")
   @@map("stories")
 }
+
+// Story generation tracking for anonymous users
+model AnonymousGeneration {
+  id        String   @id @default(cuid())
+  ipAddress String
+  createdAt DateTime @default(now())
+
+  @@index([ipAddress, createdAt], map: "idx_anonymous_ip_date")
+  @@map("anonymous_generations")
+}

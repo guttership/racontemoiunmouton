@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { StoryParams } from '@/lib/gemini';
 import { auth } from '@/auth';
-import { checkStoryLimit, checkAnonymousStoryLimit, saveStory } from '@/lib/story-limit';
+import { checkStoryLimit, checkAnonymousStoryLimit, saveStory, recordAnonymousGeneration } from '@/lib/story-limit';
 
 export async function POST(request: NextRequest) {
   try {
@@ -72,21 +72,25 @@ export async function POST(request: NextRequest) {
     const { generateStory } = await import('@/lib/gemini');
     const story = await generateStory(storyParams);
     
-    // Enregistrer l'histoire pour la limite
-    const userId = session?.user?.id || 
-                   request.headers.get('x-forwarded-for') || 
-                   request.headers.get('x-real-ip') || 
-                   'unknown';
-    
-    await saveStory({
-      userId,
-      characters: storyParams.characters.join(', '),
-      setting: storyParams.environment,
-      number: storyParams.characterCount,
-      locale: storyParams.locale,
-      title: story.title,
-      content: story.content,
-    });
+    // Enregistrer la génération pour tracking des limites
+    if (session?.user) {
+      // Utilisateur connecté : sauvegarder l'histoire complète
+      await saveStory({
+        userId: session.user.id,
+        characters: storyParams.characters.join(', '),
+        setting: storyParams.environment,
+        number: storyParams.characterCount,
+        locale: storyParams.locale,
+        title: story.title,
+        content: story.content,
+      });
+    } else {
+      // Anonyme : juste enregistrer l'IP et la date
+      const ip = request.headers.get('x-forwarded-for') || 
+                 request.headers.get('x-real-ip') || 
+                 'unknown';
+      await recordAnonymousGeneration(ip);
+    }
     
     return NextResponse.json({ story });
   } catch (error) {
