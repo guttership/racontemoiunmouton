@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         }
       }
     } else {
-      // Utilisateur anonyme - limite de 1 par jour
+      // Utilisateur anonyme - limite de 1 tous les 5 jours
       const ip = request.headers.get('x-forwarded-for') || 
                  request.headers.get('x-real-ip') || 
                  'unknown';
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
           { 
             error: 'Anonymous limit reached',
             requiresAccount: true,
-            hoursRemaining: limitCheck.hoursUntilNext
+            daysRemaining: limitCheck.daysUntilNext
           },
           { status: 403 }
         );

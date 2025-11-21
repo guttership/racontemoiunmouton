@@ -57,21 +57,21 @@ export async function checkStoryLimit(
 
 /**
  * Vérifie la limite pour un utilisateur anonyme (par IP)
- * Limite : 1 histoire par jour
+ * Limite : 1 histoire tous les 5 jours
  */
 export async function checkAnonymousStoryLimit(
   ipAddress: string
 ): Promise<{
   canGenerate: boolean;
   reason?: string;
-  hoursUntilNext?: number;
+  daysUntilNext?: number;
 }> {
   // Chercher une génération récente avec cette IP
   const recentStory = await prisma.story.findFirst({
     where: {
       userId: ipAddress, // On stocke l'IP comme userId pour les anonymes
       createdAt: {
-        gte: new Date(Date.now() - 24 * 60 * 60 * 1000), // Dernières 24h
+        gte: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // Derniers 5 jours
       },
     },
     orderBy: {
@@ -80,23 +80,23 @@ export async function checkAnonymousStoryLimit(
   });
 
   if (!recentStory) {
-    // Aucune histoire dans les dernières 24h
+    // Aucune histoire dans les derniers 5 jours
     return { canGenerate: true };
   }
 
-  const hoursSinceLastStory = Math.floor(
-    (Date.now() - recentStory.createdAt.getTime()) / (1000 * 60 * 60)
+  const daysSinceLastStory = Math.floor(
+    (Date.now() - recentStory.createdAt.getTime()) / (1000 * 60 * 60 * 24)
   );
 
-  if (hoursSinceLastStory >= 24) {
+  if (daysSinceLastStory >= 5) {
     return { canGenerate: true };
   }
 
-  const hoursUntilNext = 24 - hoursSinceLastStory;
+  const daysUntilNext = 5 - daysSinceLastStory;
   return {
     canGenerate: false,
     reason: "ANONYMOUS_LIMIT_REACHED",
-    hoursUntilNext,
+    daysUntilNext,
   };
 }
 
