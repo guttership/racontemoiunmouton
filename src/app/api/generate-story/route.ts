@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
           { 
             error: 'Story limit reached',
             requiresPremium: true,
-            daysRemaining: limitCheck.daysRemaining
+            daysRemaining: limitCheck.daysUntilNext
           },
           { status: 403 }
         );
