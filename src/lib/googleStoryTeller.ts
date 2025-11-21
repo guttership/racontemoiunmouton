@@ -574,11 +574,14 @@ Ton principal :`;
       throw new Error(`Segment SSML trop long pour Google TTS: ${ssmlSize} bytes (limite: 5000 bytes). Texte: ${ssmlText.substring(0, 100)}...`);
     }
 
+    // Extraire le code de langue de la voix (ex: "fr-FR" depuis "fr-FR-Neural2-A")
+    const languageCode = options.voice.split('-').slice(0, 2).join('-');
+
     // Configuration de la requête
     const request = {
       input: { ssml: ssmlText },
       voice: { 
-        languageCode: 'fr-FR', 
+        languageCode, 
         name: options.voice 
       },
       audioConfig: { 

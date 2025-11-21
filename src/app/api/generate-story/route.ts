@@ -1,9 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { StoryParams } from '@/lib/gemini';
+import { auth } from '@/auth';
+import { checkStoryLimit } from '@/lib/story-limit';
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
     const body = await request.json();
+    
+    // Vérifier la limite d'histoires (sauf pour les utilisateurs premium)
+    if (!session?.user?.isPremium) {
+      const limitCheck = await checkStoryLimit(session?.user?.email || null);
+      if (!limitCheck.canGenerate) {
+        return NextResponse.json(
+          { 
+            error: 'Story limit reached',
+            requiresPremium: true,
+            daysRemaining: limitCheck.daysRemaining
+          },
+          { status: 403 }
+        );
+      }
+    }
     
     const storyParams: StoryParams = {
       characters: body.characters || [],
