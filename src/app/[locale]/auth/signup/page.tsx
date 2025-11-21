@@ -3,10 +3,11 @@ import { SignUpForm } from "@/components/auth/SignUpForm";
 import { ModernBackground } from "@/components/illustrations/OrganicShapes";
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Auth" });
 
   return {
@@ -16,10 +17,11 @@ export async function generateMetadata({
 }
 
 export default async function SignUpPage({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Auth" });
 
   return (
