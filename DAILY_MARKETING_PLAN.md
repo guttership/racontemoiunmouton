@@ -8,15 +8,41 @@
 ### **LUNDI - Contenu SEO** (10 min)
 **🎯 Objectif** : Améliorer référencement Google
 
-**Actions :**
-- [ ] Rédiger 300 mots d'article blog sur Google Docs
-- [ ] Mots-clés : "histoire personnalisée enfant", "conte IA", "bedtime story"
-- [ ] 1 article complet = 4 lundis (1200 mots/mois)
+**Actions CONCRÈTES :**
+- [ ] Ouvrir Google Docs ou Notion
+- [ ] Rédiger 300 mots sur un sujet parental/histoire enfant
+- [ ] Mots-clés à intégrer 3-4 fois : "histoire personnalisée enfant", "conte IA", "bedtime story"
+- [ ] 1 article complet (1200 mots) = 4 lundis de rédaction
 
-**Sujets idées :**
-- "5 astuces pour un rituel du coucher réussi"
-- "Pourquoi les histoires personnalisées captivent les enfants"
-- "Comment l'IA révolutionne les contes du soir"
+**ENSUITE (une fois l'article terminé) :**
+1. **Publier sur LinkedIn** en format post long + lien vers racontemoiunmouton.fr
+2. **Publier sur Medium** (compte gratuit) avec CTA vers l'appli
+3. **Partager dans 3 groupes Facebook** parentalité (sans spam, apporter de la valeur)
+4. **Option bonus** : Créer page `/blog` sur le site Next.js et y publier (nécessite dev)
+
+**Sujets prêts à rédiger (300 mots chacun) :**
+1. "5 astuces pour un rituel du coucher réussi" 
+   - Intro : Pourquoi le coucher est difficile
+   - Astuce 1 : Routine fixe
+   - Astuce 2 : Histoire personnalisée
+   - Astuce 3 : Lumière tamisée
+   - Astuce 4 : Pas d'écrans 1h avant
+   - Astuce 5 : Musique douce
+   - Conclusion + CTA : "Essayez racontemoiunmouton.fr"
+
+2. "Pourquoi les histoires personnalisées captivent les enfants"
+   - Stats : +40% attention si personnalisé
+   - Psychologie : enfant = héros = engagement
+   - Exemple concret : Emma et sa licorne préférée
+   - Avantages IA vs livres classiques
+   - CTA
+
+3. "Comment l'IA révolutionne les contes du soir"
+   - Avant : toujours les mêmes histoires
+   - Maintenant : génération instantanée
+   - Cas d'usage : 3 exemples réels
+   - Sécurité et modération
+   - CTA
 
 ---
 
