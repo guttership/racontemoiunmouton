@@ -104,13 +104,21 @@ export async function checkAnonymousStoryLimit(
  * Met à jour la date de dernière génération d'histoire
  */
 export async function updateLastStoryDate(userId: string): Promise<void> {
-  await prisma.user.update({
+  // Vérifier si l'utilisateur existe (pas une IP anonyme)
+  const user = await prisma.user.findUnique({
     where: { id: userId },
-    data: {
-      lastStoryDate: new Date(),
-      storiesGenerated: { increment: 1 },
-    },
   });
+  
+  if (user) {
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        lastStoryDate: new Date(),
+        storiesGenerated: { increment: 1 },
+      },
+    });
+  }
+  // Pour les utilisateurs anonymes (IP), pas besoin de mettre à jour user
 }
 
 /**
