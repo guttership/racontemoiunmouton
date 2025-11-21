@@ -60,24 +60,26 @@ export default function Home() {
         }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        // Si erreur de limite premium
-        if (response.status === 403 && data.requiresPremium) {
-          setShowPremiumBanner(true);
-          setDaysUntilNext(data.daysUntilNext || 0);
-          return;
-        }
-        // Si erreur de limite anonyme
-        if (response.status === 403 && data.requiresAccount) {
-          setShowAccountBanner(true);
-          setDaysUntilNext(data.daysUntilNext || 0);
-          return;
+        const data = await response.json();
+        
+        // Si erreur de limite (403)
+        if (response.status === 403) {
+          if (data.requiresPremium) {
+            setShowPremiumBanner(true);
+            setDaysUntilNext(data.daysUntilNext || 0);
+            return;
+          }
+          if (data.requiresAccount) {
+            setShowAccountBanner(true);
+            setDaysUntilNext(data.daysUntilNext || 0);
+            return;
+          }
         }
         throw new Error(`Erreur lors de la génération: ${response.status}`);
       }
 
+      const data = await response.json();
       setGeneratedStory(data.story);
     } catch (error) {
       console.error('Erreur:', error);
