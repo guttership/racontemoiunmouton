@@ -36,6 +36,8 @@ export default function Home() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedStory, setGeneratedStory] = useState<string>('');
   const [showPremiumBanner, setShowPremiumBanner] = useState(false);
+  const [showAccountBanner, setShowAccountBanner] = useState(false);
+  const [daysUntilNext, setDaysUntilNext] = useState<number>(0);
 
   const scrollToCreator = () => {
     creatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -44,6 +46,7 @@ export default function Home() {
   const generateStory = async () => {
     setIsGenerating(true);
     setShowPremiumBanner(false);
+    setShowAccountBanner(false);
     try {
       const response = await fetch('/api/generate-story', {
         method: 'POST',
@@ -63,6 +66,13 @@ export default function Home() {
         // Si erreur de limite premium
         if (response.status === 403 && data.requiresPremium) {
           setShowPremiumBanner(true);
+          setDaysUntilNext(data.daysUntilNext || 0);
+          return;
+        }
+        // Si erreur de limite anonyme
+        if (response.status === 403 && data.requiresAccount) {
+          setShowAccountBanner(true);
+          setDaysUntilNext(data.daysUntilNext || 0);
           return;
         }
         throw new Error(`Erreur lors de la génération: ${response.status}`);
@@ -155,6 +165,34 @@ export default function Home() {
         {showPremiumBanner && (
           <div className="max-w-3xl mx-auto px-4 mb-8">
             <PremiumBanner />
+          </div>
+        )}
+
+        {/* Account Banner pour utilisateurs anonymes */}
+        {showAccountBanner && (
+          <div className="max-w-3xl mx-auto px-4 mb-8">
+            <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl p-6 shadow-lg">
+              <h3 className="text-xl font-bold mb-2">
+                {t('accountRequired') || 'Créez un compte gratuit'}
+              </h3>
+              <p className="mb-4">
+                {t('accountLimitMessage') || `Vous avez atteint la limite de 1 histoire tous les 5 jours pour les visiteurs. Créez un compte gratuit pour continuer ! (${daysUntilNext} jour${daysUntilNext > 1 ? 's' : ''} restant${daysUntilNext > 1 ? 's' : ''})`}
+              </p>
+              <div className="flex gap-3">
+                <Button
+                  onClick={() => window.location.href = `/${locale}/auth/signup`}
+                  className="bg-white text-orange-600 hover:bg-gray-100"
+                >
+                  {t('createAccount') || 'Créer un compte'}
+                </Button>
+                <Button
+                  onClick={() => window.location.href = `/${locale}/auth/signin`}
+                  className="bg-orange-700 text-white hover:bg-orange-800"
+                >
+                  {t('signIn') || 'Se connecter'}
+                </Button>
+              </div>
+            </div>
           </div>
         )}
 
