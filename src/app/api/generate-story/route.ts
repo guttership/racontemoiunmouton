@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
             { 
               error: 'Story limit reached',
               requiresPremium: true,
-              daysRemaining: limitCheck.daysUntilNext
+              daysUntilNext: limitCheck.daysUntilNext
             },
             { status: 403 }
           );
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
           { 
             error: 'Anonymous limit reached',
             requiresAccount: true,
-            daysRemaining: limitCheck.daysUntilNext
+            daysUntilNext: limitCheck.daysUntilNext
           },
           { status: 403 }
         );
