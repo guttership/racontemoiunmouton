@@ -81,8 +81,7 @@ export async function POST(request: NextRequest) {
         setting: storyParams.environment,
         number: storyParams.characterCount,
         locale: storyParams.locale,
-        title: story.title,
-        content: story.content,
+        content: story,
       });
     } else {
       // Anonyme : juste enregistrer l'IP et la date
