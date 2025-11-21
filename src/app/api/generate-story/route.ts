@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { StoryParams } from '@/lib/gemini';
 import { auth } from '@/auth';
-import { checkStoryLimit } from '@/lib/story-limit';
+import { checkStoryLimit, checkAnonymousStoryLimit } from '@/lib/story-limit';
 
 export async function POST(request: NextRequest) {
   try {
     const session = await auth();
     const body = await request.json();
     
-    // Vérifier la limite d'histoires (sauf pour les utilisateurs premium)
+    // Vérifier la limite d'histoires
     if (session?.user) {
       // Utilisateur connecté
       if (!session.user.isPremium) {
@@ -25,8 +25,22 @@ export async function POST(request: NextRequest) {
         }
       }
     } else {
-      // Utilisateur anonyme - pas de limitation pour le moment
-      // TODO: Implémenter limitation par IP si nécessaire
+      // Utilisateur anonyme - limite de 1 par jour
+      const ip = request.headers.get('x-forwarded-for') || 
+                 request.headers.get('x-real-ip') || 
+                 'unknown';
+      
+      const limitCheck = await checkAnonymousStoryLimit(ip);
+      if (!limitCheck.canGenerate) {
+        return NextResponse.json(
+          { 
+            error: 'Anonymous limit reached',
+            requiresAccount: true,
+            hoursRemaining: limitCheck.hoursUntilNext
+          },
+          { status: 403 }
+        );
+      }
     }
     
     const storyParams: StoryParams = {
