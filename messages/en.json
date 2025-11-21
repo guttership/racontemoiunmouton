@@ -10,7 +10,11 @@
     "newStory": "New story",
     "backToCreation": "Create a new story",
     "storyTitle": "Your Magical Story",
-    "storySubtitle": "A unique creation for your child"
+    "storySubtitle": "A unique creation for your child",
+    "accountRequired": "Create a free account",
+    "accountLimitMessage": "You have reached the limit of 1 story every 5 days for visitors. Create a free account to continue!",
+    "createAccount": "Create account",
+    "signIn": "Sign in"
   },
   "StoryCreation": {
     "step": "Step {step} of {total}",

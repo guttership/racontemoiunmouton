@@ -10,7 +10,11 @@
     "newStory": "Nouvelle histoire",
     "backToCreation": "Créer une nouvelle histoire",
     "storyTitle": "Ton histoire magique",
-    "storySubtitle": "Une création unique pour toi"
+    "storySubtitle": "Une création unique pour toi",
+    "accountRequired": "Créez un compte gratuit",
+    "accountLimitMessage": "Vous avez atteint la limite de 1 histoire tous les 5 jours pour les visiteurs. Créez un compte gratuit pour continuer !",
+    "createAccount": "Créer un compte",
+    "signIn": "Se connecter"
   },
   "StoryCreation": {
     "step": "Étape {step} sur {total}",

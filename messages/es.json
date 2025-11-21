@@ -9,8 +9,12 @@
     "subtitle": "Crea historias mágicas personalizadas para tus hijos",
     "newStory": "Nueva historia",
     "backToCreation": "Crear una nueva historia",
-    "storyTitle": "Tu Historia Mágica",
-    "storySubtitle": "Una creación única para tu hijo/a"
+    "storyTitle": "Tu historia mágica",
+    "storySubtitle": "Una creación única para ti",
+    "accountRequired": "Crea una cuenta gratis",
+    "accountLimitMessage": "Has alcanzado el límite de 1 historia cada 5 días para visitantes. ¡Crea una cuenta gratis para continuar!",
+    "createAccount": "Crear cuenta",
+    "signIn": "Iniciar sesión"
   },
   "StoryCreation": {
     "step": "Paso {step} de {total}",

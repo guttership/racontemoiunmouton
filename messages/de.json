@@ -8,9 +8,13 @@
     "title": "Erzähl mir ein Schaf",
     "subtitle": "Erstelle magische personalisierte Geschichten für deine Kinder",
     "newStory": "Neue Geschichte",
-    "backToCreation": "Neue Geschichte erstellen",
-    "storyTitle": "Deine Magische Geschichte",
-    "storySubtitle": "Eine einzigartige Kreation für dein Kind"
+    "backToCreation": "Eine neue Geschichte erstellen",
+    "storyTitle": "Deine magische Geschichte",
+    "storySubtitle": "Eine einzigartige Kreation für dich",
+    "accountRequired": "Erstelle ein kostenloses Konto",
+    "accountLimitMessage": "Sie haben das Limit von 1 Geschichte alle 5 Tage für Besucher erreicht. Erstellen Sie ein kostenloses Konto, um fortzufahren!",
+    "createAccount": "Konto erstellen",
+    "signIn": "Anmelden"
   },
   "StoryCreation": {
     "step": "Schritt {step} von {total}",
