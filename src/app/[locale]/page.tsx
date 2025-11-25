@@ -81,7 +81,7 @@ export default function Home() {
     };
 
     checkLimit();
-  }, [session, locale, isCheckingLimit]);
+  }, [session, locale]);
 
   const scrollToCreator = () => {
     creatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
