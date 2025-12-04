@@ -1,0 +1,8 @@
+# ads.txt for racontemoiunmouton.fr / tellmeasheep.com
+# This file declares authorized digital sellers
+
+# Google AdSense
+google.com, pub-1944732612792038, DIRECT, f08c47fec0942fa0
+
+# Si vous utilisez d'autres plateformes publicitaires, ajoutez-les ici
+# Format: <domain>, <publisher_id>, <relationship>, <certification_authority_id>
