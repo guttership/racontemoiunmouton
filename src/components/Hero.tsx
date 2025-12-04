@@ -60,7 +60,7 @@ export function Hero({ onStartCreating }: { onStartCreating?: () => void }) {
             onClick={handleGetStarted}
             className="bg-[#ff7519] hover:bg-[#e66610] text-white font-clash-grotesk px-8 py-6 rounded-2xl text-lg shadow-lg transition-all"
           >
-            {session?.user ? "Créer une histoire" : "Commencer gratuitement"}
+            {session?.user ? t('newStory') : t('getStarted')}
           </Button>
           
           <Button
@@ -69,13 +69,13 @@ export function Hero({ onStartCreating }: { onStartCreating?: () => void }) {
             className="font-clash-grotesk px-8 py-6 rounded-2xl text-lg border-2 hover:border-[#ff7519] hover:text-[#ff7519] transition-all"
           >
             <Crown className="w-5 h-5 mr-2" />
-            Voir les offres Premium
+            {t('seePricing')}
           </Button>
         </div>
 
         {/* Note prix */}
         <p className="text-sm text-gray-600 dark:text-gray-400 font-clash-grotesk">
-          Essai gratuit - À partir de 2,99€/mois - Sans engagement
+          {t('pricingNote')}
         </p>
       </div>
     </div>

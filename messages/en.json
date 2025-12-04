@@ -14,7 +14,10 @@
     "accountRequired": "Create a free account",
     "accountLimitMessage": "You have reached the limit of 1 story every 5 days for visitors. Create a free account to continue!",
     "createAccount": "Create account",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "getStarted": "Get started for free",
+    "seePricing": "See Premium plans",
+    "pricingNote": "Free trial - From €2.99/month - No commitment"
   },
   "StoryCreation": {
     "step": "Step {step} of {total}",
