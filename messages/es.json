@@ -14,7 +14,10 @@
     "accountRequired": "Crea una cuenta gratis",
     "accountLimitMessage": "Has alcanzado el límite de 1 historia cada 5 días para visitantes. ¡Crea una cuenta gratis para continuar!",
     "createAccount": "Crear cuenta",
-    "signIn": "Iniciar sesión"
+    "signIn": "Iniciar sesión",
+    "getStarted": "Comenzar gratis",
+    "seePricing": "Ver planes Premium",
+    "pricingNote": "Prueba gratuita - Desde 2,99€/mes - Sin compromiso"
   },
   "StoryCreation": {
     "step": "Paso {step} de {total}",

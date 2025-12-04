@@ -14,7 +14,10 @@
     "accountRequired": "Erstelle ein kostenloses Konto",
     "accountLimitMessage": "Sie haben das Limit von 1 Geschichte alle 5 Tage für Besucher erreicht. Erstellen Sie ein kostenloses Konto, um fortzufahren!",
     "createAccount": "Konto erstellen",
-    "signIn": "Anmelden"
+    "signIn": "Anmelden",
+    "getStarted": "Kostenlos starten",
+    "seePricing": "Premium-Pläne ansehen",
+    "pricingNote": "Kostenlose Testversion - Ab 2,99€/Monat - Keine Verpflichtung"
   },
   "StoryCreation": {
     "step": "Schritt {step} von {total}",
