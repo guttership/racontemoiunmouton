@@ -7,7 +7,7 @@
   <!-- Page d'accueil FR -->
   <url>
     <loc>https://racontemoiunmouton.fr/fr</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2025-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr" />
@@ -16,16 +16,28 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de" />
   </url>
 
+  <!-- Page Premium FR -->
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr/premium</loc>
+    <lastmod>2025-12-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/premium" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/premium" />
+  </url>
+
   <!-- Mentions légales FR -->
   <url>
     <loc>https://racontemoiunmouton.fr/fr/mentions-legales</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2025-12-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/mentions-legales" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/mentions-legales" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/mentions-legales" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/legal" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/legal" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/legal" />
   </url>
 
 </urlset>
