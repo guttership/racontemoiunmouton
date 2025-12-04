@@ -87,7 +87,7 @@ export function PremiumBanner() {
             {t("monthly")}
           </p>
           <p className="text-4xl font-courgette text-[#ff7519] mb-1">
-            2,99€
+            {t("price", { price: "2.99" })}
           </p>
           <p className="text-gray-600 dark:text-gray-300">
             {t("perMonth")}
@@ -109,7 +109,7 @@ export function PremiumBanner() {
             {t("yearly")}
           </p>
           <p className="text-4xl font-courgette text-[#ff7519] mb-1">
-            29,90€
+            {t("price", { price: "29.90" })}
           </p>
           <p className="text-gray-600 dark:text-gray-300">
             {t("perYear")}
