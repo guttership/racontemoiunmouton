@@ -15,7 +15,7 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      checks: ["nonce"], // Utilise nonce (côté serveur) au lieu de state/PKCE (cookies)
+      checks: [], // Désactive toutes les vérifications OAuth (PKCE, state, nonce)
       authorization: {
         params: {
           prompt: "consent",
