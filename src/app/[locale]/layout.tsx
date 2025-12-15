@@ -42,10 +42,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locales[locale as keyof typeof locales],
       type: 'website',
       images: locale === 'en' ? [
-        { url: `${baseUrl}/og-image_2400.webp`, width: 2400, height: 1260, alt: 'Tell Me a Sheep — AI generated bedtime stories — save time and imagination!' },
-        { url: `${baseUrl}/og-image_2400.png`, width: 2400, height: 1260, alt: 'Tell Me a Sheep — AI generated bedtime stories — save time and imagination!' },
         { url: `${baseUrl}/og-image_1200x630.webp`, width: 1200, height: 630, alt: 'Tell Me a Sheep — AI generated bedtime stories — save time and imagination!' },
-        { url: `${baseUrl}/og-image_1200x630.png`, width: 1200, height: 630, alt: 'Tell Me a Sheep — AI generated bedtime stories — save time and imagination!' },
+        { url: `${baseUrl}/og-image_2400.webp`, width: 2400, height: 1260, alt: 'Tell Me a Sheep — AI generated bedtime stories — save time and imagination!' },
       ] : [
         { url: `${baseUrl}/logo_mouton.svg`, width: 512, height: 512, alt: 'Logo Raconte-moi un mouton' },
       ],
@@ -54,7 +52,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
-      images: locale === 'en' ? [`${baseUrl}/og-image_1200x675.webp`, `${baseUrl}/og-image_1200x675.png`] : [`${baseUrl}/logo_mouton.svg`],
+      images: locale === 'en' ? [`${baseUrl}/og-image_1200x675.webp`] : [`${baseUrl}/logo_mouton.svg`],
     },
     robots: {
       index: true,
