@@ -36,6 +36,9 @@ export default function Footer() {
               <path d="M12 16v-4" />
             </svg>
           </a>
+          <a href="https://www.producthunt.com/products/tell-me-a-sheep?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-tell-me-a-sheep" target="_blank" rel="noopener noreferrer" aria-label="Tell Me a Sheep on Product Hunt" className="hidden md:inline-block">
+            <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1050623&theme=light&t=1765836660454" alt="Tell Me a Sheep - Create and narrate magical, personalized tales | Product Hunt" style={{ width: '250px', height: '54px' }} width={250} height={54} />
+          </a>
         </div>
         <div className="text-xs text-gray-400 dark:text-gray-500 text-center md:text-right">
           &copy; {new Date().getFullYear()} Yann Gutter
