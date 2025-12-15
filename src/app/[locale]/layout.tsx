@@ -43,18 +43,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       images: [
         {
-          url: `${baseUrl}/logo_mouton.svg`,
-          width: 512,
-          height: 512,
-          alt: 'Logo Raconte-moi un mouton',
+          url: locale === 'en' ? `${baseUrl}/og-image-dark.svg` : `${baseUrl}/logo_mouton.svg`,
+          width: locale === 'en' ? 1200 : 512,
+          height: locale === 'en' ? 630 : 512,
+          alt: locale === 'en' ? 'Tell Me a Sheep - Personalized AI bedtime stories for kids' : 'Logo Raconte-moi un mouton',
         },
       ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
-      images: [`${baseUrl}/logo_mouton.svg`],
+      images: locale === 'en' ? [`${baseUrl}/og-image-dark.svg`] : [`${baseUrl}/logo_mouton.svg`],
     },
     robots: {
       index: true,

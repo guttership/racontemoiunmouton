@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Tell Me a Sheep - Personalized AI bedtime stories for kids">
+  <defs>
+    <style>
+      @import url('/styles/clash-grotesk.css');
+      .bg { fill: #0b1020; }
+      .title { font-family: 'Clash Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-weight: 700; font-size: 56px; fill: #ffffff; }
+      .subtitle { font-family: 'Clash Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-weight: 400; font-size: 24px; fill: #cbd5e1; }
+      .url { font-family: 'Clash Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-weight: 600; font-size: 20px; fill: #9aa4b2; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1200" height="630" rx="16" />
+
+  <!-- Left: circular white badge with embedded logo (adapted from /public/logo_mouton.svg) -->
+  <g transform="translate(80,115)">
+    <circle cx="120" cy="120" r="120" fill="#111827" stroke="#ffffff" stroke-opacity="0.06" stroke-width="2" />
+    <!-- Inline simplified logo (fills with white and dark accents) -->
+    <g transform="translate(38,14) scale(0.85)">
+      <circle cx="153.44" cy="190.55" r="144.44" fill="#ffffff"/>
+      <g transform="translate(-18,-18)">
+        <path fill="#282425" d="M181.9,175.41s-14.82,7.29-26.82,7.29-28.46-7.29-28.46-7.29c0,0,16.7,21.17,28.46,21.17s26.82-21.17,26.82-21.17Z"/>
+        <path fill="#282425" d="M235.77,102.49c-18.58-36.23-73.39-75.98-73.39-75.98h-17.88s-54.81,39.52-73.39,75.75c-18.58,36.23-47.28,43.28-47.28,43.28,0,0,17.17,12.94,53.4-5.18,28.23-14.11,50.81-67.28,61.16-95.51-8.94,26.35-23.99,73.86-23.99,88.68,0,20.94,7.06,44.93,39.05,44.93s39.05-24.23,39.05-44.93c0-14.82-15.06-62.34-23.99-88.68,10.35,28.46,32.93,81.63,61.16,95.51,36.23,18.11,53.4,5.18,53.4,5.18,0,0-28.7-6.82-47.28-43.05ZM148.03,164.59c-1.41,0-3.06-.24-4.47-.71-1.18-.24-2.35-.94-3.53-1.65-.94-.71-1.88-2.12-3.06-3.06-2.12-1.65-4.47-3.06-7.06-4.23-.94-.47-1.65-.71-2.59-1.18l-.94-.47v-.47l1.18-.24c.94-.24,1.88-.24,3.06-.24,1.41,0,2.82.24,4.23.47,1.65.24,3.29.71,4.7,1.41,1.65.47,3.29,1.18,4.7,1.88,1.41.94,2.35,2.12,3.06,3.29.71,1.41,1.18,3.06,1.18,4.7l-.47.47ZM172.02,152.83c1.41-.24,2.82-.47,4.23-.47.94,0,1.88,0,3.06.24l1.18.24-.24.71-.94.47c-.94.24-1.88.71-2.59,1.18-1.18.47-2.35,1.18-3.29,1.88-1.18.71-2.35,1.41-3.53,2.35s-2.12,2.12-3.06,2.82c-.94.71-2.12,1.18-3.53,1.65-1.41.47-2.82.71-4.47.71l-.47-.47c0-1.65.47-3.29,1.18-4.7.71-1.41,1.65-2.59,2.82-3.29,1.41-.71,3.06-1.41,4.7-1.88,1.65-.71,3.29-.94,4.94-1.41Z"/>
+        <!-- ears and details -->
+        <g>
+          <g>
+            <circle fill="#ffffff" cx="189.47" cy="53.78" r="35.02" transform="translate(86.12 221.43) rotate(-74.2)"/>
+            <circle fill="#ffffff" cx="122.25" cy="53.78" r="35.02"/>
+            <circle fill="#282425" cx="122.25" cy="53.78" r="8.49"/>
+            <circle fill="#282425" cx="189.47" cy="53.78" r="8.49" transform="translate(100.83 229.65) rotate(-79.1)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+    </g>
+  </g>
+
+  </g>
+  </g>
+  </g>
+  </g>
+  </g>
+
+  <!-- Right side texts -->
+  <g transform="translate(320,120)">
+    <text x="0" y="60" class="title">Tell Me a Sheep</text>
+    <text x="0" y="110" class="subtitle">Personalized AI bedtime stories for kids</text>
+    <text x="0" y="150" class="url">tellmeasheep.com</text>
+  </g>
+
+  <!-- Decorative subtle stars -->
+  <g fill="#ffffff" fill-opacity="0.06">
+    <circle cx="980" cy="80" r="2" />
+    <circle cx="1050" cy="130" r="1.6" />
+    <circle cx="900" cy="200" r="1.8" />
+    <circle cx="760" cy="80" r="1.4" />
+  </g>
+</svg>
