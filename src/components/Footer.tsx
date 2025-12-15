@@ -36,6 +36,12 @@ export default function Footer() {
               <path d="M12 16v-4" />
             </svg>
           </a>
+          <a href="https://x.com/tellmeasheep" target="_blank" rel="noopener" aria-label="Tell Me a Sheep on X" className="hover:text-[#ff7519]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 dark:text-gray-400 hover:text-[#ff7519]">
+              <path d="M18 6L6 18" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </a>
           <a href="https://www.producthunt.com/products/tell-me-a-sheep?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-tell-me-a-sheep" target="_blank" rel="noopener noreferrer" aria-label="Tell Me a Sheep on Product Hunt" className="inline-block">
             <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1050623&theme=light&t=1765836660454" alt="Tell Me a Sheep - Create and narrate magical, personalized tales | Product Hunt" className="w-[160px] md:w-[250px] h-auto" width={250} height={54} />
           </a>
