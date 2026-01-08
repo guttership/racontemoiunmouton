@@ -25,7 +25,7 @@ L'implémentation utilise directement l'API REST de Google Cloud Speech-to-Text 
 
 Déjà configurées dans `.env.local` :
 ```
-GOOGLE_AI_API_KEY=AIzaSyDvlpEPsShwbS9oyf_NGbevuDVA-eYuiuU
+GOOGLE_AI_API_KEY=***************************************
 ```
 
 ## 🎤 Comment ça fonctionne
