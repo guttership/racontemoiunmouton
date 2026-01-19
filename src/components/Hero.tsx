@@ -12,7 +12,6 @@ export function Hero({ onStartCreating }: { onStartCreating?: () => void }) {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("HomePage");
-  const tPremium = useTranslations("Premium");
 
   const handleGetStarted = () => {
     if (session?.user) {

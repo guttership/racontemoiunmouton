@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { PremiumBanner } from "@/components/PremiumBanner";
-import { Crown } from "lucide-react";
 import { ModernBackground } from "@/components/illustrations/OrganicShapes";
 import Image from "next/image";
 

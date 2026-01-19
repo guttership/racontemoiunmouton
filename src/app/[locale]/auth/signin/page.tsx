@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { Suspense } from "react";
 import { SignInForm } from "@/components/auth/SignInForm";
 import { ModernBackground } from "@/components/illustrations/OrganicShapes";
 
@@ -41,9 +40,7 @@ export default async function SignInPage({
               </p>
             </div>
 
-            <Suspense fallback={<div className="text-center">Chargement...</div>}>
-              <SignInForm />
-            </Suspense>
+            <SignInForm />
           </div>
         </div>
       </div>

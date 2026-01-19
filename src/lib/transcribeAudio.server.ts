@@ -158,7 +158,7 @@ async function transcribeWithAlternativeEncoding(
       success: true,
       transcript: transcript.trim(),
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: 'Erreur encodage alternatif',

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Mail, Lock, Loader2 } from "lucide-react";
 
-export function SignInForm() {
+function SignInFormContent() {
   const t = useTranslations("Auth");
   const locale = useLocale();
   const router = useRouter();
@@ -180,5 +180,13 @@ export function SignInForm() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export function SignInForm() {
+  return (
+    <Suspense fallback={<div className="text-center">Chargement...</div>}>
+      <SignInFormContent />
+    </Suspense>
   );
 }
