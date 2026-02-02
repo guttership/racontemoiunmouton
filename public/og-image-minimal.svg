@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Tell Me a Sheep - AI generated bedtime stories - save time and imagination">
+  <title>Tell Me a Sheep — OG image</title>
+  <desc>AI generated bedtime stories — save time and imagination</desc>
+
+  <defs>
+    <style type="text/css"><![CDATA[
+      @font-face {
+        font-family: 'Courgette';
+        src: url('https://racontemoiunmouton.dmum.eu/font/Courgette-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'ClashGrotesk-Semibold';
+        src: url('https://racontemoiunmouton.dmum.eu/font/ClashGrotesk-Semibold.woff2') format('woff2'),
+             url('https://racontemoiunmouton.dmum.eu/font/ClashGrotesk-Semibold.woff') format('woff');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+      .bg { fill: #2a2a29; }
+      .title { font-family: 'Courgette', serif; font-size: 64px; fill: #ff7519; }
+      .tagline { font-family: 'ClashGrotesk-Semibold', sans-serif; font-size: 28px; fill: #ffffff; }
+      .site { font-family: 'ClashGrotesk-Semibold', sans-serif; font-size: 20px; fill: #9aa4b2; }
+    ]]></style>
+  </defs>
+
+  <!-- Background matching site dark -->
+  <rect class="bg" width="1200" height="630" rx="18" />
+
+  <!-- Left: logo (kept large & centered vertically) -->
+  <g transform="translate(82,90)">
+    <circle cx="158" cy="158" r="148" fill="#0f1114" opacity="0.06" />
+    <image href="/logo_mouton.svg" x="28" y="28" width="260" height="260" preserveAspectRatio="xMidYMid meet" aria-hidden="true" />
+  </g>
+
+  <!-- Right side: site title + short message -->
+  <g transform="translate(380,200)">
+    <text x="0" y="0" class="title">Tell Me a Sheep</text>
+    <text x="0" y="74" class="tagline">AI generated bedtime stories</text>
+    <text x="0" y="106" class="tagline">save time and imagination!</text>
+    <text x="0" y="140" class="site">tellmeasheep.com</text>
+  </g>
+
+  <!-- Decorative tiny stars -->
+  <g fill="#ffffff" fill-opacity="0.04">
+    <circle cx="960" cy="80" r="2" />
+    <circle cx="1030" cy="140" r="1.6" />
+    <circle cx="900" cy="220" r="1.8" />
+  </g>
+
+</svg>

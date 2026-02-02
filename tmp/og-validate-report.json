@@ -1,0 +1,145 @@
+{
+  "checkedAt": "2025-12-15T23:35:29.484Z",
+  "results": [
+    {
+      "locale": "fr",
+      "url": "http://localhost:3000/",
+      "status": 200,
+      "ogImage": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+      "twitterImage": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+      "images": [
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/svg+xml",
+            "width": 307,
+            "height": 335,
+            "size": 3268
+          }
+        },
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/svg+xml",
+            "width": 307,
+            "height": 335,
+            "size": 3268
+          }
+        }
+      ],
+      "fbRescrape": {
+        "ok": false,
+        "reason": "no_token"
+      }
+    },
+    {
+      "locale": "en",
+      "url": "http://localhost:3000/en",
+      "status": 200,
+      "ogImage": "https://racontemoiunmouton.dmum.eu/og-image_1200x630.webp",
+      "twitterImage": "https://racontemoiunmouton.dmum.eu/og-image_1200x675.webp",
+      "images": [
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/og-image_1200x630.webp",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/webp",
+            "width": 1200,
+            "height": 630,
+            "size": 26452
+          }
+        },
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/og-image_1200x675.webp",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/webp",
+            "width": 1200,
+            "height": 676,
+            "size": 27200
+          }
+        }
+      ],
+      "fbRescrape": {
+        "ok": false,
+        "reason": "no_token"
+      }
+    },
+    {
+      "locale": "es",
+      "url": "http://localhost:3000/es",
+      "status": 200,
+      "ogImage": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+      "twitterImage": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+      "images": [
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/svg+xml",
+            "width": 307,
+            "height": 335,
+            "size": 3268
+          }
+        },
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/svg+xml",
+            "width": 307,
+            "height": 335,
+            "size": 3268
+          }
+        }
+      ],
+      "fbRescrape": {
+        "ok": false,
+        "reason": "no_token"
+      }
+    },
+    {
+      "locale": "de",
+      "url": "http://localhost:3000/de",
+      "status": 200,
+      "ogImage": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+      "twitterImage": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+      "images": [
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/svg+xml",
+            "width": 307,
+            "height": 335,
+            "size": 3268
+          }
+        },
+        {
+          "url": "https://racontemoiunmouton.dmum.eu/logo_mouton.svg",
+          "check": {
+            "ok": true,
+            "status": 200,
+            "contentType": "image/svg+xml",
+            "width": 307,
+            "height": 335,
+            "size": 3268
+          }
+        }
+      ],
+      "fbRescrape": {
+        "ok": false,
+        "reason": "no_token"
+      }
+    }
+  ]
+}
