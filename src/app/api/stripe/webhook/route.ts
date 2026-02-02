@@ -4,9 +4,13 @@ import { prisma } from "@/lib/prisma";
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2025-10-29.clover",
+    apiVersion: "2024-12-18.acacia",
   });
 }
+
+// Désactiver le body parser de Next.js pour les webhooks Stripe
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   const stripe = getStripe();
