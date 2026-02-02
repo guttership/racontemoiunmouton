@@ -35,6 +35,19 @@ export async function POST(req: NextRequest) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
+        
+        // Filtre pour ignorer les événements des autres projets
+        const isMyProjectEvent = 
+          session.success_url?.includes("racontemoiunmouton.fr") ||
+          session.success_url?.includes("tellmeasheep.com") ||
+          session.cancel_url?.includes("racontemoiunmouton.fr") ||
+          session.cancel_url?.includes("tellmeasheep.com");
+
+        if (!isMyProjectEvent) {
+          console.log("[WEBHOOK] Ignoring event from other project");
+          return NextResponse.json({ received: true });
+        }
+        
         const userId = session.metadata?.userId;
 
         if (userId && session.customer) {
