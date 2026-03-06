@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://racontemoiunmouton.fr';
   return {
     rules: [
       {
@@ -9,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
     ],
-    sitemap: 'https://racontemoiunmouton.dmum.eu/sitemap.xml',
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
+
   <!-- Sitemap pour tellmeasheep.com - ENGLISH, ESPAÑOL, DEUTSCH -->
-  
+
   <!-- Page d'accueil EN -->
   <url>
     <loc>https://tellmeasheep.com/en</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2026-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr" />
     <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en" />
     <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es" />
@@ -19,9 +20,10 @@
   <!-- Page d'accueil ES -->
   <url>
     <loc>https://tellmeasheep.com/es</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2026-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr" />
     <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en" />
     <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es" />
@@ -31,21 +33,62 @@
   <!-- Page d'accueil DE -->
   <url>
     <loc>https://tellmeasheep.com/de</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2026-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr" />
     <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en" />
     <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es" />
     <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de" />
   </url>
 
+  <!-- Page Premium EN -->
+  <url>
+    <loc>https://tellmeasheep.com/en/premium</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/premium" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/premium" />
+  </url>
+
+  <!-- Page Premium ES -->
+  <url>
+    <loc>https://tellmeasheep.com/es/premium</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/premium" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/premium" />
+  </url>
+
+  <!-- Page Premium DE -->
+  <url>
+    <loc>https://tellmeasheep.com/de/premium</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/premium" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/premium" />
+  </url>
+
   <!-- Mentions légales EN -->
   <url>
     <loc>https://tellmeasheep.com/en/mentions-legales</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2026-03-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/mentions-legales" />
@@ -55,9 +98,10 @@
   <!-- Mentions légales ES -->
   <url>
     <loc>https://tellmeasheep.com/es/mentions-legales</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2026-03-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/mentions-legales" />
@@ -67,9 +111,10 @@
   <!-- Mentions légales DE -->
   <url>
     <loc>https://tellmeasheep.com/de/mentions-legales</loc>
-    <lastmod>2025-10-20</lastmod>
+    <lastmod>2026-03-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/mentions-legales" />
     <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/mentions-legales" />
