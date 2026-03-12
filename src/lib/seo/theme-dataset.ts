@@ -4,6 +4,11 @@ export type ProgrammaticLocale = 'fr' | 'en' | 'es' | 'de';
 export type ContentLocale = 'fr' | 'en';
 
 export type ThemeId =
+  | 'forestAnimals'
+  | 'farmAnimals'
+  | 'seaAnimals'
+  | 'astronauts'
+  | 'witches'
   | 'dinosaur'
   | 'princess'
   | 'dragon'
@@ -68,6 +73,36 @@ function withDerivedSlugs(
 }
 
 export const STORY_THEMES: ThemeEntry[] = [
+  withDerivedSlugs(
+    'forestAnimals',
+    ['farmAnimals', 'seaAnimals', 'jungle', 'fairy'],
+    { name: 'animaux de la foret', searchQuery: 'histoire animaux foret enfant', slug: 'histoire-animaux-foret-enfant' },
+    { name: 'forest animals', searchQuery: 'forest animals bedtime story', slug: 'forest-animals-bedtime-story' }
+  ),
+  withDerivedSlugs(
+    'farmAnimals',
+    ['forestAnimals', 'seaAnimals', 'jungle', 'dinosaur'],
+    { name: 'animaux de la ferme', searchQuery: 'histoire animaux ferme enfant', slug: 'histoire-animaux-ferme-enfant' },
+    { name: 'farm animals', searchQuery: 'farm animals bedtime story', slug: 'farm-animals-bedtime-story' }
+  ),
+  withDerivedSlugs(
+    'seaAnimals',
+    ['farmAnimals', 'forestAnimals', 'mermaid', 'pirate'],
+    { name: 'animaux marins', searchQuery: 'histoire animaux marins enfant', slug: 'histoire-animaux-marins-enfant' },
+    { name: 'sea animals', searchQuery: 'sea animals bedtime story', slug: 'sea-animals-bedtime-story' }
+  ),
+  withDerivedSlugs(
+    'astronauts',
+    ['space', 'robot', 'superhero', 'dinosaur'],
+    { name: 'astronautes', searchQuery: 'histoire astronautes enfant', slug: 'histoire-astronautes-enfant' },
+    { name: 'astronauts', searchQuery: 'astronaut bedtime story', slug: 'astronaut-bedtime-story' }
+  ),
+  withDerivedSlugs(
+    'witches',
+    ['fairy', 'dragon', 'princess', 'superhero'],
+    { name: 'sorcieres gentilles', searchQuery: 'histoire sorciere gentille enfant', slug: 'histoire-sorciere-gentille-enfant' },
+    { name: 'kind witches', searchQuery: 'kind witch bedtime story', slug: 'kind-witch-bedtime-story' }
+  ),
   withDerivedSlugs(
     'dinosaur',
     ['dragon', 'robot', 'jungle', 'space'],
