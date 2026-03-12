@@ -5,6 +5,17 @@ type FaqItem = {
   answer: string;
 };
 
+type ThemeCopyVariant = {
+  frUniverse: string;
+  frSleepBenefit: string;
+  frMiniMission: string;
+  frMoodWord: string;
+  enUniverse: string;
+  enSleepBenefit: string;
+  enMiniMission: string;
+  enMoodWord: string;
+};
+
 export type GeneratedSeoContent = {
   seoTitle: string;
   metaDescription: string;
@@ -23,28 +34,151 @@ export type GeneratedSeoContent = {
   backToHomeLabel: string;
 };
 
+const THEME_VARIANTS: Record<ThemeId, ThemeCopyVariant> = {
+  dinosaur: {
+    frUniverse: 'une vallee prehistorique pleine de traces geantes',
+    frSleepBenefit: 'canaliser son energie avant le coucher',
+    frMiniMission: 'retrouver un oeuf perdu avant la nuit',
+    frMoodWord: 'aventureux',
+    enUniverse: 'a prehistoric valley filled with giant footprints',
+    enSleepBenefit: 'channel bedtime energy into calm curiosity',
+    enMiniMission: 'find a lost egg before night falls',
+    enMoodWord: 'adventurous',
+  },
+  princess: {
+    frUniverse: 'un royaume doux entre chateau, jardin et etoiles',
+    frSleepBenefit: 'renforcer confiance et douceur en fin de journee',
+    frMiniMission: 'organiser un bal du soir pour remercier le village',
+    frMoodWord: 'rassurant',
+    enUniverse: 'a gentle kingdom of castles, gardens, and stars',
+    enSleepBenefit: 'build confidence and calm before sleep',
+    enMiniMission: 'prepare an evening ball to thank the village',
+    enMoodWord: 'reassuring',
+  },
+  dragon: {
+    frUniverse: 'des montagnes lumineuses surveillees par des dragons amis',
+    frSleepBenefit: 'transformer les peurs en courage tranquille',
+    frMiniMission: 'allumer la flamme du phare des nuages',
+    frMoodWord: 'courageux',
+    enUniverse: 'bright mountains watched by friendly dragons',
+    enSleepBenefit: 'turn bedtime fears into quiet courage',
+    enMiniMission: 'light the cloud lighthouse flame',
+    enMoodWord: 'brave',
+  },
+  unicorn: {
+    frUniverse: 'une foret pastel ou brillent des sentiers arc-en-ciel',
+    frSleepBenefit: 'apaiser les emotions et encourager la tendresse',
+    frMiniMission: 'reparer un pont de lumiere avant minuit',
+    frMoodWord: 'poetique',
+    enUniverse: 'a pastel forest crossed by rainbow paths',
+    enSleepBenefit: 'soothe emotions and encourage kindness',
+    enMiniMission: 'repair a bridge of light before midnight',
+    enMoodWord: 'dreamy',
+  },
+  pirate: {
+    frUniverse: 'une baie calme avec carte au tresor et bateau en bois',
+    frSleepBenefit: 'poser un cadre de jeu qui finit en douceur',
+    frMiniMission: 'suivre les etoiles pour retrouver une boussole doree',
+    frMoodWord: 'joueur',
+    enUniverse: 'a calm bay with a treasure map and wooden ship',
+    enSleepBenefit: 'give active imaginations a gentle landing',
+    enMiniMission: 'follow the stars to recover a golden compass',
+    enMoodWord: 'playful',
+  },
+  robot: {
+    frUniverse: 'une ville futuriste paisible aux lumieres douces',
+    frSleepBenefit: 'structurer le rituel du soir avec des reperes clairs',
+    frMiniMission: 'reprogrammer une luciole mecanique endormie',
+    frMoodWord: 'curieux',
+    enUniverse: 'a peaceful futuristic city of soft lights',
+    enSleepBenefit: 'bring clear bedtime structure for curious minds',
+    enMiniMission: 'reboot a sleepy mechanical firefly',
+    enMoodWord: 'curious',
+  },
+  fairy: {
+    frUniverse: 'un bois enchanté ou flottent des lanternes minuscules',
+    frSleepBenefit: 'creer une transition douce vers le silence',
+    frMiniMission: 'distribuer des graines de reves dans le village',
+    frMoodWord: 'delicat',
+    enUniverse: 'an enchanted grove full of tiny lanterns',
+    enSleepBenefit: 'create a soft transition into silence',
+    enMiniMission: 'deliver dream seeds across the village',
+    enMoodWord: 'gentle',
+  },
+  knight: {
+    frUniverse: 'une citadelle paisible protegee par des chevaliers bienveillants',
+    frSleepBenefit: 'valoriser entraide et sentiment de securite',
+    frMiniMission: 'garder la porte du matin jusqu au lever du soleil',
+    frMoodWord: 'noble',
+    enUniverse: 'a peaceful citadel protected by kind knights',
+    enSleepBenefit: 'support safety and teamwork at bedtime',
+    enMiniMission: 'guard the morning gate until sunrise',
+    enMoodWord: 'steady',
+  },
+  space: {
+    frUniverse: 'une station spatiale calme au-dessus des nuages',
+    frSleepBenefit: 'ouvrir l imagination tout en gardant un cadre apaisant',
+    frMiniMission: 'cartographier une etoile qui clignote faiblement',
+    frMoodWord: 'contemplatif',
+    enUniverse: 'a quiet space station above the clouds',
+    enSleepBenefit: 'expand imagination while keeping bedtime calm',
+    enMiniMission: 'map a dim blinking star',
+    enMoodWord: 'wonder-filled',
+  },
+  jungle: {
+    frUniverse: 'une jungle nocturne douce avec pluie fine et lucioles',
+    frSleepBenefit: 'detendre le corps grace a des images naturelles',
+    frMiniMission: 'aider un petit singe a retrouver son hamac',
+    frMoodWord: 'sensoriel',
+    enUniverse: 'a gentle night jungle with soft rain and fireflies',
+    enSleepBenefit: 'relax the body with calming natural imagery',
+    enMiniMission: 'help a little monkey find its hammock',
+    enMoodWord: 'sensory',
+  },
+  mermaid: {
+    frUniverse: 'un lagon paisible ou chantent les vagues lentes',
+    frSleepBenefit: 'installer un rythme lent ideal avant de dormir',
+    frMiniMission: 'ramener une perle de lune au recif',
+    frMoodWord: 'fluide',
+    enUniverse: 'a peaceful lagoon with slow singing waves',
+    enSleepBenefit: 'set a slower rhythm before sleep',
+    enMiniMission: 'return a moon pearl to the reef',
+    enMoodWord: 'flowing',
+  },
+  superhero: {
+    frUniverse: 'une ville endormie ou les heros veillent en secret',
+    frSleepBenefit: 'transformer l excitation en sentiment de protection',
+    frMiniMission: 'resoudre une panne de lumiere sans reveiller la ville',
+    frMoodWord: 'protecteur',
+    enUniverse: 'a sleepy city quietly watched by heroes',
+    enSleepBenefit: 'turn excitement into a sense of safety',
+    enMiniMission: 'fix a blackout without waking the city',
+    enMoodWord: 'protective',
+  },
+};
+
 function getFrenchIndefiniteArticle(themeName: string): 'un' | 'une' {
   const feminineThemes = new Set(['princesse', 'fee', 'sirene', 'licorne']);
   return feminineThemes.has(themeName.toLowerCase()) ? 'une' : 'un';
 }
 
-function buildFrenchIntro(themeName: string): string {
-  return `Vous cherchez une histoire du soir autour du theme ${themeName} pour apaiser le coucher de votre enfant ? Cette page vous aide a creer en quelques secondes un conte unique, adapte a son age, a ses envies et a son humeur du soir. Avec notre generateur d'histoires personnalisees, vous choisissez un univers, ajoutez des personnages, puis lancez la generation instantanee d'un recit doux et rassurant. Chaque histoire peut etre differente, meme avec le meme theme ${themeName}, pour renouveler le rituel du coucher sans effort. Vous pouvez aussi activer la narration audio afin d'ecouter l'histoire ensemble, a la maison ou en deplacement.`;
+function buildFrenchIntro(themeName: string, variant: ThemeCopyVariant): string {
+  return `Vous cherchez une histoire du soir sur le theme ${themeName} ? Cette page est pensee pour creer un rituel de coucher simple, utile et vraiment personnalise. Vous pouvez placer votre enfant dans ${variant.frUniverse}, choisir ses personnages preferes et adapter le ton selon son age. Le generateur produit en quelques secondes un recit unique qui aide a ${variant.frSleepBenefit}. Meme en gardant le meme theme ${themeName}, chaque generation change les details, les dialogues et la petite mission finale. Activez ensuite la narration audio pour ecouter l histoire ensemble, reduire les ecrans le soir et installer une routine ${variant.frMoodWord} et stable.`;
 }
 
-function buildEnglishIntro(themeName: string): string {
-  return `Looking for a ${themeName} bedtime story that feels fresh every night? This page helps you create a custom story in seconds, based on your child's age, interests, and evening mood. Our AI story generator lets you pick a theme, combine characters, and instantly produce a calm and engaging bedtime tale. Even with the same ${themeName} topic, each story can be different, so bedtime routines stay magical instead of repetitive. When you are ready, you can also enable audio narration to listen together and turn story time into a relaxing moment at home, during travel, or right before sleep.`;
+function buildEnglishIntro(themeName: string, variant: ThemeCopyVariant): string {
+  return `Looking for a ${themeName} bedtime story that does not feel repetitive? This page helps you generate tailored stories in seconds, based on age, interests, and evening mood. You can place your child in ${variant.enUniverse}, select favorite characters, and tune the tone for a calmer bedtime. Our generator creates new story variations every time, which helps families build routines that stay engaging night after night. The goal is practical: ${variant.enSleepBenefit}. When needed, switch on audio narration so story time becomes a quiet shared moment at home, during travel, or right before lights out.`;
 }
 
-function buildFrenchSample(themeName: string): string {
-  return `Ce soir-la, dans la vallee des ${themeName}, Luna decouvrit une petite lumiere doree cachee sous une feuille geante. En la touchant, elle entendit une voix douce: "Chaque enfant courageux peut inventer son propre chemin." Avec un sourire, Luna suivit la lumiere, aida un ami en difficulte et rentra sous les etoiles, fiere et rassuree. Dans son lit, elle ferma les yeux en murmurant: "Demain, j'inventerai encore une nouvelle aventure."`;
+function buildFrenchSample(themeName: string, variant: ThemeCopyVariant): string {
+  return `Ce soir-la, dans ${variant.frUniverse}, Noa recut une mission tres speciale: ${variant.frMiniMission}. Avec un pas calme, il suivit un sentier de petites lumieres, aida un ami en chemin puis trouva la solution juste avant la nuit. Tout le monde applaudit doucement pour ne pas reveiller les oiseaux. De retour sous sa couverture, Noa pensa a son aventure ${themeName}, respira lentement et ferma les yeux avec un grand sourire.`;
 }
 
-function buildEnglishSample(themeName: string): string {
-  return `That evening, in the land of ${themeName}, Leo found a tiny golden light resting beside a quiet path. As soon as he touched it, a gentle voice whispered, "Brave hearts can always create a new adventure." Leo followed the glow, helped a friend cross a sleepy river, and returned home under a sky full of stars. Wrapped in his blanket, he smiled and said, "Tomorrow, we will tell an even better story."`;
+function buildEnglishSample(themeName: string, variant: ThemeCopyVariant): string {
+  return `That evening, in ${variant.enUniverse}, Mia received one small mission: ${variant.enMiniMission}. She followed a line of soft lights, helped a friend along the way, and solved the challenge just before bedtime. The world grew quiet, the sky turned silver, and everyone whispered goodnight. Back under her blanket, Mia smiled, thought about her ${themeName} adventure, and drifted to sleep feeling calm and proud.`;
 }
 
-function buildFrenchFaq(themeName: string): FaqItem[] {
+function buildFrenchFaq(themeName: string, variant: ThemeCopyVariant): FaqItem[] {
   return [
     {
       question: `Peut-on creer une histoire personnalisee avec le theme ${themeName} ?`,
@@ -55,17 +189,17 @@ function buildFrenchFaq(themeName: string): FaqItem[] {
       answer: "Oui, les histoires sont pensees pour etre accessibles aux jeunes enfants et peuvent etre adaptees selon l'age.",
     },
     {
-      question: "Peut-on ecouter l'histoire en audio ?",
-      answer: "Oui, la narration audio est disponible pour transformer l'histoire en rituel d'ecoute au coucher.",
+      question: `Ce theme ${themeName} aide-t-il vraiment au coucher ?`,
+      answer: `Oui, le recit est construit pour ${variant.frSleepBenefit} et installer une transition apaisante avant le sommeil.`,
     },
     {
-      question: 'Peut-on regenerer une histoire plusieurs fois ?',
-      answer: 'Oui, vous pouvez relancer la generation pour obtenir de nouvelles variations autour du meme theme.',
+      question: "Peut-on ecouter l'histoire en audio ?",
+      answer: "Oui, la narration audio est disponible pour transformer l'histoire en rituel d'ecoute au coucher.",
     },
   ];
 }
 
-function buildEnglishFaq(themeName: string): FaqItem[] {
+function buildEnglishFaq(themeName: string, variant: ThemeCopyVariant): FaqItem[] {
   return [
     {
       question: `Can I create a personalized ${themeName} bedtime story?`,
@@ -76,12 +210,12 @@ function buildEnglishFaq(themeName: string): FaqItem[] {
       answer: 'Yes, stories are designed for young children and can be adapted based on age and preferences.',
     },
     {
-      question: 'Can we listen to the story with audio narration?',
-      answer: 'Yes, audio narration is available to make bedtime calm and consistent.',
+      question: `Can this ${themeName} theme support calmer bedtimes?`,
+      answer: `Yes. Stories are structured to ${variant.enSleepBenefit} while keeping the tone warm and age-appropriate.`,
     },
     {
-      question: 'Can I regenerate multiple versions?',
-      answer: 'Yes, you can generate as many variations as you need for fresh bedtime moments.',
+      question: 'Can we listen to the story with audio narration?',
+      answer: 'Yes, audio narration is available to make bedtime calm and consistent.',
     },
   ];
 }
@@ -93,54 +227,55 @@ export function generateThemeSeoContent(input: {
 }): GeneratedSeoContent {
   const { locale, localePrefix, theme } = input;
   const localizedThemeName = theme.locales[locale].name;
+  const variant = THEME_VARIANTS[theme.id];
 
   if (locale === 'fr') {
     const article = getFrenchIndefiniteArticle(localizedThemeName);
 
     return {
-      seoTitle: `Histoire du soir ${localizedThemeName} | Histoires personnalisees pour enfant`,
-      metaDescription: `Creez une histoire du soir ${localizedThemeName} unique avec narration audio. Personnalisez les personnages, le theme et le ton en quelques clics.`,
+      seoTitle: `Histoire du soir ${localizedThemeName} | Conte personnalise et audio enfant`,
+      metaDescription: `Creez une histoire du soir ${localizedThemeName} unique pour enfant, avec narration audio et variations adaptees a l age et au rituel du coucher.`,
       h1: `Histoire du soir avec ${article} ${localizedThemeName}`,
       heroSubtitle:
-        'Generez une histoire personnalisee en quelques secondes et transformez le coucher en un moment calme et creatif.',
-      intro: buildFrenchIntro(localizedThemeName),
-      sampleStory: buildFrenchSample(localizedThemeName),
+        `Generez un conte ${localizedThemeName} personnalise en quelques secondes pour un coucher plus calme et plus simple.`,
+      intro: buildFrenchIntro(localizedThemeName, variant),
+      sampleStory: buildFrenchSample(localizedThemeName, variant),
       howItWorksTitle: 'Comment ca marche',
       howItWorksSteps: [
-        'Choisissez un theme ou un personnage prefere.',
-        'Generez une histoire personnalisee en un clic.',
-        "Ecoutez la narration audio pour le rituel du coucher.",
+        `Choisissez le theme ${localizedThemeName} et les personnages preferes de votre enfant.`,
+        'Generez une histoire personnalisee en un clic avec des variantes a chaque essai.',
+        "Lancez la narration audio pour terminer la routine du soir en douceur.",
       ],
       ctaLabel: 'Creer une histoire personnalisee',
       ctaHref: `/${localePrefix}`,
       relatedTitle: 'Themes similaires a explorer',
       relatedFaqTitle: 'Questions frequentes',
       relatedThemeIds: theme.related.slice(0, 4),
-      faq: buildFrenchFaq(localizedThemeName),
+      faq: buildFrenchFaq(localizedThemeName, variant),
       backToHomeLabel: "Retour a l'accueil",
     };
   }
 
   return {
-    seoTitle: `${localizedThemeName} bedtime story | Personalized stories for kids`,
-    metaDescription: `Create a personalized ${localizedThemeName} bedtime story with instant generation and audio narration for children.`,
+    seoTitle: `${localizedThemeName} bedtime story | Personalized and narrated for kids`,
+    metaDescription: `Create a personalized ${localizedThemeName} bedtime story for kids with instant variations and optional audio narration.`,
     h1: `${localizedThemeName} bedtime story for kids`,
     heroSubtitle:
-      'Generate a unique bedtime story in seconds and make your evening routine calmer, warmer, and more playful.',
-    intro: buildEnglishIntro(localizedThemeName),
-    sampleStory: buildEnglishSample(localizedThemeName),
+      `Generate a personalized ${localizedThemeName} bedtime story in seconds and make evenings smoother.`,
+    intro: buildEnglishIntro(localizedThemeName, variant),
+    sampleStory: buildEnglishSample(localizedThemeName, variant),
     howItWorksTitle: 'How it works',
     howItWorksSteps: [
-      'Choose a theme or favorite character.',
-      'Generate a personalized bedtime story instantly.',
-      'Listen together with built-in audio narration.',
+      `Choose the ${localizedThemeName} theme and your child's favorite characters.`,
+      'Generate an instant personalized story with fresh variations each time.',
+      'Listen together with built-in audio narration to close the day calmly.',
     ],
     ctaLabel: 'Create a personalized story',
     ctaHref: `/${localePrefix}`,
     relatedTitle: 'Related bedtime themes',
     relatedFaqTitle: 'Frequently asked questions',
     relatedThemeIds: theme.related.slice(0, 4),
-    faq: buildEnglishFaq(localizedThemeName),
+    faq: buildEnglishFaq(localizedThemeName, variant),
     backToHomeLabel: 'Back to home',
   };
 }
