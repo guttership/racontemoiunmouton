@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { STORY_THEMES } from '@/lib/seo/theme-dataset';
 
 const FR_URL = 'https://racontemoiunmouton.fr';
 const EN_URL = 'https://tellmeasheep.com';
@@ -21,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   if (isFrSite) {
     // Sitemap pour racontemoiunmouton.fr — uniquement les pages FR
-    return [
+    const frPages: MetadataRoute.Sitemap = [
       {
         url: `${FR_URL}/fr`,
         lastModified,
@@ -44,6 +45,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: { languages: buildAlts('/fr/mentions-legales', '/en/mentions-legales') },
       },
     ];
+
+    frPages.push({
+      url: `${FR_URL}/fr/histoires-du-soir`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: { languages: buildAlts('/fr/histoires-du-soir', '/en/bedtime-stories') },
+    });
+
+    STORY_THEMES.forEach((theme) => {
+      frPages.push({
+        url: `${FR_URL}/fr/${theme.locales.fr.slug}`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 0.85,
+        alternates: {
+          languages: buildAlts(`/fr/${theme.locales.fr.slug}`, `/en/${theme.locales.en.slug}`),
+        },
+      });
+    });
+
+    return frPages;
   }
 
   // Sitemap pour tellmeasheep.com — EN / ES / DE
@@ -77,6 +100,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.3,
       alternates: { languages: buildAlts('/fr/mentions-legales', '/en/mentions-legales') },
+    });
+  });
+
+  locales.forEach(locale => {
+    pages.push({
+      url: `${EN_URL}/${locale}/bedtime-stories`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: { languages: buildAlts('/fr/histoires-du-soir', '/en/bedtime-stories') },
+    });
+  });
+
+  STORY_THEMES.forEach((theme) => {
+    locales.forEach((locale) => {
+      pages.push({
+        url: `${EN_URL}/${locale}/${theme.locales[locale].slug}`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 0.85,
+        alternates: {
+          languages: buildAlts(`/fr/${theme.locales.fr.slug}`, `/en/${theme.locales.en.slug}`),
+        },
+      });
     });
   });
 

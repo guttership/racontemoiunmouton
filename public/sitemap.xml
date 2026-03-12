@@ -43,4 +43,54 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/mentions-legales" />
   </url>
 
+  <!-- Hub SEO FR -->
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr/histoires-du-soir</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/histoires-du-soir" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/histoires-du-soir" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/bedtime-stories" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/bedtime-stories" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/bedtime-stories" />
+  </url>
+
+  <!-- Pages SEO examples FR -->
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr/histoire-du-soir-dinosaure</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/histoire-du-soir-dinosaure" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/histoire-du-soir-dinosaure" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/bedtime-story-dinosaur" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/bedtime-story-dinosaur" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/bedtime-story-dinosaur" />
+  </url>
+
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr/histoire-du-soir-princesse</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/histoire-du-soir-princesse" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/histoire-du-soir-princesse" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/bedtime-story-princess" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/bedtime-story-princess" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/bedtime-story-princess" />
+  </url>
+
+  <url>
+    <loc>https://racontemoiunmouton.fr/fr/conte-pirate-enfant</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://racontemoiunmouton.fr/fr/conte-pirate-enfant" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://racontemoiunmouton.fr/fr/conte-pirate-enfant" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://tellmeasheep.com/en/pirate-bedtime-story" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://tellmeasheep.com/es/pirate-bedtime-story" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://tellmeasheep.com/de/pirate-bedtime-story" />
+  </url>
+
 </urlset>
