@@ -43,6 +43,7 @@ export default function Footer() {
             </svg>
           </a>
           <a href="https://www.producthunt.com/products/tell-me-a-sheep?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-tell-me-a-sheep" target="_blank" rel="noopener noreferrer" aria-label="Tell Me a Sheep on Product Hunt" className="inline-block">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1050623&theme=light&t=1765836660454" alt="Tell Me a Sheep - Create and narrate magical, personalized tales | Product Hunt" className="w-[160px] md:w-[250px] h-auto" width={250} height={54} />
           </a>
         </div>

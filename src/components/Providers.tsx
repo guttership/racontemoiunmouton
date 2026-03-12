@@ -20,7 +20,7 @@ interface ProvidersProps {
 export function Providers({ children, locale, messages }: ProvidersProps) {
   return (
     <SessionProvider>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
         <ThemeProvider>
           {children}
         </ThemeProvider>

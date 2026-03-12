@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { writeFileSync } = require('fs');
 const fetch = global.fetch || require('node-fetch');
 const sharp = require('sharp');

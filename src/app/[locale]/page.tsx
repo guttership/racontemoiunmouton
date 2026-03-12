@@ -81,6 +81,7 @@ export default function Home() {
     };
 
     checkLimit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, locale]);
 
   const scrollToCreator = () => {
