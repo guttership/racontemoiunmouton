@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://racontemoiunmouton.dmum.eu'),
+  metadataBase: new URL('https://racontemoiunmouton.fr'),
   verification: {
     google: 'your-google-verification-code', // À remplacer par votre code Google Search Console
   },
@@ -25,8 +26,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerStore = await headers();
+  const locale = headerStore.get('x-current-locale') || 'fr';
+
   return (
-    <html suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/logo_mouton.svg" type="image/svg+xml" />

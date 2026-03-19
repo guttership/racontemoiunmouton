@@ -5,13 +5,14 @@ import { useLocale, useTranslations } from 'next-intl';
 export default function StructuredData() {
   const locale = useLocale();
   const t = useTranslations('Meta');
+  const baseUrl = locale === 'fr' ? 'https://racontemoiunmouton.fr' : 'https://tellmeasheep.com';
   
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: t('title'),
     description: t('description'),
-    url: `https://racontemoiunmouton.dmum.eu/${locale}`,
+    url: `${baseUrl}/${locale}`,
     applicationCategory: 'EntertainmentApplication',
     operatingSystem: 'Any',
     offers: {

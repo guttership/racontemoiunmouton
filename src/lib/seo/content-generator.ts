@@ -283,7 +283,7 @@ export function generateThemeSeoContent(input: {
     const article = getFrenchIndefiniteArticle(localizedThemeName);
 
     return {
-      seoTitle: `Histoire du soir ${localizedThemeName} | Conte personnalise et audio enfant`,
+      seoTitle: `Histoire du soir ${localizedThemeName} | Conte enfant IA`,
       metaDescription: `Creez une histoire du soir ${localizedThemeName} unique pour enfant, avec narration audio et variations adaptees a l age et au rituel du coucher.`,
       h1: `Histoire du soir avec ${article} ${localizedThemeName}`,
       heroSubtitle:
