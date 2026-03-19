@@ -29,6 +29,7 @@ Une application Next.js pour créer des histoires personnalisées pour le couche
    - Ajoutez votre clé API Google Gemini :
    ```
    GOOGLE_AI_API_KEY=votre_cle_api_google_gemini
+   GOOGLE_GEMINI_MODEL=gemini-3.1-flash-lite-preview
    ```
 
 4. **Lancer en développement**
@@ -75,6 +76,7 @@ Une application Next.js pour créer des histoires personnalisées pour le couche
 1. **Connectez votre repo GitHub à Vercel**
 2. **Configurez les variables d'environnement** :
    - `GOOGLE_AI_API_KEY`
+   - `GOOGLE_GEMINI_MODEL` (optionnel)
 3. **Déployez automatiquement** à chaque push
 
 ## 🤝 Contribution

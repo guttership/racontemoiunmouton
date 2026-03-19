@@ -4,6 +4,7 @@ import { getStoryPrompt } from './story-prompts';
 // Lazy initialization pour éviter les erreurs au build time
 let genAI: GoogleGenerativeAI | null = null;
 let model: GenerativeModel | null = null;
+const GEMINI_TEXT_MODEL = process.env.GOOGLE_GEMINI_MODEL || 'gemini-3.1-flash-lite-preview';
 
 function getGeminiModel(): GenerativeModel {
   if (!model) {
@@ -11,7 +12,7 @@ function getGeminiModel(): GenerativeModel {
       throw new Error('GOOGLE_AI_API_KEY is not defined in environment variables');
     }
     genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
-    model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODEL });
   }
   return model;
 }

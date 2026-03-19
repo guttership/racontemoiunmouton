@@ -5,6 +5,7 @@ import path from 'path';
 
 // Configuration du client Google TTS
 let ttsClient: TextToSpeechClient | null = null;
+const GEMINI_TONE_MODEL = process.env.GOOGLE_GEMINI_TONE_MODEL || process.env.GOOGLE_GEMINI_MODEL || 'gemini-3.1-flash-lite-preview';
 
 function initializeClient() {
   if (!ttsClient) {
@@ -206,7 +207,7 @@ Critères :
 
 Ton principal :`;
 
-      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + process.env.GOOGLE_AI_API_KEY, {
+      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_TONE_MODEL + ':generateContent?key=' + process.env.GOOGLE_AI_API_KEY, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
